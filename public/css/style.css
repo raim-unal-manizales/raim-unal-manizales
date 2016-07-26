@@ -1,0 +1,26 @@
+body{
+    font-family: 'Lato', sans-serif;
+}
+
+.quitar-float{
+    float:none;
+}
+
+.espacio-arriba{
+    margin-top:30px;
+}
+
+.st-section{
+	width: 80%;
+	
+
+}
+
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+
+

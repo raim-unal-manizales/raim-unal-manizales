@@ -1,0 +1,16 @@
+http://laravel.com/
+http://getbootstrap.com/
+
+
+Flash
+..
+
+
+form y html
+https://laravelcollective.com/docs/5.1/html
+
+para manejar select multiples 
+http://harvesthq.github.io/chosen/
+
+estilos texarea
+http://alex-d.github.io/Trumbowyg/
