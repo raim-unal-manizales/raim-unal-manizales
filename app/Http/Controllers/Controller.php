@@ -90,8 +90,8 @@ class Controller extends BaseController
    }
 
    protected function consult_personalization($id){
-        
-        $personalization = Personalization::where('user_id',$id)->get()->toArray();
+        $personalization = [];
+        ///$personalization = Personalization::where('user_id',$id)->get()->toArray();
         return $personalization;
 
    }

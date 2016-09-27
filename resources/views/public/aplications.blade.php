@@ -17,7 +17,7 @@
 					<div class="panel-body text-center">
 								
 						<a href="{{ asset(''.$aplication->url) }} " target="_blank" class="">
-							<img class="img-responsive img-article"  style="max-width: 100px; max-height: 100px; min-width: 100px; min-height: 100px;"  src="{{ asset(''.$aplication->logo) }}" alt="...">
+							<img class="img-responsive img-article"  style="max-width: 100px; max-height: 100px; min-width: 100px; min-height: 100px;"  src="{{ $aplication->logo }}" alt="...">
 						</a>
 								
 						<a href="" class=""><h3 class="text-center"></h3></a>

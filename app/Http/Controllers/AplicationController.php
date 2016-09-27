@@ -48,8 +48,8 @@ class AplicationController extends Controller
 
           if ($request -> file('logo')) {
                 $file = $request-> file('logo');
-                $name = '/images/logo_aplication/logo_'.time().'.'.$file->getClientOriginalExtension();
-                $path = public_path().'/images/logo_aplication/';
+                $name = '/raim/images/logo_aplication/logo_'.time().'.'.$file->getClientOriginalExtension();
+                $path = $this->uploadPath().'/images/logo_aplication/';
                 $file->move($path, $name);
                  $aplication -> logo = $name;
             }
@@ -104,8 +104,8 @@ class AplicationController extends Controller
 
         if ($request -> file('logo')) {
                 $file = $request-> file('logo');
-                $name = '/images/logo_aplication/logo_'.time().'.'.$file->getClientOriginalExtension();
-                $path = public_path().'/images/logo_aplication/';
+                $name = '/raim/images/logo_aplication/logo_'.time().'.'.$file->getClientOriginalExtension();
+                $path = $this->uploadPath().'/images/logo_aplication/';
                 $file->move($path, $name);             
         }
 
@@ -133,5 +133,9 @@ class AplicationController extends Controller
         $aplication = Aplication::find($id);
         return view('admin.aplication.destroy')->with('aplication', $aplication);
         
+    }
+    
+    private function uploadPath(){
+        return "/var/www/raim";
     }
 }
