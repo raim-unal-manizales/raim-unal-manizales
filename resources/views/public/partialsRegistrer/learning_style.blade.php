@@ -1,23 +1,38 @@
 	<!--TEST DE ESTILO DE APRENDIZAJE-->
 
-                <div id="test" style="">
-
-
-                        <table class="table2" width="100%" border="0" cellspacing="5" cellpadding="0" align="center">
-                                <tr> 
-                                    <td class="boxtitle" align="left"><strong>¿CÓMO APRENDO MEJOR?</strong></td>                    
-                                </tr>
-                                <tr> 
-                                    <td align="justify">
-                                        
-                                        Este cuestionario tiene como propósito saber algo acerca de sus preferencias sobre cómo trabaja con
-                                        información. Usted tendrá un estilo de aprendizaje preferido y una parte de ese Estilo de Aprendizaje es
-                                        su preferencia para capturar, procesar y entregar ideas e información.
-                                        Escoja las respuestas que mejor explican su preferencia. Seleccione mas de una
-                                        respuesta si una respuesta simple no encaja con su percepción (Preguntas de la 1 a la 13). 
-                                        De la pregunta 14 a la pregunta 24 seleccione una sola respuesta. <br>
-                                        Deje en blanco toda pregunta que no se aplique.
-                                    </td>                    
+<div id="test" style="">
+    <table class="table2" width="100%" border="0" cellspacing="5" cellpadding="0" align="center" id="test-inicial-Learning">
+        
+        <!-- Pregunta inicial para saber si el usuario Desea Ingresar Learning Style-->             
+        <tr> 
+            <td><strong><label>Este test es opcional. <br> Esta información será usada para realizar la recomendación de los objetos de aprendizaje <br> ¿Desea Ingresar Estilos de Aprendizaje?</label></strong></td> 
+        </tr>
+        <tr>
+            <td>
+                <input type="radio" name="inicial-Learning" id="inicial-Learning" value="Si" >
+                <strong> Si </strong> Deseo hacer el test
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <input type="radio" name="inicial-Learning" id="inicial-Learning" value="No" >
+                <strong> No </strong> Deseo hacer el test
+            </td>
+        </tr>
+    </table>
+    <table class="table2" width="100%" border="0" cellspacing="5" cellpadding="0" align="center" style="display: none;" id="test-learning-style">
+        <tr> 
+            <td class="boxtitle" align="left"><strong>¿CÓMO APRENDO MEJOR?</strong></td>
+        </tr>
+        <tr> 
+            <td align="justify">
+                Este cuestionario tiene como propósito saber algo acerca de sus preferencias sobre cómo trabaja con información. Usted tendrá un estilo de aprendizaje preferido y una parte de ese Estilo de Aprendizaje es su preferencia para capturar, procesar y entregar ideas e información.
+                Escoja las respuestas que mejor explican su preferencia. Seleccione mas de una
+                respuesta si una respuesta simple no encaja con su percepción (Preguntas de la 1 a la 13). 
+                De la pregunta 14 a la pregunta 24 seleccione una sola respuesta. <br>
+                Deje en blanco toda pregunta que no se aplique.
+        </td>                    
                                 </tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 

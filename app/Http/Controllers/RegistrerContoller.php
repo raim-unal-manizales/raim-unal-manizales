@@ -40,7 +40,7 @@ class RegistrerContoller extends Controller
     }
 
     public function createUser(Request $request){
-    	
+
     	$data = $request->all();
     	$user = new User();
     	$learningStyle = new LearningStyle();
@@ -70,16 +70,16 @@ class RegistrerContoller extends Controller
     				}else{
     					array_push($array_tem_aplication,$value);
     				}
-    				break;	
-    			case '2':
-    				if ($this->termination($value)) {
-    					$extraer = array_shift($array_tem_LeranindStyle);
-    					$this->storeLearningStyle($array_tem_LeranindStyle,$id_user);
-    					$bandera++;
-    				}else{
-    					array_push($array_tem_LeranindStyle,$value);
-    				}
-    					break;
+    				break;
+                case '2':
+                    if ($this->termination($value)) {
+                        $extraer = array_shift($array_tem_LeranindStyle);
+                        $this->storeLearningStyle($array_tem_LeranindStyle,$id_user);
+                        $bandera++;
+                    }else{
+                        array_push($array_tem_LeranindStyle,$value);
+                    }
+                        break;	
     			case '3':
     				if ($this->termination($value)) {
     					$need->user_id = $id_user;
@@ -89,6 +89,7 @@ class RegistrerContoller extends Controller
     					$need->$key= $value;
     				}
     				break;
+
     			case '4':
     				if ($this->termination($value)) {
     					$personalization->user_id = $id_user;
@@ -128,24 +129,27 @@ class RegistrerContoller extends Controller
     
     protected function storeAll($datos,$id_user)
     {
-         $info = unserialize(array_pop($datos));
-         
-         foreach ($info as $key => $values) {
-             
-            $position = $values['position'];
-            $value =    $datos[$position-1001];
-            if ($values['select'] == 1) {
-                $option = $value;
-            }else {
-                $option = 0;
-            }
-            $values['value'] = $value;
-            $values['id_option'] = $option;
-            $values['id_user']   = $id_user;
-            
-            $fieldEspecific  = new FieldUser($values);
-            $fieldEspecific -> save();
-         }
+
+        $info = unserialize(array_pop($datos));
+        $cantidad = count($info);
+        if ($cantidad > 0) {
+             foreach ($info as $key => $values) {
+                 
+                $position = $values['position'];
+                $value =    $datos[$position-1001];
+                if ($values['select'] == 1) {
+                    $option = $value;
+                }else {
+                    $option = 0;
+                }
+                $values['value'] = $value;
+                $values['id_option'] = $option;
+                $values['id_user']   = $id_user;
+                
+                $fieldEspecific  = new FieldUser($values);
+                $fieldEspecific -> save();
+             }
+        }
     }
 
 
@@ -199,47 +203,56 @@ class RegistrerContoller extends Controller
 /* Estilos de aprendizaje  */
 
     protected function storeLearningStyle($learningStyle,$id_user)
-    {
-    	
-
-       
+    {       
     	$Array_value = $this->ModeloArray();
 
         $Array_value['user_id'] = $id_user;
 
-    	$text = "";
-    	foreach ($learningStyle as $key => $value) {
-    		$text .= $value;
-    	}
 
-    	$a = substr_count($text, 'A');
-    	$k = substr_count($text, 'K');
-    	$v = substr_count($text, 'V');
-    	$r = substr_count($text, 'R');
+        if ($learningStyle[0] == 'Si') {
+            $text = "";
+            foreach ($learningStyle as $key => $value) {
+                $text .= $value;
+            }
 
-    	$s = substr_count($text, 'S');
-    	$g = substr_count($text, 'G');
+            $a = substr_count($text, 'A');
+            $k = substr_count($text, 'K');
+            $v = substr_count($text, 'V');
+            $r = substr_count($text, 'R');
 
-    	$suma = $a + $k + $v * $r;
-    	$suma_dos = $s + $g;
+            $s = substr_count($text, 'S');
+            $g = substr_count($text, 'G');
 
-    	$Array_value['visual'] = round( $this->porcentaje($v,$suma), 2, PHP_ROUND_HALF_DOWN);
-    	$Array_value['kinestesic'] = round( $this->porcentaje($k,$suma), 2, PHP_ROUND_HALF_DOWN);
-    	$Array_value['auditory'] = round( $this->porcentaje($a,$suma), 2, PHP_ROUND_HALF_DOWN);
-    	$Array_value['reader'] = round( $this->porcentaje($r,$suma), 2, PHP_ROUND_HALF_DOWN);
+            $suma = $a + $k + $v * $r;
+            $suma_dos = $s + $g;
 
-    	$Array_value['global'] = round( $this->porcentaje($s,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
-    	$Array_value['sequential'] = round($this->porcentaje($g,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
+            $Array_value['visual'] = round( $this->porcentaje($v,$suma), 2, PHP_ROUND_HALF_DOWN);
+            $Array_value['kinestesic'] = round( $this->porcentaje($k,$suma), 2, PHP_ROUND_HALF_DOWN);
+            $Array_value['auditory'] = round( $this->porcentaje($a,$suma), 2, PHP_ROUND_HALF_DOWN);
+            $Array_value['reader'] = round( $this->porcentaje($r,$suma), 2, PHP_ROUND_HALF_DOWN);
 
-    	$mayorUno = $this->MayorUno($a,$k,$v,$r);
-    	$mayorDos = $this->MayorDos($s,$g);	
+            $Array_value['global'] = round( $this->porcentaje($s,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
+            $Array_value['sequential'] = round($this->porcentaje($g,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
+
+            $mayorUno = $this->MayorUno($a,$k,$v,$r);
+            $mayorDos = $this->MayorDos($s,$g); 
 
 
-    	$referenceLearniingStyle = ReferenceLearningStyle::where('styleUno', $mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
+            $referenceLearniingStyle = ReferenceLearningStyle::where('styleUno', $mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
 
 
-    	$Array_value['reference_learning_styles']= $referenceLearniingStyle[0];
+            $Array_value['reference_learning_styles']= $referenceLearniingStyle[0];
 
+        }else{
+            $learningStile =  ReferenceLearningStyle::where('learningStile', 'Defect-null')->lists('id')->toArray();
+            $Array_value['reference_learning_styles'] = $learningStile[0]; 
+            $Array_value['visual'] = 0;
+            $Array_value['kinestesic'] = 0;
+            $Array_value['auditory'] = 0;
+            $Array_value['reader'] = 0;
+            $Array_value['global'] = 0;
+            $Array_value['sequential'] = 0;
+        }
 
 
         $LearningStyle = new LearningStyle($Array_value);

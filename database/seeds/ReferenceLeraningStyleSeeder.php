@@ -12,6 +12,12 @@ class ReferenceLeraningStyleSeeder extends Seeder
     public function run()
     {
         DB::table('referenceLearningStyle')->insert([
+                'learningStile' =>  'Defect-null',
+                'styleUno'      =>  'null',
+                'styleTwo'      =>  'null',
+                'description'   =>  'null',
+            ]);
+        DB::table('referenceLearningStyle')->insert([
         		
         		'learningStile'	=>	'Auditivo-Global',
         		'styleUno'		=>	'A',

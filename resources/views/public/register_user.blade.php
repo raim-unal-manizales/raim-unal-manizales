@@ -8,13 +8,13 @@
     <br>
     <div class="col-md-12">
         {!! Form::open(['route'=> 'Public.store_create_user','method'=> 'POST','id'=>'commentForm', 'class'=>'form-horizontal']) !!}
-            <div id="rootwizard" class="col-md-10 col-centered">
+            <div id="rootwizard" class="col-md-11 col-centered">
                 <ul class="">
-                    <li><a href="#tab1" data-toggle="tab">Paso 1 : Información <br> Básica</a></li>
-                    <li><a href="#tab2" data-toggle="tab">Paso 2 : Iformación De <br> Aplicaciones</a></li>
-                    <li><a href="#tab3" data-toggle="tab">Paso 3 : Estilos de <br> Aprendizaje</a></li>
-                    <li><a href="#tab4" data-toggle="tab">Paso 4 : Necesidades <br> Especiales</a></li>
-                    <li><a href="#tab5" data-toggle="tab">Paso 5 : Personalización <br> de Interfaz</a></li>
+                    <li><a href="#tab1" class="tab1" data-toggle="tab">Paso 1 : Información <br> Básica</a></li>
+                    <li><a href="#tab2" class="tab2" data-toggle="tab">Paso 2 : Iformación De <br> Aplicaciones</a></li>
+                    <li><a href="#tab4"  class="tab4" data-toggle="tab">Paso 3 : Necesidades <br> Especiales</a></li>
+                    <li><a href="#tab3" class="tab3" data-toggle="tab">Paso 4 : Estilos de <br> Aprendizaje</a></li> 
+                    <li><a href="#tab5" class="tab5" data-toggle="tab">Paso 5 : Personalización <br> de Interfaz</a></li>
                     
                 </ul>
                     <div class="tab-content">
@@ -44,7 +44,7 @@
                             <li class="previous"><a href="#">Anterior</a></li>
                             <li class="next last" style="display:none;"><a href="#">Final</a></li>
                             <li class="next"><a href="#">Siguiente</a></li>
-                            <li class="finish"><input  type="submit" value="enviar" href="javascript:;"></input></li>
+                            <li class="finish"><input  type="submit" class="btn" value="enviar" href="javascript:;"></input></li>
                         </ul>
                     </div>
             </div>
@@ -77,11 +77,17 @@
             var $current = index+1;
             var $percent = ($current/$total) * 100;
             $('#rootwizard').find('.bar').css({width:$percent+'%'});
-        }});    
+        }});
+
+        $('.next').click(function (argument) {
+
+        });    
 
         $('#rootwizard .finish').click(function() {
 
         });
+
+
     });
 </script>
 
@@ -89,6 +95,17 @@
 
         $(document).ready(function()
             {
+                $("input[name=inicial-Learning]").click(function () {
+                    if ($('input:radio[name=inicial-Learning]:checked').val() == "Si") {
+
+                        verTr(document.getElementById('test-learning-style'));
+
+                    }else{
+                        ocultarTr(document.getElementById('test-learning-style'));
+                    }
+                    
+                });
+
                $("input[name=NEED]").click(function () {    
                     
                     if ($('input:radio[name=NEED]:checked').val() == "Si") {
@@ -101,6 +118,8 @@
                         verTr(document.getElementById('tipo_necesidad5'));
                         verTr(document.getElementById('tipo_necesidad6'));
 
+                        notLearningStyle();
+
                         verTr(document.getElementById('Boton'));
                     }else{
                         
@@ -111,6 +130,8 @@
                         ocultarTr(document.getElementById('tipo_necesidad4'));
                         ocultarTr(document.getElementById('tipo_necesidad5'));
                         ocultarTr(document.getElementById('tipo_necesidad6'));
+
+                        indefineLearningStile();
 
                         verTr(document.getElementById('Boton'));
                     }
@@ -220,6 +241,14 @@
 
         function ocultarTr(fila){
             fila.style.display = "none";
+        }
+
+        function notLearningStyle(){
+           
+        }
+
+        function indefineLearningStile(){
+           
         }
 
     </script>

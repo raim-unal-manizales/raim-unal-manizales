@@ -19,13 +19,13 @@ class CreateLearningStylesTable extends Migration
             $table->integer('user_id');
             $table->integer('reference_learning_styles');
 
-            $table->double('visual', 15, 8)->nullable()->default(null);
-            $table->double('kinestesic', 15, 8)->nullable()->default(null);
-            $table->double('auditory', 15, 8)->nullable()->default(null);
-            $table->double('reader', 15, 8)->nullable()->default(null);
+            $table->double('visual', 15, 8)->nullable()->default(0);
+            $table->double('kinestesic', 15, 8)->nullable()->default(0);
+            $table->double('auditory', 15, 8)->nullable()->default(0);
+            $table->double('reader', 15, 8)->nullable()->default(0);
 
-            $table->double('global', 15, 8)->nullable()->default(null);
-             $table->double('sequential', 15, 8)->nullable()->default(null);
+            $table->double('global', 15, 8)->nullable()->default(0);
+             $table->double('sequential', 15, 8)->nullable()->default(0);
 
              $table->foreign('reference_learning_styles')->references('id')->on('referenceLearningStyle')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');

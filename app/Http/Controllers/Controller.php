@@ -35,6 +35,7 @@ class Controller extends BaseController
         $cantidad_app = count($information_user->all());
 
         $solucion = array();
+        $data_user = null;
         
         foreach ($information_user as $information) {
             
@@ -53,6 +54,7 @@ class Controller extends BaseController
                     $exist = "LA URL ".$url." NO EXISTE";
                 }
             }else{
+
                 $exist = "Aplication Inactiva";
             }
              
@@ -70,6 +72,7 @@ class Controller extends BaseController
    protected function make_content($information_user,$information_Need,$information_learningStyle,$information_personalization){
 
         $data = array();
+        $data = null;
 
         if ($information_user->rquiered_personalization == 'True') {  
             $data = array_merge($data, array('personalization' => $information_personalization));
@@ -80,7 +83,7 @@ class Controller extends BaseController
         if ($information_user->rquiered_learningStyle == 'True') {
            $data = array_merge($data, array('learningStyle' => $information_learningStyle));
         }
-        if ($information_user->rquiered_information){
+        if ($information_user->rquiered_information == 'True'){
             $data = array_merge($data, array('aplication' => $information_user->toArray()));
         }
 
