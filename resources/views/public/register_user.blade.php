@@ -73,7 +73,7 @@ $(document).ready(function(){
 
 function insertNeedFunction(){
     var nuevo = $("input[id='insertNeed']").val();
-    $('select[name=needEtnica]').append("<option value='nuevo' selected='selected'>nuevo</option>");
+    $('select[name=needEtnica]').append("<option value='"+nuevo+"' selected='selected'>"+nuevo+"</option>");
     $("#contentNeedNew").remove();
 }
 
