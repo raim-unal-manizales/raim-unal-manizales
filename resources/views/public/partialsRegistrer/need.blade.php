@@ -278,7 +278,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" placeholder="Aki va el select para necesidad etnica"></input>
+                                    <select class="needEtnica" id="needEtnica" name="needEtnica">
+                                        <?php foreach ($needEtnica as $key => $value): ?>
+                                            <option value="{{$value}}">{{ $value}}</option>
+                                        <?php endforeach ?>
+                                    </select>
+                                    <div id="OtraNeedEtnica">
+                                        
+                                    </div>
                                 </td>
                             </tr>
                         </table> 

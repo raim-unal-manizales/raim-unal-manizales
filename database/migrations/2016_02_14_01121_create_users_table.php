@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('institution')->nullable();
             $table->date('birth_date');
             $table->enum('language',['Español','Ingles']);
+            $table->enum('educativeLevel',['Pescolar','Basica Primaria','Basica secundaria','Media','Superior','General']);
             $table->string('email')->unique();
            
 

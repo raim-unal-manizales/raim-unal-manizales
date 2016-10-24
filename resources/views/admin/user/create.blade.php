@@ -43,6 +43,10 @@
 
 		</div>
 		<div class="fieldForm">
+            {!! Form::label('educativeLevel','Nivel Educativo') !!}
+            {!! Form::select('educativeLevel', ['Pescolar'=>'Pescolar','Basica Primaria'=>'Basica Primaria','Basica secundaria'=>'Basica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'General'] ,null, ['class' => '', 'required']) !!}           
+        </div>
+		<div class="fieldForm">
 			{!! Form::label('institution','Institucion') !!}
 			{!! Form::text('institution', null ,['class' => '', 'placeholder' => '','required']) !!}			
 

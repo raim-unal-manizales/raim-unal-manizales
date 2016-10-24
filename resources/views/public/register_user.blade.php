@@ -11,7 +11,7 @@
             <div id="rootwizard" class="col-md-11 col-centered">
                 <ul class="">
                     <li><a href="#tab1" class="tab1" data-toggle="tab">Paso 1 : Información <br> Básica</a></li>
-                    <li><a href="#tab2" class="tab2" data-toggle="tab">Paso 2 : Iformación De <br> Aplicaciones</a></li>
+                    <li><a href="#tab2" class="tab2" data-toggle="tab">Paso 2 : Información De <br> Aplicaciones</a></li>
                     <li><a href="#tab4"  class="tab4" data-toggle="tab">Paso 3 : Necesidades <br> Especiales</a></li>
                     <li><a href="#tab3" class="tab3" data-toggle="tab">Paso 4 : Estilos de <br> Aprendizaje</a></li> 
                     <li><a href="#tab5" class="tab5" data-toggle="tab">Paso 5 : Personalización <br> de Interfaz</a></li>
@@ -55,6 +55,41 @@
 @endsection
 
 @section('javascript')
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+    $("select[name='needEtnica']").change(function(){
+        if ($('select[name=needEtnica]').val() == 'Otra') {
+            $('#OtraNeedEtnica').append(insertOptionNew());
+        }else{
+            if ($("#contentNeedNew").length > 0) {
+                $("#contentNeedNew").remove();
+            }
+        }
+    });
+});
+
+function insertNeedFunction(){
+    var nuevo = $("input[id='insertNeed']").val();
+    $('select[name=needEtnica]').append("<option value='nuevo' selected='selected'>nuevo</option>");
+    $("#contentNeedNew").remove();
+}
+
+function cancelNeedFunction(){
+    $("#contentNeedNew").remove();
+}
+
+function insertOptionNew() {
+    return "<div id='contentNeedNew'><input id='insertNeed' type='text'> <button class='btn btn-success' type='button' id='insertNeedBTN' onclick='insertNeedFunction()'>Aceptar</button><button  class='btn btn-danger' type='button' id='cancelarNeedBTN' onclick='cancelNeedFunction()'>Cancelar</button>";
+}
+
+
+</script>
+
+
+
 <script type="text/javascript">
     $(document).ready(function() {
         var $validator = $("#commentForm").validate({
