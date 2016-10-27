@@ -72,12 +72,12 @@ class Controller extends BaseController
    protected function make_content($information_user,$information_Need,$information_learningStyle,$information_personalization){
 
         $data = array();
-        $data = null;
 
         if ($information_user->rquiered_personalization == 'True') {  
             $data = array_merge($data, array('personalization' => $information_personalization));
         }
         if ($information_user->rquiered_NEDD == 'True') {
+            
            $data = array_merge($data, array('need' => $information_Need));
         }
         if ($information_user->rquiered_learningStyle == 'True') {
@@ -86,7 +86,6 @@ class Controller extends BaseController
         if ($information_user->rquiered_information == 'True'){
             $data = array_merge($data, array('aplication' => $information_user->toArray()));
         }
-
 
         return $data;
 
