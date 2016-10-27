@@ -278,7 +278,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select class="needEtnica" id="needEtnica" name="needEtnica">
+                                    <select class="E1" id="E1" name="E1">
+
                                         <?php foreach ($needEtnica as $key => $value): ?>
                                             <option value="{{$value}}">{{ $value}}</option>
                                         <?php endforeach ?>

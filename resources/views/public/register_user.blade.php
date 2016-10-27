@@ -60,8 +60,8 @@
 
 
 $(document).ready(function(){
-    $("select[name='needEtnica']").change(function(){
-        if ($('select[name=needEtnica]').val() == 'Otra') {
+    $("select[name='E1']").change(function(){
+        if ($('select[name=E1]').val() == 'Otra') {
             $('#OtraNeedEtnica').append(insertOptionNew());
         }else{
             if ($("#contentNeedNew").length > 0) {
@@ -73,7 +73,7 @@ $(document).ready(function(){
 
 function insertNeedFunction(){
     var nuevo = $("input[id='insertNeed']").val();
-    $('select[name=needEtnica]').append("<option value='"+nuevo+"' selected='selected'>"+nuevo+"</option>");
+    $('select[name=E1]').append("<option value='"+nuevo+"' selected='selected'>"+nuevo+"</option>");
     $("#contentNeedNew").remove();
 }
 

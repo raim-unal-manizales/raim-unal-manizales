@@ -35,13 +35,14 @@ class RegistrerContoller extends Controller
     }
     private function getneedEtnica()
     {
-        $needEtnica = Need::select('E1')->distinct()->get()->toArray();
+        $needEtnica = Need::select('E1')->distinct()->where('E1', '<>','')->get()->lists('E1')->toArray();
+        
+        array_push($needEtnica, '');
 
         if (!in_array('Embera', $needEtnica)) {
             array_push($needEtnica, 'Embera');
         }
         array_push($needEtnica, 'Otra');
-
         return $needEtnica;
     }
 
@@ -106,6 +107,13 @@ class RegistrerContoller extends Controller
     			case '4':
     				if ($this->termination($value)) {
     					$personalization->user_id = $id_user;
+
+                        if ($personalization->fondSize == '') {
+                            $personalization->fondSize = 0;
+                        }
+                        if ($personalization->interline == '') {
+                            $personalization->interline = 0;
+                        }
     					$personalization-> save();
     					$bandera++;
     				}else{
