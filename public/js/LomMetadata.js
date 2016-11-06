@@ -3,9 +3,14 @@
  */
 
 function LOMMetadata(){
+
+    var value;
+
     var title;
 
     var language;
+
+    var educationalLanguage;
 
     var description;
 
@@ -36,6 +41,10 @@ function LOMMetadata(){
     var difficulty;
 
     var typicalLearningTime;
+
+    var typicalLearningTimeHours;
+
+    var typicalLearningTimeMinutes;
 
     var auditory;
 
