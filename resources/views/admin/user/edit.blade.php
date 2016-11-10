@@ -24,26 +24,32 @@
 
 		<div class="fieldForm">
 			{!! Form::label('second_name','Segundo Nombre') !!}
-			{!! Form::text('second_name', $user->second_name  ,['class' => '', 'placeholder' => 'Segundo Nombre','required']) !!}
+			{!! Form::text('second_name', $user->second_name  ,['class' => '', 'placeholder' => 'Segundo Nombre']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('last_name','Apellido') !!}
+			<br>
 			{!! Form::text('last_name', $user->last_name ,['class' => '', 'placeholder' => 'Apellido','required']) !!}
 
 		</div>
 
 		<div class="fieldForm">
-			{!! Form::label('email','Correo Electronico') !!}
+			{!! Form::label('email','Correo Electrónico') !!}
+			<br>
 			{!! Form::email('email', $user->email ,['class' => '', 'placeholder' => 'exmple@gmail.com','required']) !!}			
 
 		</div>
 
 		<div class="fieldForm">
-			{!! Form::label('institution','Institucion') !!}
+			{!! Form::label('institution','Institución') !!}
 			{!! Form::text('institution', $user->institution ,['class' => '', 'placeholder' => '','required']) !!}			
 
 		</div>
+		<div class="fieldForm">
+            {!! Form::label('educativeLevel','Nivel Educativo') !!}
+            {!! Form::select('educativeLevel', ['Pescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica secundaria'=>'Básica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'Otros'] ,$user->educativeLevel, ['class' => '', 'required']) !!}           
+        </div>
 
 		<div class="fieldForm">
 			{!! Form::label('birth_date','Fecha de Nacimiento') !!}
@@ -53,19 +59,20 @@
 
 		<div class="fieldForm">
 			{!! Form::label('language','Idioma') !!}
-			{!! Form::select('language', ['Español'=>'Español','Ingles'=>'Ingles'] , $user->language, ['class' => '','required']) !!}			
+			{!! Form::select('language', ['Español'=>'Español','Ingles'=>'Inglés'] , $user->language, ['class' => '','required']) !!}			
 
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('id_rol','Rol') !!}
-			{!! Form::select('id_rol',$roles ,$user_rol->id, ['class' => '','required']) !!}			
+			<br>
+			{!! Form::select('id_rol',$roles ,$user_rol->id, array('disabled'),['class' => '','required']) !!}			
 
 		</div>
 
 		<div class="buttonForm">
-			{!! Form::submit('Editar',['class' => '']) !!}
-			<a href="{{ route('Admin.User.index') }}">Cancelar</a>
+			{!! Form::submit('Siguiente',['class' => '']) !!}
+			<a href="{{ route('Creador.index') }}">Cancelar</a>
 		</div>
 
 

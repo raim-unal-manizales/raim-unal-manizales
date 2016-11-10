@@ -24,7 +24,7 @@
 
 		<div class="fieldForm">
 			{!! Form::label('second_name','Segundo Nombre') !!}
-			{!! Form::text('second_name', $user->second_name  ,['class' => '', 'placeholder' => 'Segundo Nombre','required']) !!}
+			{!! Form::text('second_name', $user->second_name  ,['class' => '', 'placeholder' => 'Segundo Nombre']) !!}
 		</div>
 
 		<div class="fieldForm">
@@ -46,6 +46,10 @@
 			{!! Form::text('institution', $user->institution ,['class' => '', 'placeholder' => '','required']) !!}			
 
 		</div>
+		<div class="fieldForm">
+            {!! Form::label('educativeLevel','Nivel Educativo') !!}
+            {!! Form::select('educativeLevel', ['Pescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica secundaria'=>'Básica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'Otros'] ,$user->educativeLevel, ['class' => '', 'required']) !!}           
+        </div>
 
 		<div class="fieldForm">
 			{!! Form::label('birth_date','Fecha de Nacimiento') !!}
@@ -55,7 +59,7 @@
 
 		<div class="fieldForm">
 			{!! Form::label('language','Idioma') !!}
-			{!! Form::select('language', ['Español'=>'Español','Ingles'=>'Ingles'] , $user->language, ['class' => '','required']) !!}			
+			{!! Form::select('language', ['Español'=>'Español','Ingles'=>'Inglés'] , $user->language, ['class' => '','required']) !!}			
 
 		</div>
 
