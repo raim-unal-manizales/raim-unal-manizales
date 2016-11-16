@@ -61,7 +61,7 @@
 
                 $.ajax({
                     type: "GET",
-                    data: "val=" + searchString,
+                    data: "raim=" + searchString,
                     url: "http://froac.manizales.unal.edu.co/froacn",
                     dataType: "jsonp",
                     async: true,
@@ -473,6 +473,7 @@
                     '<strong>Descripción: </strong>' + lom.description + '<br>' +
                     '<strong>Palabras clave: </strong>' + ((lom.keyword) ? lom.keyword.toUpperCase() : '') + '<br>' +
                     '<strong>Formato: </strong>' + lom.format + '<br>' +
+                    '<strong>Puntuación: </strong>' + lom.value + '<br>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
