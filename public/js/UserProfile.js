@@ -4,10 +4,13 @@
 
 function UserProfile(){
 
+    var existe_perfil_usuario;
+
     var idioma;
     var nivel_escolaridad;
 
     //Estilo de aprendizaje
+    var id_estilo_aprendizaje;
     var estilo_aprendizaje;
     var ls_vark;
     var ls_dicotomia;
@@ -43,4 +46,57 @@ function UserProfile(){
     var need_etnica;
     var need_e1;    //Étnia a la que pertenece
 
+}
+
+function varificarLs(userProfile){
+
+    switch(userProfile.id_estilo_aprendizaje) {
+        case '1':
+            userProfile.estilo_aprendizaje = 'No definido';
+            userProfile.ls_vark = '';
+            userProfile.ls_dicotomia = '';
+            break;
+        case '2':
+            userProfile.estilo_aprendizaje = 'Auditivo-Global';
+            userProfile.ls_vark = 'A';
+            userProfile.ls_dicotomia = 'G';
+            break;
+        case '3':
+            userProfile.estilo_aprendizaje = 'Auditivo-Secuencial';
+            userProfile.ls_vark = 'A';
+            userProfile.ls_dicotomia = 'S';
+            break;
+        case '4':
+            userProfile.estilo_aprendizaje = 'Kinestesico-Global';
+            userProfile.ls_vark = 'K';
+            userProfile.ls_dicotomia = 'G';
+            break;
+        case '5':
+            userProfile.estilo_aprendizaje = 'Kinestesico-Secuencial';
+            userProfile.ls_vark = 'K';
+            userProfile.ls_dicotomia = 'S';
+            break;
+        case '6':
+            userProfile.estilo_aprendizaje = 'Lector-Global';
+            userProfile.ls_vark = 'L';
+            userProfile.ls_dicotomia = 'G';
+            break;
+        case '7':
+            userProfile.estilo_aprendizaje = 'Lector-Secuencial';
+            userProfile.ls_vark = 'L';
+            userProfile.ls_dicotomia = 'S';
+            break;
+        case '8':
+            userProfile.estilo_aprendizaje = 'Visual-Global';
+            userProfile.ls_vark = 'V';
+            userProfile.ls_dicotomia = 'G';
+            break;
+        case '9':
+            userProfile.estilo_aprendizaje = 'Visual-Secuencial';
+            userProfile.ls_vark = 'V';
+            userProfile.ls_dicotomia = 'S';
+
+    }
+
+    return userProfile;
 }
