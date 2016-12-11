@@ -4,3 +4,10 @@ Homestead.yaml
 Homestead.json
 workspace.xml
 .env
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources/
+.idea/inspectionProfiles/
+resources/views/public/searchOa.blade2.php
+/.env
+!/.env
