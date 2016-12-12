@@ -4,8 +4,10 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-.descripcion-lo {
-    display: none;
+a.descripcion-lo, a.descripcion-lo:hover, a.descripcion-lo:focus, a.descripcion-lo:active {
+    color: #0c0c0c;
+    text-decoration: none;
+    cursor: default;
 }
 
 .highContrast1 {

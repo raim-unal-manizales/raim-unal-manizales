@@ -251,12 +251,12 @@
                     '<div class="col.md-2">' +
                     '<div class="panel panel-default">' +
                     '<div class="panel-heading">' +
-                    '<a href="' + lom.location + '" target="_blank" class="">' + lom.title +
-                    '<span class="descripcion-lo"> ' + lom.description + '</span>' + '</a>' +
+                    '<a href="' + lom.location + '" target="_blank" class="">' + lom.title + '</a>' +
                     '</div>' +
                     '<div class="panel-body" style="text-align: justify;">' +
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
-                    '<strong>Descripción: </strong>' + lom.description + '<br>' +
+                    '<strong>Descripción: </strong><a class="descripcion-lo" href="' +
+                    lom.location + '" target="_blank">' + lom.description + '</a><br>' +
                     '<strong>Palabras clave: </strong>' + ((lom.keyword) ? lom.keyword.toUpperCase() : '') + '<br>' +
                     '<strong>Formato: </strong>' + lom.format + '<br>' +
                     '<strong>Puntuación de adpatación: </strong>' + lom.value + '<br>' +
