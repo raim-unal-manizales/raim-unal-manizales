@@ -255,7 +255,7 @@
                     '</div>' +
                     '<div class="panel-body" style="text-align: justify;">' +
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
-                    '<strong>Descripción: </strong>' + lom.description + '<br>' +
+                    '<strong>Descripción: </strong>' + '<p>' + lom.description + '</p>' + '<br>' +
                     '<strong>Palabras clave: </strong>' + ((lom.keyword) ? lom.keyword.toUpperCase() : '') + '<br>' +
                     '<strong>Formato: </strong>' + lom.format + '<br>' +
                     '<strong>Puntuación de adpatación: </strong>' + lom.value + '<br>' +
