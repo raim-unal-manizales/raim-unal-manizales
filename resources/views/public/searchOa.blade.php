@@ -252,7 +252,7 @@
                     '<div class="panel panel-default">' +
                     '<div class="panel-heading">' +
                     '<a href="' + lom.location + '" target="_blank" class="">' + lom.title +
-                    '<span style="display: none;">' + lom.description + '</span>' + '</a>' +
+                    '<span>' + lom.description + '</span>' + '</a>' +
                     '</div>' +
                     '<div class="panel-body" style="text-align: justify;">' +
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
