@@ -4,6 +4,10 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+.descripcion-lo {
+    display: none;
+}
+
 .highContrast1 {
     background-color: #0f0f0f !important;
     color: #ffffff !important;
