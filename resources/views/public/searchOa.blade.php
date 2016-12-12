@@ -251,7 +251,8 @@
                     '<div class="col.md-2">' +
                     '<div class="panel panel-default">' +
                     '<div class="panel-heading">' +
-                    '<a href="' + lom.location + '" target="_blank" class="">' + lom.title + '</a>' +
+                    '<a href="' + lom.location + '" target="_blank" class="">' + lom.title +
+                    '<p style="display: none;">' + lom.description + '</p>' + '</a>' +
                     '</div>' +
                     '<div class="panel-body" style="text-align: justify;">' +
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
