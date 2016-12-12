@@ -27,7 +27,7 @@
 
         <div class="fieldForm">
             {!! Form::label('educativeLevel','Nivel Educativo') !!}
-            {!! Form::select('educativeLevel', ['Pescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica secundaria'=>'Básica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'Otros'] ,null, ['class' => '', 'required']) !!}           
+            {!! Form::select('educativeLevel', ['Preescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica Secundaria'=>'Básica Secundaria','Media'=>'Media','Superior'=>'Superior','Otro'=>'Otro'] ,null, ['class' => '', 'required']) !!}
         </div>
         
         <div class="fieldForm">

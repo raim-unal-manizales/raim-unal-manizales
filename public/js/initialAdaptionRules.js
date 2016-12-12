@@ -24,12 +24,8 @@ function filtroReglasIniciales(listaOA, userProfile){
             listaIdioma.push('eng');
         }
 
-        /*if($.inArray(lom.language.toLowerCase().trim(), listaIdioma) > -1  &&
-         userProfile.nivel_escolaridad.toLowerCase().trim() === lom.context.toLowerCase().trim()){
-         listaOAFiltroInicial.push(lom);
-         }*/
-
-        if($.inArray(lom.language.toLowerCase().trim(), listaIdioma) > -1){
+        if($.inArray(lom.language.toLowerCase().trim(), listaIdioma) > -1  &&
+            userProfile.nivel_escolaridad.toLowerCase().trim().indexOf(lom.context.toLowerCase().trim()) !== -1){
             listaOAFiltroInicial.push(lom);
         }
     });
