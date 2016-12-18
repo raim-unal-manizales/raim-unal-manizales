@@ -7,16 +7,16 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-use App\FieldUser;
-use App\Aplication;
-use App\Table;
-use App\TypeField;
-use App\FieldTable;
-use App\Option;
-use App\User;
-use App\Need;
-use App\LearningStyle;
-use App\Personalization;
+use App\Entities\FieldUser;
+use App\Entities\Aplication;
+use App\Entities\Table;
+use App\Entities\TypeField;
+use App\Entities\FieldTable;
+use App\Entities\Option;
+use App\Entities\User;
+use App\Entities\Need;
+use App\Entities\LearningStyle;
+use App\Entities\Personalization;
 
 class Controller extends BaseController
 {
@@ -36,14 +36,14 @@ class Controller extends BaseController
 
         $solucion = array();
         $data_user = null;
-        
+
         foreach ($information_user as $information) {
-            
+
             $url_base = $information->url;
             $name = $information->name;
             $data= $information->all();
             $url = $this->Direccionamiento($url_base,$tipo_accion);
-            
+
             if ($information->state == "Activo") {
 
                 $data_user = $this->make_content($information,$information_Need,$information_learningStyle,$information_personalization);
@@ -57,15 +57,15 @@ class Controller extends BaseController
 
                 $exist = "Aplication Inactiva";
             }
-             
+
             array_push($solucion, [$name => $exist]);
             }
 
         $final  = array(
                 'resultado' => $solucion ,
-                'data'      => $data_user 
-            );    
-        
+                'data'      => $data_user
+            );
+
         return $final;
    }
 
@@ -73,11 +73,11 @@ class Controller extends BaseController
 
         $data = array();
 
-        if ($information_user->rquiered_personalization == 'True') {  
+        if ($information_user->rquiered_personalization == 'True') {
             $data = array_merge($data, array('personalization' => $information_personalization));
         }
         if ($information_user->rquiered_NEDD == 'True') {
-            
+
            $data = array_merge($data, array('need' => $information_Need));
         }
         if ($information_user->rquiered_learningStyle == 'True') {
@@ -114,7 +114,7 @@ class Controller extends BaseController
 
     public function Consult_Aplications($id)
     {
-    	#--------------------------------------------------------------------------------------    
+    	#--------------------------------------------------------------------------------------
             //$aplications = Aplication::all();
             $aplications = Aplication::where('state','Activo')->get();
             $aplications -> user_id = $id;
@@ -123,40 +123,40 @@ class Controller extends BaseController
                 $value -> user_id = $id;
             }
             $aplications->each(function ($aplications)
-            {  
-                
+            {
+
                 $tables = Table::where('id_app',$aplications->id)->get();
 
                 foreach ($tables as $key => $value) {
                  $value -> user_id = $aplications->user_id;
-                
+
                 }
 
                 $tables->each(function ($tables)
                 {
-                    
+
                     $fieldTables = FieldTable::where('id_table',$tables->id)->get();
 
                     foreach ($fieldTables as $key => $value) {
                         $value -> user_id = $tables->user_id;
-                
+
                     }
-                    
+
                     $fieldTables->each(function ($fieldTables)
                     {
-                        
+
                         $id_fiel_tables = $fieldTables->id;
 
                         $fielduser = FieldUser::where('id_user',$fieldTables->user_id)->where('id_field_table',$id_fiel_tables)->get()->first();
 
                         $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
                         $fieldTables-> types_fields = $types_fields;
-                      
-                        $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
-                        $fieldTables-> options = $options; 
 
-                                    
-                     
+                        $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
+                        $fieldTables-> options = $options;
+
+
+
                         if (is_null($fielduser)) {
 
                             $fieldTables-> value = null;
@@ -164,33 +164,33 @@ class Controller extends BaseController
                         }else{
 
                             $types_fields_select= TypeField::select('html')->where('id',$fieldTables->id_type_field)->lists('html')->all();
-                            
+
 
                             if ($types_fields_select[0] == "select") {
-                                
+
                                 $option= Option::select('name')->where('id',$fielduser->value)->lists('name')->all();
-                                
+
                                 $fieldTables-> value = $option[0];
 
                             }else{
-                                
+
                                 $fieldTables-> value = $fielduser->value;
                             }
 
-                            
+
                             $fieldTables-> id_defect = $fielduser->id;
                         };
 
-     
-                                   
-                    }); 
-                
-                $tables-> fields_tables = $fieldTables->all();   
+
+
+                    });
+
+                $tables-> fields_tables = $fieldTables->all();
                 });
-            
-            $aplications -> tablas = $tables; 
+
+            $aplications -> tablas = $tables;
              });
-            #-------------------------------------------------------------------------------------- 
+            #--------------------------------------------------------------------------------------
             #
            return $aplications;
     }
@@ -198,7 +198,7 @@ class Controller extends BaseController
 
     protected function Consult_User_Information($id)
     {
-        #--------------------------------------------------------------------------------------    
+        #--------------------------------------------------------------------------------------
             $aplications = Aplication::all();
             $aplications -> user_id = $id;
 
@@ -206,40 +206,40 @@ class Controller extends BaseController
                 $value -> user_id = $id;
             }
             $aplications->each(function ($aplications)
-            {  
-                
+            {
+
                 $tables = Table::select('id','name','id_app')->where('id_app',$aplications->id)->get();
 
                 foreach ($tables as $key => $value) {
                  $value -> user_id = $aplications->user_id;
-                
+
                 }
 
                 $tables->each(function ($tables)
                 {
-                    
+
                     $fieldTables = FieldTable::select('id','id_table','id_type_field','name','name_db')->where('id_table',$tables->id)->get();
 
                     foreach ($fieldTables as $key => $value) {
                         $value -> user_id = $tables->user_id;
-                
+
                     }
-                    
+
                     $fieldTables->each(function ($fieldTables)
                     {
-                        
+
                         $id_fiel_tables = $fieldTables->id;
 
                         $fielduser = FieldUser::where('id_user',$fieldTables->user_id)->where('id_field_table',$id_fiel_tables)->get()->first();
 
                         $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
                         //$fieldTables-> types_fields = $types_fields;
-                      
-                        $options= Option::where('id_field_table',$id_fiel_tables)->lists('id', 'id_option_app');
-                        //$fieldTables-> options = $options; 
 
-                                    
-                     
+                        $options= Option::where('id_field_table',$id_fiel_tables)->lists('id', 'id_option_app');
+                        //$fieldTables-> options = $options;
+
+
+
                         if (is_null($fielduser)) {
 
                             $fieldTables-> value = null;
@@ -248,37 +248,37 @@ class Controller extends BaseController
                         }else{
 
                             $types_fields_select= TypeField::select('html')->where('id',$fieldTables->id_type_field)->lists('html')->all();
-                            
+
 
                             if ($types_fields_select[0] == "select") {
-                                
+
                                 $option= Option::select('name')->where('id',$fielduser->value)->lists('name')->all();
                                 $id_option_app= Option::select('id_option_app')->where('id',$fielduser->value)->lists('id_option_app')->all();
-                                
+
                                 $fieldTables-> value = $option[0];
                                 $fieldTables-> id_option_app = $id_option_app[0];
 
                             }else{
-                                
+
                                 $fieldTables-> value = $fielduser->value;
                             }
 
-                            
+
                             $fieldTables-> id_defect = $fielduser->id;
                         };
 
-     
-                                   
-                    }); 
-                
-                $tables-> fields_tables = $fieldTables->all();   
+
+
+                    });
+
+                $tables-> fields_tables = $fieldTables->all();
                 });
-            
-            $aplications -> tablas = $tables; 
+
+            $aplications -> tablas = $tables;
              });
-            #-------------------------------------------------------------------------------------- 
+            #--------------------------------------------------------------------------------------
             #
-           
+
         return $aplications;
 
     }
@@ -321,7 +321,7 @@ class Controller extends BaseController
         }
 
         $ch = curl_init( $url );
-     
+
         //Establecer un tiempo de espera
         curl_setopt( $ch, CURLOPT_TIMEOUT, 5 );
         curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5 );

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +10,7 @@ class FieldTable extends Model
 	//use SoftDeletes;
 
 	protected $table = "fields_tables";
-    
+
     protected $fillable = ['id', 'id_table', 'id_type_field','name', 'name_db', 'description' , 'field_required','field_recommendation'];
 
     //protected $dates = ['deleted_at'];

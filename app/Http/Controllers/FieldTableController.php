@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\FieldTable;
-use App\Table;
-use App\TypeField;
+use App\Entities\FieldTable;
+use App\Entities\Table;
+use App\Entities\TypeField;
 
 class FieldTableController extends Controller
 {
@@ -21,11 +21,11 @@ class FieldTableController extends Controller
     {
         $fieldTables = FieldTable::orderBy('id','ASC')->paginate(10);
             $fieldTables->each(function ($fieldTables)
-            {      
-                $fieldTables -> table_name = Table::find($fieldTables->id_table)->name; 
-                $fieldTables -> typeField_name = TypeField::find($fieldTables->id_type_field)->name;         
+            {
+                $fieldTables -> table_name = Table::find($fieldTables->id_table)->name;
+                $fieldTables -> typeField_name = TypeField::find($fieldTables->id_type_field)->name;
             });
-             
+
         return view('admin.fieldTable.index')
                     ->with('fieldTables', $fieldTables);
     }
@@ -57,7 +57,7 @@ class FieldTableController extends Controller
     {
         $fieldTable  = new FieldTable($request->all());
         $fieldTable -> save();
-        
+
         return redirect()->route('Admin.FieldTable.index');
     }
 
@@ -70,9 +70,9 @@ class FieldTableController extends Controller
     public function show($id)
     {
         $fieldTable = FieldTable::find($id);
-        $table  = Table::find($fieldTable->id_table); 
+        $table  = Table::find($fieldTable->id_table);
         $typeField  = TypeField::find($fieldTable->id_type_field);
-        
+
 
         return view('admin.fieldTable.show')
                     ->with('fieldTable', $fieldTable)
@@ -92,7 +92,7 @@ class FieldTableController extends Controller
 
         $table = Table::orderBy('name','ASC')->lists('name', 'id');
         $typeField = TypeField::orderBy('name','ASC')->lists('name', 'id');
-        
+
         $fieldTable_table = Table::find($fieldTable->id_table);
         $fieldTable_typeField = TypeField::find($fieldTable->id_type_field);
 
@@ -114,11 +114,11 @@ class FieldTableController extends Controller
     public function update(Request $request, $id)
     {
         $fieldTable = FieldTable::find($id);
-        
-        $fieldTable ->fill($request->all());
-        $fieldTable->save(); 
 
-        
+        $fieldTable ->fill($request->all());
+        $fieldTable->save();
+
+
         return redirect()->route('Admin.FieldTable.index');
     }
 
@@ -140,12 +140,12 @@ class FieldTableController extends Controller
 
         $fieldTable = FieldTable::find($id);
 
-        $table  = Table::find($fieldTable->id_table); 
+        $table  = Table::find($fieldTable->id_table);
         $typeField  = TypeField::find($fieldTable->id_type_field);
         return view('admin.fieldTable.destroy')
                     ->with('fieldTable', $fieldTable)
                     ->with('table', $table)
                     ->with('typeField', $typeField);
-        
+
     }
 }

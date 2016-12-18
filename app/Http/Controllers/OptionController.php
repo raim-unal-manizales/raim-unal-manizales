@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Option;
-use App\FieldTable;
+use App\Entities\Option;
+use App\Entities\FieldTable;
 
 class OptionController extends Controller
 {
@@ -20,10 +20,10 @@ class OptionController extends Controller
     {
         $options = Option::orderBy('id','ASC')->paginate(10);
             $options->each(function ($options)
-            {      
-                $options -> fieldTable_name = FieldTable::find($options->id_field_table)->name;           
+            {
+                $options -> fieldTable_name = FieldTable::find($options->id_field_table)->name;
             });
-             
+
         return view('admin.option.index')->with('options', $options);
     }
 
@@ -49,7 +49,7 @@ class OptionController extends Controller
     {
         $option  = new Option($request->all());
         $option -> save();
-        
+
         return redirect()->route('Admin.Option.index');
     }
 
@@ -63,7 +63,7 @@ class OptionController extends Controller
     {
         $option = Option::find($id);
         $option_fieldTable = FieldTable::find($option->id_field_table);
-        
+
         return view('admin.option.show')
                     ->with('option', $option)
                     ->with('option_fieldTable', $option_fieldTable);
@@ -97,11 +97,11 @@ class OptionController extends Controller
     public function update(Request $request, $id)
     {
         $option = Option::find($id);
-        
-        $option ->fill($request->all());
-        $option->save(); 
 
-        
+        $option ->fill($request->all());
+        $option->save();
+
+
         return redirect()->route('Admin.Option.index');
     }
 
@@ -126,6 +126,6 @@ class OptionController extends Controller
         return view('admin.option.destroy')
                     ->with('option', $option)
                     ->with('option_fieldTable', $option_fieldTable);
-        
+
     }
 }

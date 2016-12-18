@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Rol;
+use App\Entities\User;
+use App\Entities\Rol;
 use narutimateum\Toastr\Facades\Toastr;
 
 class UserController extends Controller
@@ -20,12 +20,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('id','ASC')->paginate(10);
-            
+
             $users->each(function ($users)
-            {      
-                $users -> rol_name = Rol::find($users->id_rol)->name;          
+            {
+                $users -> rol_name = Rol::find($users->id_rol)->name;
             });
-        
+
         return view('admin.user.index')->with('users', $users);
     }
 
@@ -38,7 +38,7 @@ class UserController extends Controller
     {
         $rol = Rol::orderBy('name','ASC')->lists('name', 'id');
 
-        
+
 
         return view('admin.user.create')->with('rol', $rol);
     }
@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $user  = new User($request->all());
         $user -> password = bcrypt($request->password);
         $user -> encript = encrypt($request->password);
@@ -112,11 +112,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        
-        $user ->fill($request->all());
-        $user->save(); 
 
-        
+        $user ->fill($request->all());
+        $user->save();
+
+
         return redirect()->route('Admin.User.index');
     }
 
@@ -141,8 +141,8 @@ class UserController extends Controller
         return view('admin.user.destroy')
                     ->with('user', $user)
                     ->with('user_rol', $user_rol);
-        
+
     }
 
-    
+
 }

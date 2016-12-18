@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\FieldUser;
-use App\Aplication;
-use App\Table;
-use App\TypeField;
-use App\FieldTable;
-use App\Option;
-use App\User;
-use App\Rol;
+use App\Entities\FieldUser;
+use App\Entities\Aplication;
+use App\Entities\Table;
+use App\Entities\TypeField;
+use App\Entities\FieldTable;
+use App\Entities\Option;
+use App\Entities\User;
+use App\Entities\Rol;
 
 
 
@@ -38,9 +38,9 @@ class PublicController extends Controller
 
     public function register()
     {
-     
+
         //$rol = Rol::orderBy('name','ASC')->lists('name', 'id');
-        $rol = Rol::where('id', '<>', 1)->orderBy('name','ASC')->lists('name', 'id');       
+        $rol = Rol::where('id', '<>', 1)->orderBy('name','ASC')->lists('name', 'id');
         return view('public.register')->with('rol', $rol);
     }
 
@@ -66,7 +66,7 @@ class PublicController extends Controller
         //dd($user);
         $user -> password = bcrypt($request->password);
         $user -> encript = encrypt($request->password);
-       
+
         $descript = decrypt($user->encript);
         //dd($descript);
 
@@ -96,32 +96,32 @@ class PublicController extends Controller
         $aplications = Aplication::where('rquiered_information','True')->get();
 
         $aplications->each(function ($aplications)
-        {  
-            $tables = Table::where('id_app',$aplications->id)->get();            
-            
+        {
+            $tables = Table::where('id_app',$aplications->id)->get();
+
             $tables->each(function ($tables)
             {
                 $fieldTables = FieldTable::where('id_table',$tables->id)->get();
-                
+
                 $fieldTables->each(function ($fieldTables)
                 {
                     $id_fiel_tables = $fieldTables->id;
 
                     $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
                     $fieldTables-> types_fields = $types_fields;
-                  
+
                     $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
-                    $fieldTables-> options = $options; 
+                    $fieldTables-> options = $options;
 
                     //dd($fieldTables->options);
-                               
-                }); 
-            
-            $tables-> fields_tables = $fieldTables->all();   
+
+                });
+
+            $tables-> fields_tables = $fieldTables->all();
             });
-        
-        $aplications -> tablas = $tables; 
-         });  
+
+        $aplications -> tablas = $tables;
+         });
 
         return view('public.create')
                             ->with('aplications',$aplications)
@@ -134,13 +134,13 @@ class PublicController extends Controller
     {
          $datos = $request->all();
          $info = unserialize($datos["info"]);
-         
-        
+
+
 
          //$user = $datos["id_user"];
-         
+
          foreach ($info as $key => $values) {
-             
+
             $position = $values['position'];
             $value =    $datos[$position-1];
 
@@ -154,15 +154,15 @@ class PublicController extends Controller
             $values['value'] = $value;
             $values['id_option'] = $option;
             //$values['id_user']   = $user;
-            
+
             $fieldEspecific  = new FieldUser($values);
 
 
 
-             $fieldEspecific -> save(); 
+             $fieldEspecific -> save();
 
          }
-         
+
          return redirect()->route('Public.index');
     }
 
@@ -286,10 +286,10 @@ class PublicController extends Controller
                 ->with('user_id',$id)
                 ->with('fielduser',$fielduser);
         }
-        
+
         return view('public.searchOa')
             ->with('aplications', null);
-        
+
     }
 
     public function objectives()

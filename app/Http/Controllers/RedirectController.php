@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\User;
-use App\Aplication;
+use App\Entities\User;
+use App\Entities\Aplication;
 
 class RedirectController extends Controller
 {
@@ -39,7 +39,7 @@ class RedirectController extends Controller
    }
 
    public function session_create(Request $request){
-   		
+
    		$datos = $request->all();
    		$id = $datos['id'];
    		$tipo_accion = $datos['tipo_accion'];

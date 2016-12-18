@@ -7,27 +7,27 @@ use Illuminate\Contracts\Auth\Guard;
 use App\Http\Controllers\Controller;
 
 use App\FieldUser;
-use App\Aplication;
-use App\Table;
-use App\TypeField;
-use App\FieldTable;
-use App\Option;
-use App\User;
-use App\Rol;
+use App\Entities\Aplication;
+use App\Entities\Table;
+use App\Entities\TypeField;
+use App\Entities\FieldTable;
+use App\Entities\Option;
+use App\Entities\User;
+use App\Entities\Rol;
 
 
 /**
-* 
+*
 */
 class DataDinamic extends Controller {
 
 	protected $auth;
-        
+
     public function __construct(Guard $auth){
-        
+
             $this->auth = $auth;
         }
-	
+
 	public function compose(View $view)
 	{
 		if ($this->auth->user()) {
@@ -43,9 +43,9 @@ class DataDinamic extends Controller {
 					'learningStyle' => $learningStyle,
 					'personalization' => $personalization
 				);
-	   
+
 	        #-------------------------------------------------
-	       // datos de usuario   
+	       // datos de usuario
 	        $usuario = User::where('id',$id)->get();
 	        #-------------------------------------------------
 		}else{

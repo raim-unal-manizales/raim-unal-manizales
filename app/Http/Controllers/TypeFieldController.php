@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\TypeField;
+use App\Entities\TypeField;
 
 class TypeFieldController extends Controller
 {
@@ -39,7 +39,7 @@ class TypeFieldController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $typeField  = new TypeField($request->all());
         $typeField -> save();
 
@@ -80,11 +80,11 @@ class TypeFieldController extends Controller
     public function update(Request $request, $id)
     {
         $typeField = TypeField::find($id);
-        
-        $typeField ->fill($request->all());
-        $typeField->save(); 
 
-        
+        $typeField ->fill($request->all());
+        $typeField->save();
+
+
         return redirect()->route('Admin.TypeField.index');
     }
 
@@ -105,6 +105,6 @@ class TypeFieldController extends Controller
 
         $typeField = TypeField::find($id);
         return view('admin.typeField.destroy')->with('typeField', $typeField);
-        
+
     }
 }
