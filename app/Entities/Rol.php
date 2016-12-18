@@ -2,25 +2,14 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Rol extends Model
+class Rol extends Entity
 {
-	//use SoftDeletes;
 
 	protected $table = "rol";
 
-    protected $fillable = ['id','name', 'description'];
-
-    //protected $dates = ['deleted_at'];
-
-
-    /*
-    	//	Relaciones
-     */
+  protected $fillable = ['id','name', 'description'];
 
     public function users(){
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\Entities\User', 'id_rol');
     }
 }

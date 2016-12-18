@@ -2,11 +2,7 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\SoftDeletes;
-
-
-class FieldUser extends Model
+class FieldUser extends Entity
 {
 	//use SoftDeletes;
 
@@ -23,8 +19,12 @@ class FieldUser extends Model
     */
 
     public function fields_tables(){
-        return $this->belongsTo('App\FieldTable');
+        return $this->belongsTo('App\Entities\FieldTable', 'id_field_table');
     }
+
+		public function user(){
+				return $this->belongsTo('App\Entities\User', 'id_user');
+		}
 
 
 }

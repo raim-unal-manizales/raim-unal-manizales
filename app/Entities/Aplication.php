@@ -2,10 +2,11 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+
+//use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Aplication extends Model
+class Aplication extends Entity
 {
    	//use SoftDeletes;
 
@@ -16,7 +17,7 @@ class Aplication extends Model
     //protected $dates = ['deleted_at'];
 
     public function tables(){
-        return $this->hasMany('App\Table');
+        return $this->hasMany('App\Entities\Table', 'id_app');
     }
 
     public function recoverTables($query, $id_app)

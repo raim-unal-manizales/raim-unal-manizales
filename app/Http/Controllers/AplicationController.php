@@ -18,9 +18,7 @@ class AplicationController extends Controller
      */
     public function index()
     {
-
         $aplications = Aplication::orderBy('id', 'ASC')->paginate(10);
-
         return view('admin.aplication.index')->with('aplications',$aplications);
     }
 

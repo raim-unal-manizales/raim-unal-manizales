@@ -2,25 +2,20 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Table extends Model
+class Table extends Entity
 {
-	//use SoftDeletes;
 
 	protected $table = "tables";
 
-    protected $fillable = ['id','id_app' ,'name', 'description'];
-
-    //protected $dates = ['deleted_at'];
+  protected $fillable = ['id','id_app' ,'name', 'description'];
 
 
-    public function aplication(){
-        return $this->belongsTo('App\Aplication');
-    }
+  public function aplication(){
+      return $this->belongsTo('App\Entities\Aplication', 'id_app');
+  }
 
-    public function fields_tables(){
-        return $this->hasMany('App\FieldTable');
-    }
+  public function fields_tables(){
+      return $this->hasMany('App\Entities\FieldTable', 'id_table');
+  }
 }

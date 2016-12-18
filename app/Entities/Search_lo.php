@@ -2,11 +2,15 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 
-class Search_lo extends Model
+class Search_lo extends Entity
 {
     protected $table = "search_lo";
 
     protected $fillable = ['id', 'user_id','search_string'];
+
+
+    public function user(){
+        return $this->belongsTo('App\Entities\User', 'user_id');
+    }
 }

@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Entities;
-
-use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FieldTable extends Model
+class FieldTable extends Entity
 {
 	//use SoftDeletes;
 
@@ -16,25 +14,20 @@ class FieldTable extends Model
     //protected $dates = ['deleted_at'];
 
 
-    public function tables(){
-        return $this->belongsTo('App\Table');
+    public function table(){
+        return $this->belongsTo('App\Entities\Table', 'id_table');
     }
 
     public function options(){
-        return $this->hasMany('App\Option');
+        return $this->hasMany('App\Entities\Option', 'id_field_table');
     }
 
     public function types_fields(){
-        return $this->belongsTo('App\TypeField');
+        return $this->belongsTo('App\Entities\TypeField', 'id_type_field');
     }
 
     public function field_user(){
-        return $this->hasMany('App\FieldUser');
+        return $this->hasMany('App\Entities\FieldUser', 'id_field_table');
     }
-
-    public function user(){
-        return $this->belongsTo('App\User');
-    }
-
 
 }

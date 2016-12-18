@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    //use SoftDeletes;
 
     protected $table = "users";
     /**
@@ -18,7 +17,6 @@ class User extends Authenticatable
     protected $fillable = [
         'id','id_rol','user_name','first_name','second_name','last_name','educativeLevel', 'institution', 'email', 'password','birth_date','language','encript'];
 
-    //protected $dates = ['deleted_at'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -30,14 +28,35 @@ class User extends Authenticatable
     ];
 
     public function rol(){
-        return $this->belongsTo('App\Rol');
+        return $this->belongsTo('App\Entities\Rol', 'id_rol');
     }
 
-    public function fields_tables(){
-        return $this->hasMany('App\FieldTable');
+    public function fields_user(){
+        return $this->hasMany('App\Entities\FieldUser', 'id_user');
     }
 
+    public function search_lo(){
+        return $this->hasMany('App\Entities\search_lo', 'user_id');
+    }
 
+    public function visited_lo(){
+        return $this->hasMany('App\Entities\Visited_lo', 'user_id');
+    }
+
+    public function calification_lo(){
+        return $this->hasMany('App\Entities\Calification_lo', 'user_id');
+    }
+
+    public function personalization(){
+        return $this->hasMany('App\Entities\Personalization', 'user_id');
+    }
+    public function need(){
+        return $this->hasMany('App\Entities\Need', 'user_id');
+    }
+
+    public function learningStyle(){
+        return $this->hasMany('App\Entities\LearningStyle', 'user_id');
+    }
 
 
 }

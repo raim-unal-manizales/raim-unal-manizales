@@ -2,26 +2,16 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Option extends Model
+class Option extends Entity
 {
-	//use SoftDeletes;
 
 	protected $table = "options";
 
-    protected $fillable = ['id', 'id_field_table','name', 'description', 'id_option_app'];
+  protected $fillable = ['id', 'id_field_table','name', 'description', 'id_option_app'];
 
-    //protected $dates = ['deleted_at'];
 
-  /*
-
-    public function fields_tables(){
-        return $this->belongsTo('App\FieldTable');
-    }*/
-
-    public function field_user(){
-        return $this->hasMany('App\FieldUser');
+    public function fields_table(){
+        return $this->belongsTo('App\Entities\FieldTable', 'id_field_table');
     }
 }

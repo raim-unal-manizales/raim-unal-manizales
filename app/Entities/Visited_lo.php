@@ -2,11 +2,14 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 
-class Visited_lo extends Model
+class Visited_lo extends Entity
 {
       protected $table = "visited_lo";
 
     protected $fillable = ['id', 'user_id','repository_id', 'object_id'];
+
+    public function user(){
+				return $this->belongsTo('App\Entities\User', 'user_id');
+		}
 }
