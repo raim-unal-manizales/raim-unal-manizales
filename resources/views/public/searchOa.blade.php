@@ -42,6 +42,9 @@
         </div>
     </div>
 
+    <div class="row" id="notResults">
+    </div>
+
 @endsection
 
 @section('javascript')
@@ -73,10 +76,10 @@
 
                 $('#recomendedLo .resultado').html('');
                 $('#othersLo .resultado').html('');
-                $('#sinResultados').html('');
+                $('#notResults').html('');
 
                 //Obtiene la palabra de busqueda del formulario
-                var searchString = $('#text').val();
+                var searchString = $('#text').val().trim();
 
                 $.ajax({
                     type: "GET",
@@ -190,9 +193,8 @@
 
                         }else if(listaOA.length <= 0){
 
-                            $('#page-wrapper').append('<div id="sinResultados" class"row">' +
-                                    'No existen objetos de aprendizaje que cumplan con los criterios de búsqueda' +
-                                    '</div>');
+                            $('#notResults')
+                                .append('No existen objetos de aprendizaje que cumplan con los criterios de búsqueda');
                         }else{
 
                             mostrarLOSecciones(listaOA);
