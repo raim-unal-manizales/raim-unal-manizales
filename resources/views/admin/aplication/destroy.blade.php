@@ -3,19 +3,19 @@
 @section('title', 'Eliminar Aplicacion')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Eliminar Aplicacion</h1> 
+  		<h1>Eliminar Aplicacion</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.Aplication.destroy', $aplication->id], 'method' => 'DELETE']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -59,11 +59,16 @@
 				<td>{!! $aplication->rquiered_learningStyle!!}</td>
 			</tr>
 		</table>
+
+    <tr>
+      <td>Manejo de rutas en framework</td>
+      <td>{!! $aplication->systemRoute !!}</td>
+    </tr>
 	</div>
-	
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
-		<a href="{{ route('Admin.Aplication.index') }}">Cancelar</a>	
+
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
+		<a href="{{ route('Admin.Aplication.index') }}">Cancelar</a>
 	</div>
 
 	{!! Form::close() !!}

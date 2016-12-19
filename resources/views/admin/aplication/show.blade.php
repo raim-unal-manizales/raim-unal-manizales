@@ -3,19 +3,19 @@
 @section('title', 'Ver Aplicacion')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Ver Aplicacion</h1> 
+  		<h1>Ver Aplicacion</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.Aplication.index'], 'method' => 'GET','novalidate' => 'novalidate']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -58,10 +58,15 @@
 				<td>Requiere NEDD</td>
 				<td>{!! $aplication->rquiered_learningStyle!!}</td>
 			</tr>
+
+      <tr>
+        <td>Manejo de rutas en framework</td>
+        <td>{!! $aplication->systemRoute !!}</td>
+      </tr>
 		</table>
 	</div>
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
 	</div>
 
 	{!! Form::close() !!}

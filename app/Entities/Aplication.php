@@ -12,7 +12,7 @@ class Aplication extends Entity
 
 	protected $table = "aplications";
 
-    protected $fillable = ['id','name', 'description', 'url', 'logo', 'type', 'rquiered_information','rquiered_personalization','rquiered_NEDD','rquiered_learningStyle', 'state'];
+    protected $fillable = ['id','name', 'description', 'url', 'logo', 'type', 'rquiered_information','rquiered_personalization','rquiered_NEDD','rquiered_learningStyle', 'state' ,'systemRoute'];
 
     //protected $dates = ['deleted_at'];
 

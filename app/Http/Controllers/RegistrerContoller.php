@@ -25,14 +25,15 @@ class RegistrerContoller extends Controller
     public function create()
     {
     	$rol = Rol::where('id', '<>', 1)->orderBy('name','ASC')->lists('name', 'id');
-        $needEtnica = $this->getneedEtnica();
+      $needEtnica = $this->getneedEtnica();
     	$aplications = $this->Information_App();
 
-        return view('public.register_user')
-        			->with('rol', $rol)
-        			->with('aplications',$aplications)
-                    ->with('needEtnica',$needEtnica);
+      return view('public.register_user')
+        			    ->with('rol', $rol)
+        			    ->with('aplications',$aplications)
+                  ->with('needEtnica',$needEtnica);
     }
+    
     private function getneedEtnica()
     {
         $needEtnica = Need::select('E1')->distinct()->where('E1', '<>','')->get()->lists('E1')->toArray();

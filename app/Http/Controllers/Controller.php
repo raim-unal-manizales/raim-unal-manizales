@@ -38,7 +38,7 @@ class Controller extends BaseController
         $data_user = null;
 
         foreach ($information_user as $information) {
-
+            dd($information);
             $url_base = $information->url;
             $name = $information->name;
             $data= $information->all();
@@ -69,7 +69,9 @@ class Controller extends BaseController
         return $final;
    }
 
-   protected function make_content($information_user,$information_Need,$information_learningStyle,$information_personalization){
+   protected function make_content($information_user,$information_Need,
+                                    $information_learningStyle,$information_personalization)
+  {
 
         $data = array();
 
@@ -298,6 +300,19 @@ class Controller extends BaseController
     }
 
    }
+   protected function DireccionamientoRoute($url,$tipo_accion){
+
+    if ($tipo_accion == "Create") {
+        return $url."raim/session_create";
+    }elseif ($tipo_accion == "Update") {
+        return $url."raim/session_update";
+    }elseif ($tipo_accion == "Delete") {
+        return $url."raim/session_delete";
+    }else{
+        return "false";
+    }
+
+   }
     protected function EnvioDatos($data,$url)
     {
 
@@ -311,6 +326,7 @@ class Controller extends BaseController
 
 
         return $respuesta->getReasonPhrase();
+        //return $data;
 
     }
 

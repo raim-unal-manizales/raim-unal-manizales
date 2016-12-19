@@ -61,6 +61,11 @@
 			{!! Form::select('rquiered_learningStyle',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '', 'required']) !!}
 		</div>
 
+    <div class="fieldForm">
+      {!! Form::label('systemRoute','Rutas definidad por framework') !!}
+      {!! Form::select('systemRoute',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '', 'required']) !!}
+    </div>
+
 		<div class="fieldForm">
 
 			{!! Form::label('description','Descripcion') !!}

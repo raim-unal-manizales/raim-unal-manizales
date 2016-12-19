@@ -13,7 +13,7 @@ class CreateAplicationsTable extends Migration
     public function up()
     {
         Schema::create('aplications', function (Blueprint $table) {
-            
+
             $table->increments('id');
 
             $table->string('name');
@@ -22,11 +22,12 @@ class CreateAplicationsTable extends Migration
             $table->string('logo')->nullable();
             $table->enum('type',['Herramienta_Autor','Repositorio']);
             $table->enum('state',['Activo','Inactivo']);
-            
+
             $table->enum('rquiered_personalization',['True','False'])->default('False');
             $table->enum('rquiered_NEDD',['True','False'])->default('False');
             $table->enum('rquiered_information',['True','False'])->default('False');
             $table->enum('rquiered_learningStyle',['True','False'])->default('False');
+            $table->enum('systemRoute',['True','False'])->default('False');
 
             $table->timestamps();
            //$table->SoftDeletes();
