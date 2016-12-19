@@ -38,11 +38,15 @@ class Controller extends BaseController
         $data_user = null;
 
         foreach ($information_user as $information) {
-            dd($information);
             $url_base = $information->url;
             $name = $information->name;
             $data= $information->all();
-            $url = $this->Direccionamiento($url_base,$tipo_accion);
+            if ($information->systemRoute == "True") {
+              $url = $this->DireccionamientoRoute($url_base,$tipo_accion);
+            }else {
+              $url = $this->Direccionamiento($url_base,$tipo_accion);
+            }
+
 
             if ($information->state == "Activo") {
 
