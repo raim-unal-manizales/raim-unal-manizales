@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\ReferenceLearningStyle;
-use App\LearningStyle;
+use App\Entities\ReferenceLearningStyle;
+use App\Entities\LearningStyle;
 
 class LearningStyleController extends Controller
 {
@@ -18,7 +18,7 @@ class LearningStyleController extends Controller
     public function store(Request $request)
     {
 
-       
+
     	$Array_value = $this->ModeloArray();
 
         $Array_value['user_id'] = $request->user_id;
@@ -48,7 +48,7 @@ class LearningStyleController extends Controller
     	$Array_value['sequential'] = round($this->porcentaje($g,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
 
     	$mayorUno = $this->MayorUno($a,$k,$v,$r);
-    	$mayorDos = $this->MayorDos($s,$g); 	
+    	$mayorDos = $this->MayorDos($s,$g);
 
 
     	$referenceLearniingStyle = ReferenceLearningStyle::where('styleUno', $mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
@@ -56,8 +56,8 @@ class LearningStyleController extends Controller
     	$Array_value['reference_learning_styles']= $referenceLearniingStyle[0];
 
         $LearningStyle = new LearningStyle($Array_value);
-        $LearningStyle->save(); 
-        
+        $LearningStyle->save();
+
 
     }
     protected function MayorUno($a,$k,$v,$r)
@@ -112,7 +112,7 @@ class LearningStyleController extends Controller
     		'auditory' => '' ,
     		'reader' => '' ,
     		'global' => '' ,
-    		'sequential' => '' 
+    		'sequential' => ''
 
     		);
 

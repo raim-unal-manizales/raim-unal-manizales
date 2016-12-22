@@ -7,36 +7,37 @@ use App\Http\Controllers\Auth;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\FieldUser;
-use App\Aplication;
-use App\Table;
-use App\TypeField;
-use App\FieldTable;
-use App\Option;
-use App\Rol;
-use App\LearningStyle;
-use App\Personalization;
-use App\Need;
-use App\ReferenceLearningStyle;
+use App\Entities\User;
+use App\Entities\FieldUser;
+use App\Entities\Aplication;
+use App\Entities\Table;
+use App\Entities\TypeField;
+use App\Entities\FieldTable;
+use App\Entities\Option;
+use App\Entities\Rol;
+use App\Entities\LearningStyle;
+use App\Entities\Personalization;
+use App\Entities\Need;
+use App\Entities\ReferenceLearningStyle;
 
 class RegistrerContoller extends Controller
 {
     public function create()
     {
     	$rol = Rol::where('id', '<>', 1)->orderBy('name','ASC')->lists('name', 'id');
-        $needEtnica = $this->getneedEtnica();
+      $needEtnica = $this->getneedEtnica();
     	$aplications = $this->Information_App();
 
-        return view('public.register_user')
-        			->with('rol', $rol)
-        			->with('aplications',$aplications)
-                    ->with('needEtnica',$needEtnica);
+      return view('public.register_user')
+        			    ->with('rol', $rol)
+        			    ->with('aplications',$aplications)
+                  ->with('needEtnica',$needEtnica);
     }
+    
     private function getneedEtnica()
     {
         $needEtnica = Need::select('E1')->distinct()->where('E1', '<>','')->get()->lists('E1')->toArray();
-        
+
         array_push($needEtnica, '');
 
         if (!in_array('Embera', $needEtnica)) {
@@ -93,7 +94,7 @@ class RegistrerContoller extends Controller
                     }else{
                         array_push($array_tem_LeranindStyle,$value);
                     }
-                        break;	
+                        break;
     			case '3':
     				if ($this->termination($value)) {
     					$need->user_id = $id_user;
@@ -126,10 +127,10 @@ class RegistrerContoller extends Controller
     	}
 
 
-        
+
         $resultado = $this->session_all($id_user,'Create');
-         
-        
+
+
         //dd($resultado);
 
         //$user = Auth::user();
@@ -147,7 +148,7 @@ class RegistrerContoller extends Controller
         return $userCreate->id;
     }
 
-    
+
     protected function storeAll($datos,$id_user)
     {
 
@@ -155,7 +156,7 @@ class RegistrerContoller extends Controller
         $cantidad = count($info);
         if ($cantidad > 0) {
              foreach ($info as $key => $values) {
-                 
+
                 $position = $values['position'];
                 $value =    $datos[$position-1001];
                 if ($values['select'] == 1) {
@@ -166,7 +167,7 @@ class RegistrerContoller extends Controller
                 $values['value'] = $value;
                 $values['id_option'] = $option;
                 $values['id_user']   = $id_user;
-                
+
                 $fieldEspecific  = new FieldUser($values);
                 $fieldEspecific -> save();
              }
@@ -191,30 +192,30 @@ class RegistrerContoller extends Controller
         $aplications = Aplication::where('rquiered_information','True')->get();
 
         $aplications->each(function ($aplications)
-        {  
-            $tables = Table::where('id_app',$aplications->id)->get();            
-            
+        {
+            $tables = Table::where('id_app',$aplications->id)->get();
+
             $tables->each(function ($tables)
             {
                 $fieldTables = FieldTable::where('id_table',$tables->id)->get();
-                
+
                 $fieldTables->each(function ($fieldTables)
                 {
                     $id_fiel_tables = $fieldTables->id;
 
                     $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
                     $fieldTables-> types_fields = $types_fields;
-                  
+
                     $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
-                    $fieldTables-> options = $options; 
-                               
-                }); 
-            
-            $tables-> fields_tables = $fieldTables->all();   
+                    $fieldTables-> options = $options;
+
+                });
+
+            $tables-> fields_tables = $fieldTables->all();
             });
-        
-        $aplications -> tablas = $tables; 
-         });  
+
+        $aplications -> tablas = $tables;
+         });
 
         return $aplications;
     }
@@ -224,7 +225,7 @@ class RegistrerContoller extends Controller
 /* Estilos de aprendizaje  */
 
     protected function storeLearningStyle($learningStyle,$id_user)
-    {       
+    {
     	$Array_value = $this->ModeloArray();
 
         $Array_value['user_id'] = $id_user;
@@ -256,7 +257,7 @@ class RegistrerContoller extends Controller
             $Array_value['sequential'] = round($this->porcentaje($g,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
 
             $mayorUno = $this->MayorUno($a,$k,$v,$r);
-            $mayorDos = $this->MayorDos($s,$g); 
+            $mayorDos = $this->MayorDos($s,$g);
 
 
             $referenceLearniingStyle = ReferenceLearningStyle::where('styleUno', $mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
@@ -266,7 +267,7 @@ class RegistrerContoller extends Controller
 
         }else{
             $learningStile =  ReferenceLearningStyle::where('learningStile', 'Defect-null')->lists('id')->toArray();
-            $Array_value['reference_learning_styles'] = $learningStile[0]; 
+            $Array_value['reference_learning_styles'] = $learningStile[0];
             $Array_value['visual'] = 0;
             $Array_value['kinestesic'] = 0;
             $Array_value['auditory'] = 0;
@@ -277,8 +278,8 @@ class RegistrerContoller extends Controller
 
 
         $LearningStyle = new LearningStyle($Array_value);
-        $LearningStyle->save(); 
-        
+        $LearningStyle->save();
+
 
     }
     protected function MayorUno($a,$k,$v,$r)
@@ -333,7 +334,7 @@ class RegistrerContoller extends Controller
     		'auditory' => '' ,
     		'reader' => '' ,
     		'global' => '' ,
-    		'sequential' => '' 
+    		'sequential' => ''
 
     		);
 

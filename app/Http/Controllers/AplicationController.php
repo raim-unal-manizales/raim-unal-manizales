@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Aplication;
+use App\Entities\Aplication;
 
 
 class AplicationController extends Controller
@@ -18,9 +18,7 @@ class AplicationController extends Controller
      */
     public function index()
     {
-
         $aplications = Aplication::orderBy('id', 'ASC')->paginate(10);
-
         return view('admin.aplication.index')->with('aplications',$aplications);
     }
 
@@ -43,7 +41,7 @@ class AplicationController extends Controller
     public function store(Request $request)
     {
 
-        
+
         $aplication = new Aplication($request->all());
 
           if ($request -> file('logo')) {
@@ -53,7 +51,7 @@ class AplicationController extends Controller
                 $file->move($path, $name);
                  $aplication -> logo = $name;
             }
-           
+
        //dd($aplication);
         $aplication ->save();
 
@@ -98,7 +96,7 @@ class AplicationController extends Controller
 
         $aplication_ant = Aplication::find($id);
         $name =$aplication_ant->logo;
-         
+
         $aplication = Aplication::find($id);
         $aplication-> fill($request->all());
 
@@ -106,11 +104,11 @@ class AplicationController extends Controller
                 $file = $request-> file('logo');
                 $name = '/raim/images/logo_aplication/logo_'.time().'.'.$file->getClientOriginalExtension();
                 $path = $this->uploadPath().'/images/logo_aplication/';
-                $file->move($path, $name);             
+                $file->move($path, $name);
         }
 
         $aplication -> logo = $name;
-        $aplication->save(); 
+        $aplication->save();
 
         return redirect()->route('Admin.Aplication.index');
     }
@@ -132,9 +130,9 @@ class AplicationController extends Controller
 
         $aplication = Aplication::find($id);
         return view('admin.aplication.destroy')->with('aplication', $aplication);
-        
+
     }
-    
+
     private function uploadPath(){
         return "/var/www/raim";
     }

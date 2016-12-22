@@ -37,7 +37,7 @@ Route::get('/', function () {
 				'uses' 	=> 'RolController@delete',
 				'as'	=> 'Admin.Rol.delete'
 			]);
-		
+
 		Route::resource('User','UserController');
 			Route::get('User/{id}/delete',[
 				'uses' 	=> 'UserController@delete',
@@ -48,13 +48,13 @@ Route::get('/', function () {
 				'uses' 	=> 'UserController@index',
 				'as'	=> 'Admin.User.index'
 			]);
-		
+
 		Route::resource('Aplication','AplicationController');
 			Route::get('Aplication/{id}/delete',[
 				'uses' 	=> 'AplicationController@delete',
 				'as'	=> 'Admin.Aplication.delete'
 			]);
-		
+
 		Route::resource('Table','TableController');
 			Route::get('Table/{id}/delete',[
 				'uses' 	=> 'TableController@delete',
@@ -65,19 +65,19 @@ Route::get('/', function () {
 				'uses' 	=> 'TableController@index',
 				'as'	=> 'Admin.Table.index'
 			]);*/
-		
+
 		Route::resource('Option','OptionController');
 			Route::get('Option/{id}/delete',[
 				'uses' 	=> 'OptionController@delete',
 				'as'	=> 'Admin.Option.delete'
 			]);
-		
+
 		Route::resource('TypeField','TypeFieldController');
 			Route::get('TypeField/{id}/delete',[
 				'uses' 	=> 'TypeFieldController@delete',
 				'as'	=> 'Admin.TypeField.delete'
 			]);
-		
+
 		Route::resource('FieldTable','FieldTableController');
 			Route::get('FieldTable/{id}/delete',[
 				'uses' 	=> 'FieldTableController@delete',
@@ -193,8 +193,8 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			'as'	=> 'Public.index'
 		]);
 
-	//Formularios necesarios para el registro de usuarios 
-			
+	//Formularios necesarios para el registro de usuarios
+
 		// formulario para los estilos de aprendizaje.
 
 		Route::get('/learning_style',[
@@ -208,7 +208,7 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			]);
 
 		// formulario para la personalizacion de la interfaz de usuario.
-		
+
 		Route::get('/personalizacion',[
 			'uses' 	=> 'PersonalizationController@create',
 			'as'	=> 'Public.personalizacion'
@@ -220,7 +220,7 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			]);
 
 		// formulario para la personalizacion de la interfaz de usuario.
-		
+
 		Route::get('/need',[
 			'uses' 	=> 'NeedController@create',
 			'as'	=> 'Public.need'
@@ -232,7 +232,7 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			]);
 
 		// formulario para el reguistro de usuario.
-		
+
 		Route::get('/register_user',[
 			'uses' 	=> 'RegistrerContoller@create',
 			'as'	=> 'Public.register_user'
@@ -249,8 +249,8 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			]);
 
 
-	//fin de rutas necesarios para el registro de usuarios 	
-	
+	//fin de rutas necesarios para el registro de usuarios
+
 
 
 
@@ -258,7 +258,7 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			'uses' 	=> 'PublicController@objectives',
 			'as'	=> 'Public.objectives'
 		]);
-		
+
 		Route::get('/advisers',[
 			'uses' 	=> 'PublicController@advisers',
 			'as'	=> 'Public.advisers'
@@ -317,11 +317,11 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 
 
 	});
-		
+
 
 
 	Route::group(['middleware' => 'web'], function () {
-	    
+
 	    Route::auth();
 
 	    Route::get('/home', 'HomeController@index');
@@ -338,12 +338,12 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			'uses' 	=> 'LoController@save_calification',
 			'as'	=> 'Lo.save_calification'
 		]);
-		
+
 		Route::post('/save_visited',[
 			'uses' 	=> 'LoController@save_visited',
 			'as'	=> 'Lo.save_visited'
 		]);
-		
+
 		Route::post('/save_search',[
 			'uses' 	=> 'LoController@save_search',
 			'as'	=> 'Lo.save_search'
@@ -363,7 +363,5 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			'uses' 	=> 'RedirectController@session_create',
 			'as'	=> 'RedirectRoute.session_create'
 		]);
-		
+
 	});
-
-

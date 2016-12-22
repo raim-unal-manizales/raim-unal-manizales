@@ -10,7 +10,8 @@
         "laravelcollective/html": "^5.2",
         "barryvdh/laravel-cors": "0.7.*",
         "narutimateum/toastr-5.2-laravel": "dev-master",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\FieldUser;
-use App\Aplication;
-use App\Table;
-use App\TypeField;
-use App\FieldTable;
-use App\Option;
-use App\User;
+use App\Entities\FieldUser;
+use App\Entities\Aplication;
+use App\Entities\Table;
+use App\Entities\TypeField;
+use App\Entities\FieldTable;
+use App\Entities\Option;
+use App\Entities\User;
 
 class FieldUserController extends Controller
 {
@@ -23,16 +23,16 @@ class FieldUserController extends Controller
      */
     public function index(Request $request)
     {
-        
-        // consulto todas las aplicaciones, tablas, usuarios en un array   
+
+        // consulto todas las aplicaciones, tablas, usuarios en un array
         $aplications = Aplication::all()->lists('name', 'id');
         $tables = Table::all()->lists('name', 'id');
         $users = User::all()->lists('name', 'id');
 
 
 
-        // consulto tipos de campo a mostrar 
-           
+        // consulto tipos de campo a mostrar
+
         $fieldusers = FieldUser::orderBy('id', 'ASC')->paginate(10);
 
         $fieldusers->each(function ($fieldusers){
@@ -50,7 +50,7 @@ class FieldUserController extends Controller
             $fieldusers -> type_field_name = $type_field->name;
 
             if ($type_field->html == "select") {
-                
+
                 $option = Option::where('id',$fieldusers->id_option)->get()->first();
                 $fieldusers -> option_name = $option->name;
             }
@@ -74,34 +74,34 @@ class FieldUserController extends Controller
         //$aplications = Aplication::all();
 
         $aplications = Aplication::where('rquiered_information','True')->get();
-       
+
         $aplications->each(function ($aplications)
-        {  
-            $tables = Table::where('id_app',$aplications->id)->get();            
-            
+        {
+            $tables = Table::where('id_app',$aplications->id)->get();
+
             $tables->each(function ($tables)
             {
                 $fieldTables = FieldTable::where('id_table',$tables->id)->get();
-                
+
                 $fieldTables->each(function ($fieldTables)
                 {
                     $id_fiel_tables = $fieldTables->id;
 
                     $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
                     $fieldTables-> types_fields = $types_fields;
-                  
+
                     $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
-                    $fieldTables-> options = $options; 
+                    $fieldTables-> options = $options;
 
                     //dd($fieldTables->options);
-                               
-                }); 
-            
-            $tables-> fields_tables = $fieldTables->all();   
+
+                });
+
+            $tables-> fields_tables = $fieldTables->all();
             });
-        
-        $aplications -> tablas = $tables; 
-         });  
+
+        $aplications -> tablas = $tables;
+         });
 
         $users = User::all()->lists('name', 'id');
 
@@ -123,13 +123,13 @@ class FieldUserController extends Controller
     {
          $datos = $request->all();
          $info = unserialize($datos["info"]);
-         
+
          //dd($datos);
 
          $user = $datos["id_user"];
-         
+
          foreach ($info as $key => $values) {
-             
+
             $position = $values['position'];
             $value =    $datos[$position-1];
 
@@ -143,15 +143,15 @@ class FieldUserController extends Controller
             $values['value'] = $value;
             $values['id_option'] = $option;
             $values['id_user']   = $user;
-            
+
             $fieldEspecific  = new FieldUser($values);
 
-             $fieldEspecific -> save(); 
+             $fieldEspecific -> save();
 
 
 
          }
-         
+
          return redirect()->route('Public.index');
     }
 
@@ -178,11 +178,11 @@ class FieldUserController extends Controller
             $fielduser -> type_field_name = $type_field->name;
 
             if ($type_field->html == "select") {
-                
+
                 $option = Option::where('id',$fielduser->id_option)->get()->first();
                 $fielduser -> option_name = $option->html;
             }
-   
+
         return view('admin.fieldUser.show')
                     ->with('fielduser', $fielduser);
     }
@@ -211,12 +211,12 @@ class FieldUserController extends Controller
 
             if ($type_field->html == "select") {
                 $options= Option::where('id_field_table',$fieldtable->id)->lists('name', 'id');
-                $fielduser-> options = $options; 
+                $fielduser-> options = $options;
             }
 
-   
+
         return view('admin.fieldUser.edit')
-                    ->with('fielduser', $fielduser); 
+                    ->with('fielduser', $fielduser);
     }
 
     /**
@@ -230,14 +230,14 @@ class FieldUserController extends Controller
     {
         $fielduser = FieldUser::find($id);
         $fielduser ->fill($request->all());
-        $select = $request->info;   
+        $select = $request->info;
         if ($select == "1") {
             $fielduser->id_option = $fielduser->value;
         }
-            
-        $fielduser->save(); 
 
-        
+        $fielduser->save();
+
+
         return redirect()->route('Admin.FieldUser.index');
     }
 
@@ -272,13 +272,13 @@ class FieldUserController extends Controller
             $fielduser -> type_field_name = $type_field->html;
 
             if ($type_field->html == "select") {
-              
+
                 $option = Option::where('id',$fielduser->id_option)->get()->first();
                 $fielduser -> option_name = $option->name;
             }
-   
+
         return view('admin.fieldUser.destroy')
-                    ->with('fielduser', $fielduser);       
+                    ->with('fielduser', $fielduser);
     }
 
 
@@ -293,32 +293,32 @@ class FieldUserController extends Controller
             $value -> user_id = $id;
         }
         $aplications->each(function ($aplications)
-        {  
-            
+        {
+
             $tables = Table::where('id_app',$aplications->id)->get();
 
             foreach ($tables as $key => $value) {
              $value -> user_id = $aplications->user_id;
-            
+
             }
 
             $tables->each(function ($tables)
             {
-                
+
                 $fieldTables = FieldTable::where('id_table',$tables->id)->get();
 
                 foreach ($fieldTables as $key => $value) {
                     $value -> user_id = $tables->user_id;
-            
+
                 }
-                
+
                 $fieldTables->each(function ($fieldTables)
                 {
-                    
+
                     $id_fiel_tables = $fieldTables->id;
 
                     $fielduser = FieldUser::where('id_user',$fieldTables->user_id)->where('id_field_table',$id_fiel_tables)->get()->first();
-                    
+
                     if (is_null($fielduser)) {
 
                         $fieldTables-> value = null;
@@ -331,19 +331,19 @@ class FieldUserController extends Controller
 
                     $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
                     $fieldTables-> types_fields = $types_fields;
-                  
-                    $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
-                    $fieldTables-> options = $options; 
 
-                    
-                               
-                }); 
-            
-            $tables-> fields_tables = $fieldTables->all();   
+                    $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
+                    $fieldTables-> options = $options;
+
+
+
+                });
+
+            $tables-> fields_tables = $fieldTables->all();
             });
-        
-        $aplications -> tablas = $tables; 
-         }); 
+
+        $aplications -> tablas = $tables;
+         });
 
         $fielduser = FieldUser::find($id);
 
@@ -362,7 +362,7 @@ class FieldUserController extends Controller
 
 
         foreach ($info as $key => $values) {
-             
+
             $position = $values['position'];
             $value =    $datos[$position-1];
 
@@ -377,16 +377,16 @@ class FieldUserController extends Controller
             $values['id_option'] = $option;
             $values['id_user']   = $user;
 
-            
+
 
             if ($values['defect_value'] == null) {
-    
-                if ($values['value'] != null) {          
+
+                if ($values['value'] != null) {
                     $fieldEspecific  = new FieldUser($values);
                     $fieldEspecific -> save();
-                }              
+                }
             }else{
-                
+
                 $fielduser = FieldUser::find($values['id_defect']);
                 $fielduser ->fill($values);
                 $fielduser->save();
@@ -394,8 +394,8 @@ class FieldUserController extends Controller
             };
 
         }
-        
-       return redirect()->route('Admin.FieldUser.index'); 
+
+       return redirect()->route('Admin.FieldUser.index');
     }
     public function data(Request $request)
     {

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Table;
-use App\Aplication;
+use App\Entities\Table;
+use App\Entities\Aplication;
 
 class TableController extends Controller
 {
@@ -21,10 +21,10 @@ class TableController extends Controller
 
         $tables = Table::orderBy('id','ASC')->paginate(10);
             $tables->each(function ($tables)
-            {      
-                $tables -> app_name = Aplication::find($tables->id_app)->name;           
+            {
+                $tables -> app_name = Aplication::find($tables->id_app)->name;
             });
-             
+
         return view('admin.Table.index')->with('tables', $tables);
     }
 
@@ -50,7 +50,7 @@ class TableController extends Controller
     {
         $table  = new Table($request->all());
         $table -> save();
-        
+
         return redirect()->route('Admin.Table.index');
     }
 
@@ -99,11 +99,11 @@ class TableController extends Controller
     public function update(Request $request, $id)
     {
         $table = Table::find($id);
-        
-        $table ->fill($request->all());
-        $table->save(); 
 
-        
+        $table ->fill($request->all());
+        $table->save();
+
+
         return redirect()->route('Admin.Table.index');
     }
 
@@ -128,6 +128,6 @@ class TableController extends Controller
         return view('admin.table.destroy')
                     ->with('table', $table)
                     ->with('table_app', $table_app);
-        
+
     }
 }

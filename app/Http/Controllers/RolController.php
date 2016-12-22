@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Rol;
+use App\Entities\Rol;
 
 class RolController extends Controller
 {
@@ -81,11 +81,11 @@ class RolController extends Controller
     public function update(Request $request, $id)
     {
         $rol = Rol::find($id);
-        
-        $rol ->fill($request->all());
-        $rol->save(); 
 
-        
+        $rol ->fill($request->all());
+        $rol->save();
+
+
         return redirect()->route('Admin.Rol.index');
     }
 
@@ -106,7 +106,7 @@ class RolController extends Controller
 
         $rol = Rol::find($id);
         return view('admin.rol.destroy')->with('rol', $rol);
-        
+
     }
 
 }
