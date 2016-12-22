@@ -30,8 +30,11 @@ class LoController extends Controller
 
     public function save_search(Request $request)
     {
-        $save_search  = new Search_lo($request->all());
-        $save_search -> save();
+        //$user_id = auth()->user();
+        //dd($request->all());
+        //$save_search  = new Search_lo($request->all());
+        //$save_search -> save();
+        return response()->Json($user_id);
 
     }
 }

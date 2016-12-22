@@ -9,16 +9,14 @@
     </div>
 
     <div class="row">
-        <form id="formulario" action="" method="post" enctype="multipart/form-data">
 
+        {!! Form::open(['id'=>'formulario', 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
             <div class="form-group">
                 <label for="text" class="">Buscar objetos:</label>
-                <input type="text" id="text" class="" placeholder="Buscar">
+                <input type="text" id="text" name="Buscar" class="" placeholder="Buscar">
             </div>
-
             <input type="submit" value="Buscar objetos" name="submit">
-
-        </form>
+        {!! Form::close() !!}
     </div>
 
     {{-- dd($data) --}}
@@ -81,6 +79,8 @@
                 //Obtiene la palabra de busqueda del formulario
                 var searchString = $('#text').val().trim();
 
+                //store_search_lo();
+
                 $.ajax({
                     type: "GET",
                     data: "raim=" + searchString,
@@ -92,6 +92,7 @@
 
                         var items = [];
                         $.each(dataJson, function(key, val) {
+                            //console.log(key);
                             items.push(val);
                         });
 
@@ -102,7 +103,7 @@
                             //console.log(xml);
 
                             var lom = processXml(xml);
-                            console.log(lom);
+                            //console.log(lom);
                             listaOA.push(lom);
 
                             lom.typicalLearningTimeHours = 0;
@@ -200,6 +201,23 @@
                             mostrarLOSecciones(listaOA);
                         }
 
+                    },
+                    error: function (obj, error, objError){
+                        //avisar que ocurrió un error
+                        console.log(obj);
+                        console.log(error);
+                        console.log(objError);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    data: $("#formulario").serialize(),
+                    url: "{{ route('Lo.save_search') }}",
+                    async: true,
+                    success: function(datos){
+                      var dataJson = eval(datos);
+                      console.log(dataJson);
                     },
                     error: function (obj, error, objError){
                         //avisar que ocurrió un error
@@ -394,6 +412,14 @@
             lom.coverage = $(xml).find("lom\\:coverage").text();
 
             return lom;
+        }
+
+
+        function store_search_lo() {
+          var url = "/Lo/save_search/";
+          var data= $("#formulario").serialize();
+          console.log(data);
+
         }
 
     </script>
