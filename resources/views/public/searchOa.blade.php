@@ -13,7 +13,7 @@
         {!! Form::open(['id'=>'formulario', 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
             <div class="form-group">
                 <label for="text" class="">Buscar objetos:</label>
-                <input type="text" id="text" name="Buscar" class="" placeholder="Buscar">
+                <input type="text" id="text" name="buscar" class="" placeholder="Buscar">
             </div>
             <input type="submit" value="Buscar objetos" name="submit">
         {!! Form::close() !!}
@@ -80,8 +80,9 @@
                 var searchString = $('#text').val().trim();
 
                 //store_search_lo();
+                  if (searchString.length !== 0) {
 
-                $.ajax({
+                    $.ajax({
                     type: "GET",
                     data: "raim=" + searchString,
                     url: "http://froac.manizales.unal.edu.co/froacn",
@@ -93,7 +94,7 @@
                         var items = [];
                         $.each(dataJson, function(key, val) {
                             //console.log(key);
-                            items.push(val);
+                            items.push({'rep_id': val.rep_id, 'lo_id': val.lo_id, 'xml': val.xml});
                         });
 
                         var listaOA = [];
@@ -102,7 +103,7 @@
 
                             //console.log(xml);
 
-                            var lom = processXml(xml);
+                            var lom = processXml(xml.xml, xml.rep_id, xml.lo_id);
                             //console.log(lom);
                             listaOA.push(lom);
 
@@ -210,22 +211,12 @@
                     }
                 });
 
-                $.ajax({
-                    type: "POST",
-                    data: $("#formulario").serialize(),
-                    url: "{{ route('Lo.save_search') }}",
-                    async: true,
-                    success: function(datos){
-                      var dataJson = eval(datos);
-                      console.log(dataJson);
-                    },
-                    error: function (obj, error, objError){
-                        //avisar que ocurrió un error
-                        console.log(obj);
-                        console.log(error);
-                        console.log(objError);
+                    if(existUserProfile){
+                        // funcionalidad de guardar historial de busqueda
+                        store_search_lo();
                     }
-                });
+
+                }
 
                 //Previene que se realice la redirección con el submit del formulario
                 return false;
@@ -271,7 +262,8 @@
                     '<div class="col.md-2">' +
                     '<div class="panel panel-default">' +
                     '<div class="panel-heading">' +
-                    '<a href="' + lom.location + '" target="_blank" class="">' + lom.title + '</a>' +
+                    '<a href="' + lom.location + '" onclick="store_visited_lo(' +
+                    lom.rep_id + ',' + lom.lo_id + ')" target="_blank" class="">' + lom.title + '</a>' +
                     '</div>' +
                     '<div class="panel-body" style="text-align: justify;">' +
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
@@ -341,9 +333,13 @@
 
         }
 
-        function processXml(xml) {
+        function processXml(xml, rep_id, lo_id) {
 
             var lom = new LOMMetadata();
+
+            lom.rep_id = rep_id;
+
+            lom.lo_id = lo_id;
 
             lom.value = 0;
 
@@ -416,10 +412,52 @@
 
 
         function store_search_lo() {
-          var url = "/Lo/save_search/";
-          var data= $("#formulario").serialize();
-          console.log(data);
+            $.ajax({
+                type: "POST",
+                data: $("#formulario").serialize(),
+                url: "{{ route('Lo.save_search') }}",
+                async: true,
+                success: function(datos){
+                  var dataJson = eval(datos);
+                  console.log(dataJson);
+                },
+                error: function (obj, error, objError){
+                  //avisar que ocurrió un error
+                  console.log(obj);
+                  console.log(error);
+                  console.log(objError);
+                }
+            });
 
+        }
+
+        function store_visited_lo(rep_id, lo_id) {
+          if(existUserProfile){
+
+            $("#formulario").append('<input type="hidden" name="rep_id" id="rep_id" value="' +
+                rep_id + '">');
+            $("#formulario").append('<input type="hidden" name="lo_id" id="lo_id" value="' +
+                lo_id + '">');
+
+            $.ajax({
+                type: "POST",
+                data: $("#formulario").serialize(),
+                url: "{{ route('Lo.save_visited') }}",
+                async: true,
+                success: function(datos){
+                  var dataJson = eval(datos);
+                  console.log(dataJson);
+                  $("#rep_id").remove();
+                  $("#lo_id").remove();
+                },
+                error: function (obj, error, objError){
+                  //avisar que ocurrió un error
+                  console.log(obj);
+                  console.log(error);
+                  console.log(objError);
+                }
+            });
+          }
         }
 
     </script>

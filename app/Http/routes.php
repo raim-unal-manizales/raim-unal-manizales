@@ -332,7 +332,7 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 
 
 
-	Route::group(['prefix' => 'Lo'],function(){
+	Route::group(['middleware' => 'web','prefix' => 'Lo'],function(){
 
 		Route::post('/save_calification',[
 			'uses' 	=> 'LoController@save_calification',

@@ -4,6 +4,10 @@
 
 function LOMMetadata(){
 
+    var rep_id;
+
+    var lo_id;
+
     var value;
 
     var title;

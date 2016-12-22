@@ -23,18 +23,24 @@ class LoController extends Controller
 
     public function save_visited(Request $request)
     {
-        $save_visited  = new Visited_lo($request->all());
+        $user_id = currentUser()->id;
+        $data = $request->all();
+        $rep_id = $data['rep_id'];
+        $lo_id = $data['lo_id'];
+        $save_visited  = new Visited_lo([ 'user_id' => $user_id,
+            'repository_id' => $rep_id, 'object_id' => $lo_id, ]);
         $save_visited -> save();
-
+        return response()->Json($save_visited);
     }
 
     public function save_search(Request $request)
     {
-        //$user_id = auth()->user();
-        //dd($request->all());
-        //$save_search  = new Search_lo($request->all());
-        //$save_search -> save();
-        return response()->Json($user_id);
+        $user_id = currentUser()->id;
+        $data = $request->all();
+        $content = trim($data['buscar']);
+        $save_search  = new Search_lo([ 'user_id' => $user_id, 'search_string' => $content]);
+        $save_search -> save();
+        return response()->Json($save_search);
 
     }
 }
