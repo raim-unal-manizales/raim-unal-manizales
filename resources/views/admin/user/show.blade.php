@@ -3,19 +3,19 @@
 @section('title', 'Ver Usuario')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Ver Usuarip</h1> 
+  		<h1>Ver Usuario</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.User.index'], 'method' => 'GET','novalidate' => 'novalidate']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -56,13 +56,13 @@
 			</tr>
 			<tr>
 				<td>Rol</td>
-				<td>{!! $user_rol->name!!}</td>
+				<td>{!! $user->rol->name !!}</td>
 			</tr>
 
 		</table>
 	</div>
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
 	</div>
 
 	{!! Form::close() !!}

@@ -43,12 +43,12 @@
 					<td>{{ $user-> last_name}}</td>
 					<td>{{ $user-> email}}</td>
 					<td>
-						@if($user-> rol_name == "admin")
-							<span class="label label-danger">{{ $user-> rol_name}}</span>
-						@elseif($user-> rol_name == "creador")
-							<span class="label label-warning">{{ $user-> rol_name}}</span>
-						@elseif($user-> rol_name == "estudiante")
-							<span class="label label-success">{{ $user-> rol_name}}</span>
+						@if($user->rol->name == "admin")
+							<span class="label label-danger">{{ $user->rol->name}}</span>
+						@elseif($user->rol->name == "creador")
+							<span class="label label-warning">{{ $user->rol->name}}</span>
+						@elseif($user->rol->name == "estudiante")
+							<span class="label label-success">{{ $user->rol->name}}</span>
 						@endif
 					</td>
 					<td>
@@ -58,8 +58,6 @@
 							<a href="{{ route('Admin.User.editAll', $user->id) }}" class="" title="Editar" alt="Editar" value="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 
 							<a href="{{ route('Admin.User.delete', $user->id) }}" class="" title="Eliminar" alt="Eliminar" value="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-
-							<a href="{{ route('Admin.FieldUser.EditApps', $user->id) }}" class="" title="Actualizar" alt="Actualizar">Actualizar</a>
 
 						</div>
 					</td>

@@ -6,10 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Entities\Rol;
+use App\Repositories\RolRepository;
 
 class RolController extends Controller
 {
+  public $rolRepository;
+
+  public function __construct(RolRepository $rolRepository)
+  {
+    $this->rolRepository = $rolRepository;
+  }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,7 @@ class RolController extends Controller
      */
     public function index()
     {
-        $roles = Rol::orderBy('id', 'ASC')->paginate(10);
+        $roles = $this->rolRepository->orderBy();
         return view('admin.rol.index')->with('roles',$roles);
     }
 
@@ -39,12 +45,8 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-
-        $rol  = new Rol($request->all());
-        $rol -> save();
-
+        $rol = $this->rolRepository->store($request->all());
         return redirect()->route('Admin.Rol.index');
-
     }
 
     /**
@@ -55,7 +57,7 @@ class RolController extends Controller
      */
     public function show($id)
     {
-        $rol = Rol::find($id);
+        $rol = $this->rolRepository->find($id);
         return view('admin.rol.show')->with('rol', $rol);
     }
 
@@ -67,7 +69,7 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-        $rol = Rol::find($id);
+        $rol = $this->rolRepository->find($id);
         return view('admin.rol.edit')->with('rol', $rol);
     }
 
@@ -80,12 +82,7 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rol = Rol::find($id);
-
-        $rol ->fill($request->all());
-        $rol->save();
-
-
+        $user = $this->rolRepository->update($request->all(), $id);
         return redirect()->route('Admin.Rol.index');
     }
 
@@ -97,14 +94,12 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
-        $rol = Rol::find($id);
-        $rol-> delete();
+        $rol = $this->rolRepository->destroy($id);
         return redirect()->route('Admin.Rol.index');
     }
     public function delete($id)
     {
-
-        $rol = Rol::find($id);
+        $rol = $this->rolRepository->find($id);
         return view('admin.rol.destroy')->with('rol', $rol);
 
     }

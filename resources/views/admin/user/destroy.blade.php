@@ -3,19 +3,19 @@
 @section('title', 'Eliminar Usuario')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Eliminar Usuario</h1> 
+  		<h1>Eliminar Usuario</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.User.destroy', $user->id], 'method' => 'DELETE']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -53,16 +53,16 @@
 			<tr>
 				<td>Idioma</td>
 				<td>{!! $user->language !!}</td>
-			</tr>						
+			</tr>
 			<tr>
 				<td>Rol</td>
-				<td>{!! $user_rol->name!!}</td>
+				<td>{!! $user->rol->name !!}</td>
 			</tr>
 
 		</table>
 	</div>
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
 		<a href="{{ route('Admin.User.index') }}">Cancelar</a>
 	</div>
 

@@ -10,6 +10,6 @@ class Rol extends Entity
   protected $fillable = ['id','name', 'description'];
 
     public function users(){
-        return $this->hasMany('App\Entities\User', 'id_rol');
+        return $this->hasOne('App\Entities\User', 'id_rol');
     }
 }

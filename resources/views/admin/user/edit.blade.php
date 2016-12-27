@@ -52,7 +52,7 @@
 		</div>
 		<div class="fieldForm">
             {!! Form::label('educativeLevel','Nivel Educativo') !!}
-            {!! Form::select('educativeLevel', ['Pescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica secundaria'=>'Básica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'Otros'] ,$user->educativeLevel, ['class' => '', 'required']) !!}
+            {!! Form::select('educativeLevel', ['Preescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica secundaria'=>'Básica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'Otros'] ,$user->educativeLevel, ['class' => '', 'required']) !!}
         </div>
 
 		<div class="fieldForm">
@@ -70,7 +70,7 @@
 		<div class="fieldForm">
 			{!! Form::label('id_rol','Rol') !!}
 			<br>
-			{!! Form::select('id_rol',$roles ,$user_rol->id, array('disabled'),['class' => '','required']) !!}
+			{!! Form::select('id_rol',$roles ,$user->rol->name,['class' => '','required']) !!}
 
 		</div>
 
