@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Entities\Personalization', 'user_id');
     }
     public function need(){
-        return $this->hasMany('App\Entities\Need', 'user_id');
+        return $this->hasOne('App\Entities\Need', 'user_id');
     }
 
     public function learningStyle(){

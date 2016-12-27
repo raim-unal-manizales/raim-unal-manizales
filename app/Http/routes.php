@@ -43,7 +43,42 @@ Route::get('/', function () {
 				'uses' 	=> 'UserController@delete',
 				'as'	=> 'Admin.User.delete'
 			]);
-
+      Route::get('User/{id}/editAll',[
+        'uses' 	=> 'UserController@editAll',
+        'as'	=> 'Admin.User.editAll'
+      ]);
+      Route::get('User/{id}/estilosEdit',[
+        'uses' 	=> 'UserController@estilosEdit',
+        'as'	=> 'Admin.User.estilosEdit'
+      ]);
+      Route::get('User/{id}/estilosCreate',[
+        'uses' 	=> 'UserController@estilosCreate',
+        'as'	=> 'Admin.User.estilosCreate'
+      ]);
+      Route::post('User/{id}/storeEstilosEdit',[
+        'uses' 	=> 'UserController@storeEstilosEdit',
+        'as'	=> 'Admin.User.storeEstilosEdit'
+      ]);
+      Route::post('User/{id}/storeEstilosCreate',[
+        'uses' 	=> 'UserController@storeEstilosCreate',
+        'as'	=> 'Admin.User.storeEstilosCreate'
+      ]);
+      Route::get('User/{id}/needEdit',[
+        'uses' 	=> 'UserController@needEdit',
+        'as'	=> 'Admin.User.needEdit'
+      ]);
+      Route::get('User/{id}/needCreate',[
+        'uses' 	=> 'UserController@needCreate',
+        'as'	=> 'Admin.User.needCreate'
+      ]);
+      Route::post('User/{id}/storeNeedEdit',[
+        'uses' 	=> 'UserController@storeNeedEdit',
+        'as'	=> 'Admin.User.storeNeedEdit'
+      ]);
+      Route::post('User/{id}/storeNeedCreate',[
+        'uses' 	=> 'UserController@storeNeedCreate',
+        'as'	=> 'Admin.User.storeNeedCreate'
+      ]);
 			Route::get('User',[
 				'uses' 	=> 'UserController@index',
 				'as'	=> 'Admin.User.index'

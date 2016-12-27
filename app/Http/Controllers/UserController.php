@@ -112,12 +112,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
         $user ->fill($request->all());
         $user->save();
-
-
-        return redirect()->route('Admin.User.index');
+        return view('admin.user.indexEdit')->with('user', $user);
     }
 
     /**
@@ -144,5 +141,42 @@ class UserController extends Controller
 
     }
 
+    public function editAll($id)
+    {
+      $user = User::with('need')->find($id);
+      return view('admin.user.indexEdit')->with('user', $user);
+    }
 
+    public function estilosEdit($id)
+    {
+      # code...
+    }
+    public function estilosCreate($id)
+    {
+      # code...
+    }
+    public function storeEstilosEdit(Resouce $resource)
+    {
+      # code...
+    }
+    public function storeEstilosCreate(Resouce $resource)
+    {
+      # code...
+    }
+    public function needEdit($id)
+    {
+      # code...
+    }
+    public function needCreate($id)
+    {
+      # code...
+    }
+    public function storeNeedEdit(Resouce $resource)
+    {
+      # code...
+    }
+    public function storeNeedCreate(Resouce $resource)
+    {
+      # code...
+    }
 }
