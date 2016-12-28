@@ -23,11 +23,6 @@ class RolRepository extends BaseRepository
     return $rol = $this->getModel()->orderBy('name','ASC')->lists('name', 'id');
   }
 
-  public function orderBy()
-  {
-    return $rol = $this->getModel()->orderBy('name','ASC')->paginate(10);
-  }
-
   public function store($rol)
   {
     return $this->createObject($rol)->save();

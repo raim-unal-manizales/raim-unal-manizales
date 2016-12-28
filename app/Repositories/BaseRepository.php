@@ -27,10 +27,14 @@ abstract class BaseRepository
   {
     return $this->find($id)->fill($New)->update();
   }
-  
+
   public function destroy($id)
   {
     return $this->getModel()->find($id)->delete();
+  }
+  public function orderBy()
+  {
+    return  $this->getModel()->orderBy('id','ASC')->paginate(10);
   }
 
 }

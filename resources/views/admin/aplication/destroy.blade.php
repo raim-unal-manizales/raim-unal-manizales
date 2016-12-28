@@ -58,13 +58,12 @@
 				<td>Requiere NEDD</td>
 				<td>{!! $aplication->rquiered_learningStyle!!}</td>
 			</tr>
-		</table>
-
-    <tr>
-      <td>Manejo de rutas en framework</td>
-      <td>{!! $aplication->systemRoute !!}</td>
-    </tr>
-	</div>
+      <tr>
+        <td>Manejo de rutas en framework</td>
+        <td>{!! $aplication->systemRoute !!}</td>
+      </tr>
+    </div>
+	</table>
 
 	<div class="buttonTable">
 		{!! Form::submit('Aceptar',['class' => '']) !!}
