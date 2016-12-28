@@ -8,8 +8,23 @@ use App\Http\Requests;
 use App\Entities\ReferenceLearningStyle;
 use App\Entities\LearningStyle;
 
+use App\Repositories\RLSRepository;
+use App\Repositories\LearningStyleRepository;
+
 class LearningStyleController extends Controller
 {
+    public $rLSRepository;
+    public $learningStyleRepository;
+
+    public function __construct(
+        RLSRepository $rLSRepository,
+        LearningStyleRepository $learningStyleRepository
+    )
+    {
+      $this->rLSRepository = $rLSRepository;
+      $this->learningStyleRepository = $learningStyleRepository;
+    }
+
     public function create()
     {
         return view('public.learning_style');

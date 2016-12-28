@@ -8,34 +8,13 @@
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Listar campos de tabla para usauario</h1>
+  		<h1>Listar campos de tabla para usuario</h1>
    		<a href=" {{ route('Admin.FieldUser.create') }}" class="">Nuevo campo de tabla para usuario</a>
   </div>
 <!--
-  <div>
-  	<h5>Filtrar por : </h5>
-  		{!! Form::open(['route' => 'Admin.FieldUser.data', 'method' => 'POST','novalidate' => 'novalidate']) !!}
-
-			<div id="fields_tables">
-				{!! Form::select('aplications', $aplications,  null, ['name' => 'Aplicacion','id'=>'Aplicacion','placeholder' => 'Aplicacion']) !!}
-			</div>
-
-			<div id="fields_tables">
-				{!! Form::select('tables', $tables,  null, ['name' => 'Tabla','id'=>'Tabla','placeholder' => 'Tabla']) !!}
-			</div>
-
-			<div id="fields_tables">
-				{!! Form::select('users', $users,  null, ['name' => 'Usuario','id'=>'Usuario','placeholder' => 'Usuario']) !!}
-			</div>
-
-			{!! Form::submit('Guardar',['class' => '']) !!}
-
-  		{!! Form::close() !!}
-  </div>
--->
-<!--
 	//fin de la cabezera del contenido
 -->
+
 <!--
 	//cuerpo del contenido
 -->
@@ -56,18 +35,17 @@
 
 			@foreach($fieldusers as $fielduser)
 				<tr>
-					<td>{{ $fielduser-> id}}</td>
-					<td>{{ $fielduser-> user_name}}</td>
-					<td>{{ $fielduser-> table_name}}</td>
-					<td>{{ $fielduser-> fieldtable_name}}</td>
-					<td>{{ $fielduser-> type_field_name}}</td>
+					<td>{{ $fielduser->id}}</td>
+					<td>{{ $fielduser->user->user_name}}</td>
+					<td>{{ $fielduser->fields_tables->table->name}}</td>
+					<td>{{ $fielduser->fields_tables->name}}</td>
+					<td>{{ $fielduser->fields_tables->types_field->name}}</td>
 
-					@if($fielduser->type_field_name == "select")
-						<td>{{ $fielduser-> option_name}}</td>
+					@if($fielduser->fields_tables->types_field->name == "select")
+						<td>{{ $fielduser->fields_tables->option->name}}</td>
 					@else
-						<td>{{ $fielduser-> value}}</td>
+						<td>{{ $fielduser->value}}</td>
 					@endif
-
 
 					<td>
 						<div class="buttonsTable">

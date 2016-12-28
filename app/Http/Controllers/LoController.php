@@ -10,10 +10,28 @@ use App\Entities\Calification_lo;
 use App\Entities\Search_lo;
 use App\Entities\Visited_lo;
 
+use App\Repository\CalificationLoRepository;
+use App\Repository\SearchLoRepository;
+use App\Repository\VisitedLoRepository;
+
 class LoController extends Controller
 {
+  public $calificationLoRepository;
+  public $searchLoRepository;
+  public $visitedLoRepository;
 
-    public function save_calification(Request $request)
+  public function __construct(
+    CalificationLoRepository $calificationLoRepository,
+    SearchLoRepository $searchLoRepository,
+    VisitedLoRepository $visitedLoRepository
+  )
+  {
+    $this->calificationLoRepository = $calificationLoRepository;
+    $this->searchLoRepository = $searchLoRepository;
+    $this->visitedLoRepository = $visitedLoRepository;
+  }
+
+  public function save_calification(Request $request)
     {
 
         $save_calification  = new Calification_lo($request->all());

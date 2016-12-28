@@ -6,20 +6,24 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Entities\Personalization;
+use App\Repositories\PersonalizationRepository;
 
 class PersonalizationController extends Controller
 {
-    public function create()
-    {
-        return view('public.personalization');
-    }
+  public $personalizationRepository;
 
-    public function store(Request $request)
-    {
+  public function __construct(PersonalizationRepository $personalizationRepository)
+  {
+    $this->personalizationRepository = $personalizationRepository;
+  }
 
-    	$personalization = new Personalization($request->all());
-    	$personalization->save();
+  public function create()
+  {
+    return view('public.personalization');
+  }
 
-    }
+  public function store(Request $request)
+  {
+    $personalization = $this->personalizationRepository->store($request->all());
+  }
 }

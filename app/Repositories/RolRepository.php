@@ -13,9 +13,9 @@ class RolRepository extends BaseRepository
     return new Rol();
   }
 
-  public function createObject($user)
+  public function createObject($rol)
   {
-    return new User($user);
+    return new Rol($rol);
   }
 
   public function store($rol)

@@ -3,104 +3,85 @@
 @section('title', '')
 
 @section('content')
+	<?php
+		$bandera = 0;
+		$var = [];
+	 ?>
+<br>
+<div class="panel panel-default">
+	<div class="panel-heading"><h4>Información para aplicaiónes</h4></div>
+	<div class="panel-body">
+		{!! Form::open(['route' => 'Admin.FieldUser.store', 'method' => 'POST']) !!}
 
-<?php 
-	$bandera = 0;
-	$var = [];
- ?>
+		@foreach($aplications as $aplication)
 
-<!--<form method="POST" action="{{ route('Admin.FieldUser.store') }}" novalidate="novalidate">-->
+			<h5>{{ $aplication->name }}</h5>
+			<div id="aplicaicon" class="well well-sm">
+					@foreach($aplication->tables as $table)
+						<div id="tables" class="">
+							{{ $table->name }}
+							@foreach($table->fields_tables as $fields_table)
+								<div id="fields_tables" class="fieldForm">
+									<?php $select = 0 ?>
 
-	{!! Form::open(['route' => 'Admin.FieldUser.store', 'method' => 'POST']) !!}
-	
-	@foreach($aplications as $aplication)
+									@if($fields_table->types_field->html == "select")
+										{!! Form::label($fields_table->id,$fields_table->name) !!}
+										{!! Form::select($bandera, $fields_table->options,  $fields_table-> value, ['class' => '', 'required']) !!}
 
-		<div id="aplicaicon">
+										<?php $select = 1 ?>
 
-				{{ $aplication->name }}
+									@elseif($fields_table->types_field->html == "textarea")
 
-				@foreach($aplication->tablas as $table)
-					<div id="tables">
-						{{ $table->name }}
+										{!! Form::label($fields_table->id,$fields_table->name) !!}
+										{!! Form::textarea($bandera, $fields_table-> value ,['class' => '','required']) !!}
 
-						@foreach($table->fields_tables as $fields_table)
-							<div id="fields_tables" class="fieldForm">
-								<!--<label class="">{{ $fields_table->name }}</label>-->
-								
-								@foreach($fields_table->types_fields as $type_field)
+									@elseif($fields_table->types_field->html == "number")
 
-										<?php $select = 0 ?>
-										
-										@if($type_field->html == "select")
+										{!! Form::label($fields_table->id,$fields_table->name) !!}
 
-											@if($table->name == "NEED Visual" || $table->name == "NEED Auditiva" || $table->name == "NEED Motriz" || $table->name == "NEED Cognitiva" || $table->name == "NEED Étnica")
-												{!! Form::label($fields_table->id,$fields_table->description) !!}
-											@else
-												{!! Form::label($fields_table->id,$fields_table->name) !!}
-											@endif
-											
+										{!! Form::number($bandera, $fields_table-> value ,['class' => '','required']) !!}
+										<!--<input type="{{ $type_field->html}}"></input>-->
 
-											{!! Form::select($bandera, $fields_table->options,  $fields_table-> value, ['class' => '', 'required']) !!}	
+									@else
 
-											<?php $select = 1 ?>
+										{!! Form::label($fields_table->id,$fields_table->name) !!}
 
-										@elseif($type_field->html == "textarea")
+										{!! Form::text($bandera, $fields_table-> value ,['class' => '','required']) !!}
+									@endif
 
-											{!! Form::label($fields_table->id,$fields_table->name) !!}
-											<!--<textarea name="{{ $type_field->id}}" ></textarea>-->
-											{!! Form::textarea($bandera, $fields_table-> value ,['class' => '','required']) !!}
-										
-										@elseif($type_field->html == "number")
+									<?php
+										$bandera++;
+										$var[$bandera] = array(
+												"position" 	=> $bandera,
+												"id_user"	=> '',
+												"id_field_table"	=> $fields_table->id,
+												"select"		=> $select
+												//"id_app"	=> $aplication->id,
+												//"id_table"	=> $table->id,
+												//"id_type_field"		=> $type_field->id,
+											);
+									 ?>
+								</div>
+							@endforeach
+						<HR>
+						</div>
+					@endforeach
+			</div>
+			<br>
 
-											{!! Form::label($fields_table->id,$fields_table->name) !!}
+		@endforeach
+			<div class="fieldForm">
+				{!! Form::label('id_user','Usuario') !!}
+				{!! Form::select('id_user', $users,  null, ['class' => '', 'required']) !!}
+				{{ Form::hidden('info',serialize($var), ['value' => $var]) }}
+			</div>
+			<HR>
+			<div class="buttonTable">
+				{!! Form::submit('Guardar',['class' => '']) !!}
+				<a href="{{ route('Admin.FieldUser.index') }}">Cancelar</a>
+			</div>
+			{!! Form::close() !!}
+	</div>
+</div>
 
-											{!! Form::number($bandera, $fields_table-> value ,['class' => '','required']) !!}	
-											<!--<input type="{{ $type_field->html}}"></input>-->
-
-										@else 
-
-											{!! Form::label($fields_table->id,$fields_table->name) !!}
-
-											{!! Form::text($bandera, $fields_table-> value ,['class' => '','required']) !!}	
-										@endif
-
-										<?php 
-											$bandera++;
-											$var[$bandera] = array(
-													"position" 	=> $bandera,
-													//"id_user"	=> Auth::user()->id,
-													"id_field_table"	=> $fields_table->id,
-													"select"		=> $select
-													//"id_app"	=> $aplication->id,
-													//"id_table"	=> $table->id,
-													//"id_type_field"		=> $type_field->id,
-												);
-										 ?>
-									
-								@endforeach
-
-
-
-							</div>
-						@endforeach
-					</div>
-				@endforeach
-		</div>
-		<br>
-		
-	@endforeach
-		
-		<div class="fieldForm">
-			{!! Form::select('id_user', $users,  null, ['class' => '', 'required']) !!}
-
-			{{ Form::hidden('info',serialize($var), ['value' => $var]) }}
-		</div>
-		
-		<div class="buttonTable">
-			{!! Form::submit('Guardar',['class' => '']) !!}
-			<a href="{{ route('Admin.FieldUser.index') }}">Cancelar</a>
-		</div>
-					
-		{!! Form::close() !!}
-	<!--</form>	-->
 @endsection

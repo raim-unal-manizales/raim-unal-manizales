@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$bandera = 1000;
 	$var = [];
  ?>
@@ -16,14 +16,14 @@
 						@foreach($table->fields_tables as $fields_table)
 							<div id="fields_tables" class="fieldForm">
 								<!--<label class="">{{ $fields_table->name }}</label>-->
-								
+
 								@foreach($fields_table->types_fields as $type_field)
 
 										<?php $select = 0 ?>
-										
+
 										@if($type_field->html == "select")
 											{!! Form::label($fields_table->id,$fields_table->name) !!}
-											{!! Form::select($bandera, $fields_table->options,  $fields_table-> value, ['class' => '', 'required']) !!}	
+											{!! Form::select($bandera, $fields_table->options,  $fields_table-> value, ['class' => '', 'required']) !!}
 
 											<?php $select = 1 ?>
 
@@ -32,26 +32,26 @@
 											{!! Form::label($fields_table->id,$fields_table->name) !!}
 											<!--<textarea name="{{ $type_field->id}}" ></textarea>-->
 											{!! Form::textarea($bandera, $fields_table-> value ,['class' => '','required']) !!}
-										
+
 										@elseif($type_field->html == "number")
 
 											{!! Form::label($fields_table->id,$fields_table->name) !!}
 
-											{!! Form::number($bandera, $fields_table-> value ,['class' => '','required']) !!}	
+											{!! Form::number($bandera, $fields_table-> value ,['class' => '','required']) !!}
 											<!--<input type="{{ $type_field->html}}"></input>-->
 
-										@else 
+										@else
 
 											{!! Form::label($fields_table->id,$fields_table->name) !!}
 
-											{!! Form::text($bandera, $fields_table-> value ,['class' => '','required']) !!}	
+											{!! Form::text($bandera, $fields_table-> value ,['class' => '','required']) !!}
 										@endif
 
-										<?php 
+										<?php
 											$bandera++;
 											$var[$bandera] = array(
 													"position" 	=> $bandera,
-													"id_user"	=> '',
+													//"id_user"	=> '',
 													"id_field_table"	=> $fields_table->id,
 													"select"		=> $select
 													//"id_app"	=> $aplication->id,
@@ -66,9 +66,9 @@
 				@endforeach
 		</div>
 		<br>
-		
+
 	@endforeach
-		
+
 		<div class="fieldForm">
 			{{ Form::hidden('info',serialize($var), ['value' => $var]) }}
 		</div>

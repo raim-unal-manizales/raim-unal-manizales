@@ -3,19 +3,19 @@
 @section('title', 'ver campo Usuario')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Ver Campo Usuario</h1> 
+  		<h1>Ver Campo Usuario</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.FieldUser.index'], 'method' => 'GET','novalidate' => 'novalidate']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -24,37 +24,37 @@
 			</tr>
 			<tr>
 				<td>Usuario</td>
-				<td>{!! $fielduser->user_name !!}</td>
+				<td>{!! $fielduser->user->user_name !!}</td>
 			</tr>
 
 			<tr>
 				<td>Tabla</td>
-				<td>{!! $fielduser->table_name !!}</td>
+				<td>{!! $fielduser->fields_tables->table->name !!}</td>
 			</tr>
 
 			<tr>
 				<td>Campo</td>
-				<td>{!! $fielduser->fieldtable_name !!}</td>
+				<td>{!! $fielduser->fields_tables->name  !!}</td>
 			</tr>
 			<tr>
 				<td>Tipo de campo</td>
-				<td>{!! $fielduser->type_field_name !!}</td>
+				<td>{!! $fielduser->fields_tables->types_field->name  !!}</td>
 			</tr>
 			<tr>
 				<td>valor</td>
-				
+
 				@if($fielduser->type_field_name == "select")
 					<td>{{ $fielduser-> option_name}}</td>
-				@else 
+				@else
 					<td>{{ $fielduser-> value}}</td>
 				@endif
-				
+
 			</tr>
 
 		</table>
 	</div>
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
 	</div>
 
 	{!! Form::close() !!}

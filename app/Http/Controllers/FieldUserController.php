@@ -14,8 +14,30 @@ use App\Entities\FieldTable;
 use App\Entities\Option;
 use App\Entities\User;
 
+use App\Repositories\FieldUserRepository;
+use App\Repositories\AplicationRepository;
+use App\Repositories\TableRepository;
+use App\Repositories\TypeFieldRepository;
+use App\Repositories\FieldTableRepository;
+use App\Repositories\OptionFieldRepository;
+use App\Repositories\UserRepository;
+
 class FieldUserController extends Controller
 {
+  public $fieldUserRepository;
+  public $aplicationRepository;
+  public $userRepository;
+
+  public function __construct(
+    FieldUserRepository $fieldUserRepository,
+    AplicationRepository $aplicationRepository,
+    UserRepository $userRepository
+  )
+  {
+    $this->fieldUserRepository = $fieldUserRepository;
+    $this->aplicationRepository = $aplicationRepository;
+    $this->userRepository = $userRepository;
+  }
     /**
      * Display a listing of the resource.
      *
@@ -23,45 +45,8 @@ class FieldUserController extends Controller
      */
     public function index(Request $request)
     {
-
-        // consulto todas las aplicaciones, tablas, usuarios en un array
-        $aplications = Aplication::all()->lists('name', 'id');
-        $tables = Table::all()->lists('name', 'id');
-        $users = User::all()->lists('name', 'id');
-
-
-
-        // consulto tipos de campo a mostrar
-
-        $fieldusers = FieldUser::orderBy('id', 'ASC')->paginate(10);
-
-        $fieldusers->each(function ($fieldusers){
-
-            $user = User::where('id',$fieldusers->id_user)->get()->first();
-            $fieldusers -> user_name = $user->user_name;
-
-            $fieldtable = FieldTable::where('id',$fieldusers->id_field_table)->get()->first();
-            $fieldusers -> fieldtable_name = $fieldtable->name;
-
-            $table = Table::where('id',$fieldtable->id_table)->get()->first();
-            $fieldusers -> table_name = $table->name;
-
-            $type_field =  TypeField::where('id',$fieldtable->id_type_field)->get()->first();
-            $fieldusers -> type_field_name = $type_field->name;
-
-            if ($type_field->html == "select") {
-
-                $option = Option::where('id',$fieldusers->id_option)->get()->first();
-                $fieldusers -> option_name = $option->name;
-            }
-
-        });
-
-        return view('admin.fieldUser.index')
-                    ->with('fieldusers',$fieldusers)
-                    ->with('aplications',$aplications)
-                    ->with('tables',$tables)
-                    ->with('users',$users);
+      $fieldusers = $this->fieldUserRepository->orderBy();
+      return view('admin.fieldUser.index')->with('fieldusers',$fieldusers);
     }
 
     /**
@@ -71,44 +56,11 @@ class FieldUserController extends Controller
      */
     public function create()
     {
-        //$aplications = Aplication::all();
-
-        $aplications = Aplication::where('rquiered_information','True')->get();
-
-        $aplications->each(function ($aplications)
-        {
-            $tables = Table::where('id_app',$aplications->id)->get();
-
-            $tables->each(function ($tables)
-            {
-                $fieldTables = FieldTable::where('id_table',$tables->id)->get();
-
-                $fieldTables->each(function ($fieldTables)
-                {
-                    $id_fiel_tables = $fieldTables->id;
-
-                    $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
-                    $fieldTables-> types_fields = $types_fields;
-
-                    $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
-                    $fieldTables-> options = $options;
-
-                    //dd($fieldTables->options);
-
-                });
-
-            $tables-> fields_tables = $fieldTables->all();
-            });
-
-        $aplications -> tablas = $tables;
-         });
-
-        $users = User::all()->lists('name', 'id');
-
-
-        return view('admin.fieldUser.create')
-                            ->with('aplications',$aplications)
-                            ->with('users',$users);
+      $aplications= $this->aplicationRepository->listRequareInfo();
+      $users = $this->userRepository->list("user_name");
+      return view('admin.fieldUser.create')
+                  ->with('aplications',$aplications)
+                  ->with('users',$users);
     }
 
 
@@ -123,36 +75,23 @@ class FieldUserController extends Controller
     {
          $datos = $request->all();
          $info = unserialize($datos["info"]);
-
-         //dd($datos);
-
          $user = $datos["id_user"];
-
          foreach ($info as $key => $values) {
 
             $position = $values['position'];
             $value =    $datos[$position-1];
-
-
             if ($values['select'] == 1) {
                 $option = $value;
             }else {
                 $option = 0;
             }
-
             $values['value'] = $value;
             $values['id_option'] = $option;
             $values['id_user']   = $user;
-
-            $fieldEspecific  = new FieldUser($values);
-
-             $fieldEspecific -> save();
-
-
-
+            $fieldEspecific  = $this->fieldUserRepository->store($values);
          }
-
-         return redirect()->route('Public.index');
+         $fieldusers = $this->fieldUserRepository->orderBy();
+         return view('admin.fieldUser.index')->with('fieldusers',$fieldusers);
     }
 
     /**
@@ -164,27 +103,7 @@ class FieldUserController extends Controller
     public function show($id)
     {
         $fielduser = FieldUser::find($id);
-
-            $user = User::where('id',$fielduser->id_user)->get()->first();
-            $fielduser -> user_name = $user->user_name;
-
-            $fieldtable = FieldTable::where('id',$fielduser->id_field_table)->get()->first();
-            $fielduser -> fieldtable_name = $fieldtable->name;
-
-            $table = Table::where('id',$fieldtable->id_table)->get()->first();
-            $fielduser -> table_name = $table->name;
-
-            $type_field =  TypeField::where('id',$fieldtable->id_type_field)->get()->first();
-            $fielduser -> type_field_name = $type_field->name;
-
-            if ($type_field->html == "select") {
-
-                $option = Option::where('id',$fielduser->id_option)->get()->first();
-                $fielduser -> option_name = $option->html;
-            }
-
-        return view('admin.fieldUser.show')
-                    ->with('fielduser', $fielduser);
+        return view('admin.fieldUser.show')->with('fielduser', $fielduser);
     }
 
     /**
@@ -195,28 +114,8 @@ class FieldUserController extends Controller
      */
     public function edit($id)
     {
-        $fielduser = FieldUser::find($id);
-
-            $user = User::where('id',$fielduser->id_user)->get()->first();
-            $fielduser -> user_name = $user->user_name;
-
-            $fieldtable = FieldTable::where('id',$fielduser->id_field_table)->get()->first();
-            $fielduser -> fieldtable_name = $fieldtable->name;
-
-            $table = Table::where('id',$fieldtable->id_table)->get()->first();
-            $fielduser -> table_name = $table->name;
-
-            $type_field =  TypeField::where('id',$fieldtable->id_type_field)->get()->first();
-            $fielduser -> type_field_name = $type_field->html;
-
-            if ($type_field->html == "select") {
-                $options= Option::where('id_field_table',$fieldtable->id)->lists('name', 'id');
-                $fielduser-> options = $options;
-            }
-
-
-        return view('admin.fieldUser.edit')
-                    ->with('fielduser', $fielduser);
+        $fielduser = $this->fieldUserRepository->find($id);
+        return view('admin.fieldUser.edit')->with('fielduser', $fielduser);
     }
 
     /**
@@ -228,16 +127,7 @@ class FieldUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fielduser = FieldUser::find($id);
-        $fielduser ->fill($request->all());
-        $select = $request->info;
-        if ($select == "1") {
-            $fielduser->id_option = $fielduser->value;
-        }
-
-        $fielduser->save();
-
-
+        $fielduser = $this->fieldUserRepository->updateFieldUser($request->all(),$id);
         return redirect()->route('Admin.FieldUser.index');
     }
 
@@ -249,36 +139,14 @@ class FieldUserController extends Controller
      */
     public function destroy($id)
     {
-        $fielduser = FieldUser::find($id);
-        $fielduser-> delete();
-
+        $fielduser = $this->fieldUserRepository->destroy($id);
         return redirect()->route('Admin.FieldUser.index');
     }
 
     public function delete($id)
     {
-        $fielduser = FieldUser::find($id);
-
-            $user = User::where('id',$fielduser->id_user)->get()->first();
-            $fielduser -> user_name = $user->user_name;
-
-            $fieldtable = FieldTable::where('id',$fielduser->id_field_table)->get()->first();
-            $fielduser -> fieldtable_name = $fieldtable->name;
-
-            $table = Table::where('id',$fieldtable->id_table)->get()->first();
-            $fielduser -> table_name = $table->name;
-
-            $type_field =  TypeField::where('id',$fieldtable->id_type_field)->get()->first();
-            $fielduser -> type_field_name = $type_field->html;
-
-            if ($type_field->html == "select") {
-
-                $option = Option::where('id',$fielduser->id_option)->get()->first();
-                $fielduser -> option_name = $option->name;
-            }
-
-        return view('admin.fieldUser.destroy')
-                    ->with('fielduser', $fielduser);
+        $fielduser = $this->fieldUserRepository->find($id);
+        return view('admin.fieldUser.destroy')->with('fielduser', $fielduser);
     }
 
 

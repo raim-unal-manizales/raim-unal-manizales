@@ -40,6 +40,11 @@ class AplicationRepository extends BaseRepository
     return $aplication->save();
   }
 
+  public function listRequareInfo()
+  {
+    return $this->getModel()->where('rquiered_information','True')->get();
+  }
+
   public function uploadFile($aplication)
   {
     $file = $aplication->logo;

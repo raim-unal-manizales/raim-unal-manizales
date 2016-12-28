@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Entities\Option;
-use App\Entities\FieldTable;
-
 use App\Repositories\OptionFieldRepository;
 use App\Repositories\FieldTableRepository;
 
@@ -111,7 +108,7 @@ class OptionController extends Controller
         $option = $this->optionFieldRepository->destroy($id);
         return redirect()->route('Admin.Option.index');
     }
-    
+
     public function delete($id)
     {
       $option = $this->optionFieldRepository->find($id);
