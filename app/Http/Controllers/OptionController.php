@@ -9,8 +9,22 @@ use App\Http\Controllers\Controller;
 use App\Entities\Option;
 use App\Entities\FieldTable;
 
+use App\Repositories\OptionFieldRepository;
+use App\Repositories\FieldTableRepository;
+
 class OptionController extends Controller
 {
+    public $optionFieldRepository;
+    public $fieldTableRepository;
+
+    public function __construct(
+      OptionFieldRepository $optionFieldRepository,
+      FieldTableRepository $fieldTableRepository
+    )
+    {
+      $this->optionFieldRepository = $optionFieldRepository;
+      $this->fieldTableRepository = $fieldTableRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,12 +32,7 @@ class OptionController extends Controller
      */
     public function index()
     {
-        $options = Option::orderBy('id','ASC')->paginate(10);
-            $options->each(function ($options)
-            {
-                $options -> fieldTable_name = FieldTable::find($options->id_field_table)->name;
-            });
-
+        $options = $this->optionFieldRepository->orderBy();
         return view('admin.option.index')->with('options', $options);
     }
 
@@ -34,9 +43,8 @@ class OptionController extends Controller
      */
     public function create()
     {
-        $fieldTable = FieldTable::orderBy('name','ASC')->lists('name', 'id');
-
-        return view('admin.option.create')->with('fieldTable', $fieldTable);
+      $fieldTable = $this->fieldTableRepository->list();
+      return view('admin.option.create')->with('fieldTable', $fieldTable);
     }
 
     /**
@@ -47,10 +55,8 @@ class OptionController extends Controller
      */
     public function store(Request $request)
     {
-        $option  = new Option($request->all());
-        $option -> save();
-
-        return redirect()->route('Admin.Option.index');
+      $option =$this->optionFieldRepository->store($request->all());
+      return redirect()->route('Admin.Option.index');
     }
 
     /**
@@ -61,12 +67,8 @@ class OptionController extends Controller
      */
     public function show($id)
     {
-        $option = Option::find($id);
-        $option_fieldTable = FieldTable::find($option->id_field_table);
-
-        return view('admin.option.show')
-                    ->with('option', $option)
-                    ->with('option_fieldTable', $option_fieldTable);
+      $option = $this->optionFieldRepository->find($id);
+      return view('admin.option.show')->with('option', $option);
     }
 
     /**
@@ -77,13 +79,11 @@ class OptionController extends Controller
      */
     public function edit($id)
     {
-        $option = Option::find($id);
-        $option_fieldTable = FieldTable::find($option->id_field_table);
-        $fieldTable = FieldTable::orderBy('name','ASC')->lists('name', 'id');
+        $option = $this->optionFieldRepository->find($id);
+        $fieldTable = $this->fieldTableRepository->list();
 
         return view('admin.option.edit')
                     ->with('option', $option)
-                    ->with('option_fieldTable', $option_fieldTable)
                     ->with('fieldTable', $fieldTable);
     }
 
@@ -96,12 +96,7 @@ class OptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $option = Option::find($id);
-
-        $option ->fill($request->all());
-        $option->save();
-
-
+        $option = $this->optionFieldRepository->update($request->all(),$id);
         return redirect()->route('Admin.Option.index');
     }
 
@@ -113,19 +108,13 @@ class OptionController extends Controller
      */
     public function destroy($id)
     {
-        $option = Option::find($id);
-        $option-> delete();
-
+        $option = $this->optionFieldRepository->destroy($id);
         return redirect()->route('Admin.Option.index');
     }
+    
     public function delete($id)
     {
-
-        $option = Option::find($id);
-        $option_fieldTable = FieldTable::find($option->id_field_table);
-        return view('admin.option.destroy')
-                    ->with('option', $option)
-                    ->with('option_fieldTable', $option_fieldTable);
-
+      $option = $this->optionFieldRepository->find($id);
+      return view('admin.option.destroy')->with('option', $option);
     }
 }

@@ -3,19 +3,19 @@
 @section('title', 'ver Tabla')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Ver Tabla</h1> 
+  		<h1>Ver Tabla</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.FieldTable.index'], 'method' => 'GET','novalidate' => 'novalidate']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -37,11 +37,11 @@
 			</tr>
 			<tr>
 				<td>tabla</td>
-				<td>{!! $table->name!!}</td>
+				<td>{!! $fieldTable->table->name !!}</td>
 			</tr>
 			<tr>
 				<td>tipo de campo</td>
-				<td>{!! $typeField->name !!}</td>
+				<td>{!! $fieldTable->types_field->name !!}</td>
 			</tr>
 			<tr>
 				<td>Campo para Recomendacion</td>
@@ -54,8 +54,8 @@
 
 		</table>
 	</div>
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
 	</div>
 
 	{!! Form::close() !!}

@@ -8,8 +8,16 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Entities\TypeField;
 
+use App\Repositories\TypeFieldRepository;
+
 class TypeFieldController extends Controller
 {
+    public $typeFieldRepository;
+
+    public function __construct(TypeFieldRepository $typeFieldRepository)
+    {
+      $this->typeFieldRepository = $typeFieldRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,7 @@ class TypeFieldController extends Controller
      */
     public function index()
     {
-        $typeFields = TypeField::orderBy('id', 'ASC')->paginate(10);
+        $typeFields = $this->typeFieldRepository->orderBy();
         return view('admin.typeField.index')->with('typeFields',$typeFields);
     }
 
@@ -39,10 +47,7 @@ class TypeFieldController extends Controller
      */
     public function store(Request $request)
     {
-
-        $typeField  = new TypeField($request->all());
-        $typeField -> save();
-
+        $typeField  =  $this->typeFieldRepository->store($request->all());
         return redirect()->route('Admin.TypeField.index');
     }
 
@@ -54,7 +59,7 @@ class TypeFieldController extends Controller
      */
     public function show($id)
     {
-        $typeField = TypeField::find($id);
+        $typeField = $this->typeFieldRepository->find($id);
         return view('admin.typeField.show')->with('typeField', $typeField);
     }
 
@@ -66,7 +71,7 @@ class TypeFieldController extends Controller
      */
     public function edit($id)
     {
-        $typeField = TypeField::find($id);
+        $typeField =  $this->typeFieldRepository->find($id);
         return view('admin.typeField.edit')->with('typeField', $typeField);
     }
 
@@ -79,12 +84,7 @@ class TypeFieldController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $typeField = TypeField::find($id);
-
-        $typeField ->fill($request->all());
-        $typeField->save();
-
-
+        $typeField = $this->typeFieldRepository->update($request->all(), $id);
         return redirect()->route('Admin.TypeField.index');
     }
 
@@ -96,14 +96,12 @@ class TypeFieldController extends Controller
      */
     public function destroy($id)
     {
-        $typeField = TypeField::find($id);
-        $typeField-> delete();
+        $typeField = $this->typeFieldRepository->destroy($id);
         return redirect()->route('Admin.TypeField.index');
     }
     public function delete($id)
     {
-
-        $typeField = TypeField::find($id);
+        $typeField = $this->typeFieldRepository->find($id);
         return view('admin.typeField.destroy')->with('typeField', $typeField);
 
     }

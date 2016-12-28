@@ -39,8 +39,8 @@
 					<td>{{ $fieldTable-> id}}</td>
 					<td>{{ $fieldTable-> name}}</td>
 					<td>{{ $fieldTable-> name_db}}</td>
-					<td>{{ $fieldTable-> table_name}}</td>
-					<td>{{ $fieldTable-> typeField_name}}</td>
+					<td>{{ $fieldTable->table->name}}</td>
+					<td>{{ $fieldTable->types_field->name }}</td>
 					<td>{{ $fieldTable-> field_recommendation}}</td>
 					<td>{{ $fieldTable-> field_required}}</td>
 

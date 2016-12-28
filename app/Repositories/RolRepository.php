@@ -18,11 +18,6 @@ class RolRepository extends BaseRepository
     return new User($user);
   }
 
-  public function list()
-  {
-    return $rol = $this->getModel()->orderBy('name','ASC')->lists('name', 'id');
-  }
-
   public function store($rol)
   {
     return $this->createObject($rol)->save();

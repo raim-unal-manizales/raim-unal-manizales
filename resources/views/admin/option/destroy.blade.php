@@ -3,19 +3,19 @@
 @section('title', 'Eliminar Opcion')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Eliminar Opcion</h1> 
+  		<h1>Eliminar Opcion</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.Option.destroy', $option->id], 'method' => 'DELETE']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -38,13 +38,13 @@
 			</tr>
 			<tr>
 				<td>Campo de Tabla</td>
-				<td>{!! $option_fieldTable->name!!}</td>
+				<td>{!! $option->fields_table->name !!}</td>
 			</tr>
 
 		</table>
 	</div>
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
 		<a href="{{ route('Admin.Option.index') }}">Cancelar</a>
 	</div>
 

@@ -6,12 +6,26 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Entities\FieldTable;
-use App\Entities\Table;
-use App\Entities\TypeField;
+use App\Repositories\TableRepository;
+use App\Repositories\TypeFieldRepository;
+use App\Repositories\FieldTableRepository;
 
 class FieldTableController extends Controller
 {
+    public $tableRepository;
+    public $typeFieldRepository;
+    public $fieldTableRepository;
+
+    public function __construct(
+        TableRepository $tableRepository,
+        TypeFieldRepository $typeFieldRepository,
+        FieldTableRepository $fieldTableRepository
+    )
+    {
+      $this->tableRepository = $tableRepository;
+      $this->typeFieldRepository = $typeFieldRepository;
+      $this->fieldTableRepository = $fieldTableRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,15 +33,8 @@ class FieldTableController extends Controller
      */
     public function index()
     {
-        $fieldTables = FieldTable::orderBy('id','ASC')->paginate(10);
-            $fieldTables->each(function ($fieldTables)
-            {
-                $fieldTables -> table_name = Table::find($fieldTables->id_table)->name;
-                $fieldTables -> typeField_name = TypeField::find($fieldTables->id_type_field)->name;
-            });
-
-        return view('admin.fieldTable.index')
-                    ->with('fieldTables', $fieldTables);
+        $fieldTables = $this->fieldTableRepository->orderBy();
+        return view('admin.fieldTable.index')->with('fieldTables', $fieldTables);
     }
 
     /**
@@ -37,10 +44,8 @@ class FieldTableController extends Controller
      */
     public function create()
     {
-        $table = Table::orderBy('name','ASC')->lists('name', 'id');
-        $typeField = TypeField::orderBy('name','ASC')->lists('name', 'id');
-
-
+        $table = $this->tableRepository->list();
+        $typeField = $this->typeFieldRepository->list();
         return view('admin.fieldTable.create')
                     ->with('table', $table)
                     ->with('typeField', $typeField);
@@ -55,9 +60,7 @@ class FieldTableController extends Controller
      */
     public function store(Request $request)
     {
-        $fieldTable  = new FieldTable($request->all());
-        $fieldTable -> save();
-
+        $fieldTable  = $this->fieldTableRepository->store($request->all());
         return redirect()->route('Admin.FieldTable.index');
     }
 
@@ -69,15 +72,8 @@ class FieldTableController extends Controller
      */
     public function show($id)
     {
-        $fieldTable = FieldTable::find($id);
-        $table  = Table::find($fieldTable->id_table);
-        $typeField  = TypeField::find($fieldTable->id_type_field);
-
-
-        return view('admin.fieldTable.show')
-                    ->with('fieldTable', $fieldTable)
-                    ->with('table', $table)
-                    ->with('typeField', $typeField);
+        $fieldTable = $this->fieldTableRepository->find($id);
+        return view('admin.fieldTable.show')->with('fieldTable', $fieldTable);
     }
 
     /**
@@ -88,20 +84,14 @@ class FieldTableController extends Controller
      */
     public function edit($id)
     {
-        $fieldTable = FieldTable::find($id);
-
-        $table = Table::orderBy('name','ASC')->lists('name', 'id');
-        $typeField = TypeField::orderBy('name','ASC')->lists('name', 'id');
-
-        $fieldTable_table = Table::find($fieldTable->id_table);
-        $fieldTable_typeField = TypeField::find($fieldTable->id_type_field);
+        $fieldTable = $this->fieldTableRepository->find($id);
+        $table = $this->tableRepository->list();
+        $typeField = $this->typeFieldRepository->list();
 
         return view('admin.FieldTable.edit')
                     ->with('fieldTable', $fieldTable)
                     ->with('table', $table)
-                    ->with('typeField', $typeField)
-                    ->with('fieldTable_table', $fieldTable_table)
-                    ->with('fieldTable_typeField', $fieldTable_typeField);
+                    ->with('typeField', $typeField);
     }
 
     /**
@@ -113,12 +103,7 @@ class FieldTableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fieldTable = FieldTable::find($id);
-
-        $fieldTable ->fill($request->all());
-        $fieldTable->save();
-
-
+        $fieldTable = $this->fieldTableRepository->update($request->all(), $id);
         return redirect()->route('Admin.FieldTable.index');
     }
 
@@ -130,22 +115,13 @@ class FieldTableController extends Controller
      */
     public function destroy($id)
     {
-        $fieldTable = FieldTable::find($id);
-        $fieldTable-> delete();
-
+        $fieldTable = $this->fieldTableRepository->destroy($id);
         return redirect()->route('Admin.FieldTable.index');
     }
+
     public function delete($id)
     {
-
-        $fieldTable = FieldTable::find($id);
-
-        $table  = Table::find($fieldTable->id_table);
-        $typeField  = TypeField::find($fieldTable->id_type_field);
-        return view('admin.fieldTable.destroy')
-                    ->with('fieldTable', $fieldTable)
-                    ->with('table', $table)
-                    ->with('typeField', $typeField);
-
+        $fieldTable = $this->fieldTableRepository->find($id);
+        return view('admin.fieldTable.destroy')->with('fieldTable', $fieldTable);
     }
 }

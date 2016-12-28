@@ -4,24 +4,24 @@
 
 @section('content')
 
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Editar Rol</h1> 
+  		<h1>Editar Rol</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
-	{!! Form::open(['route' => ['Admin.Rol.update', $rol], 'method'=> 'PUT']) !!}
-		
+-->
+
+	{!! Form::model($rol,['route' => ['Admin.Rol.update', $rol], 'method'=> 'PUT']) !!}
+
 		<div class="fieldForm">
 
 			{!! Form::label('name','Nombre') !!}
 
-			{!! Form::text('name', $rol->name ,['class' => '', 'placeholder' => 'Nombre Del Rol','required']) !!}
+			{!! Form::text('name', null,['class' => '', 'placeholder' => 'Nombre Del Rol','required']) !!}
 
 		</div>
 
@@ -29,7 +29,7 @@
 
 			{!! Form::label('description','Descripcion') !!}
 
-			{!! Form::textarea('description', $rol->description ,['class' => '']) !!}
+			{!! Form::textarea('description', null ,['class' => '']) !!}
 
 		</div>
 

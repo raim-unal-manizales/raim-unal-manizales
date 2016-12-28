@@ -22,7 +22,7 @@ class FieldTable extends Entity
         return $this->hasMany('App\Entities\Option', 'id_field_table');
     }
 
-    public function types_fields(){
+    public function types_field(){
         return $this->belongsTo('App\Entities\TypeField', 'id_type_field');
     }
 

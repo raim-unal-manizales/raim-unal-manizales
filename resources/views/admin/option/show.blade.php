@@ -3,19 +3,19 @@
 @section('title', 'ver Opcion')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Ver Opcion</h1> 
+  		<h1>Ver Opcion</h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
---> 
-	
+-->
+
 	{!! Form::open(['route' => ['Admin.Option.index'], 'method' => 'GET','novalidate' => 'novalidate']) !!}
-	
+
 	<div class="zebraTabla">
 		<table>
 			<tr>
@@ -38,13 +38,13 @@
 			</tr>
 			<tr>
 				<td>Campo de Tabla</td>
-				<td>{!! $option_fieldTable->name!!}</td>
+				<td>{!! $option->fields_table->name !!}</td>
 			</tr>
 
 		</table>
 	</div>
-	<div class="buttonTable">			
-		{!! Form::submit('Aceptar',['class' => '']) !!}	
+	<div class="buttonTable">
+		{!! Form::submit('Aceptar',['class' => '']) !!}
 	</div>
 
 	{!! Form::close() !!}

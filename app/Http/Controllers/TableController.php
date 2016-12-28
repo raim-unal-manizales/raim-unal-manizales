@@ -6,11 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Entities\Table;
-use App\Entities\Aplication;
+use App\Repositories\TableRepository;
+use App\Repositories\AplicationRepository;
 
 class TableController extends Controller
 {
+    public $tableRepository;
+    public $aplicationRepository;
+
+    public function __construct(
+      TableRepository $tableRepository,
+      AplicationRepository $aplicationRepository
+    )
+    {
+      $this->tableRepository = $tableRepository;
+      $this->aplicationRepository = $aplicationRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,13 +29,7 @@ class TableController extends Controller
      */
     public function index()
     {
-
-        $tables = Table::orderBy('id','ASC')->paginate(10);
-            $tables->each(function ($tables)
-            {
-                $tables -> app_name = Aplication::find($tables->id_app)->name;
-            });
-
+        $tables = $this->tableRepository->OrderId();
         return view('admin.Table.index')->with('tables', $tables);
     }
 
@@ -35,8 +40,7 @@ class TableController extends Controller
      */
     public function create()
     {
-        $aplication = Aplication::orderBy('name','ASC')->lists('name', 'id');
-
+        $aplication = $this->aplicationRepository->list();
         return view('admin.table.create')->with('aplication', $aplication);
     }
 
@@ -48,9 +52,7 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        $table  = new Table($request->all());
-        $table -> save();
-
+        $table  = $this->tableRepository->store($request->all());
         return redirect()->route('Admin.Table.index');
     }
 
@@ -62,13 +64,8 @@ class TableController extends Controller
      */
     public function show($id)
     {
-        $table = Table::find($id);
-        $table_app = Aplication::find($table->id_app);
-        return view('admin.table.show')
-                    ->with('table', $table)
-                    ->with('table_app', $table_app);
-
-
+        $table = $this->tableRepository->find($id);
+        return view('admin.table.show')->with('table', $table);
     }
 
     /**
@@ -79,13 +76,11 @@ class TableController extends Controller
      */
     public function edit($id)
     {
-        $table = Table::find($id);
-        $table_app = Aplication::find($table->id_app);
-        $aplications = Aplication::orderBy('name','ASC')->lists('name', 'id');
+        $table = $this->tableRepository->find($id);
+        $aplications = $this->aplicationRepository->list();
 
         return view('admin.table.edit')
                     ->with('table', $table)
-                    ->with('table_app', $table_app)
                     ->with('aplications', $aplications);
     }
 
@@ -98,12 +93,7 @@ class TableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $table = Table::find($id);
-
-        $table ->fill($request->all());
-        $table->save();
-
-
+        $table = $this->tableRepository->update($request->all(), $id);
         return redirect()->route('Admin.Table.index');
     }
 
@@ -115,19 +105,12 @@ class TableController extends Controller
      */
     public function destroy($id)
     {
-        $table = Table::find($id);
-        $table-> delete();
-
+        $table = $this->tableRepository->destroy($id);
         return redirect()->route('Admin.Table.index');
     }
     public function delete($id)
     {
-
-        $table = Table::find($id);
-        $table_app = Aplication::find($table->id_app);
-        return view('admin.table.destroy')
-                    ->with('table', $table)
-                    ->with('table_app', $table_app);
-
+        $table = $this->tableRepository->find($id);
+        return view('admin.table.destroy')->with('table', $table);
     }
 }

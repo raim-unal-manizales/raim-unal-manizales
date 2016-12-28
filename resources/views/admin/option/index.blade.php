@@ -38,7 +38,7 @@
 					<td>{{ $option-> name}}</td>
 					<td>{{ $option-> description}}</td>
 					<td>{{ $option-> id_option_app}}</td>
-					<td>{{ $option-> fieldTable_name}}</td>
+					<td>{{ $option->fields_table->name}}</td>
 					<td>
 						<div class="buttonsTable">
 							<a href="{{ route('Admin.Option.show', $option->id) }}" class="" title="Ver" alt="Ver" value="ver"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>

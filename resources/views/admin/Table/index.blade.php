@@ -36,7 +36,7 @@
 					<td>{{ $table-> id}}</td>
 					<td>{{ $table-> name}}</td>
 					<td>{{ $table-> description}}</td>
-					<td>{{ $table-> app_name}}</td>
+					<td>{{ $table->aplication->name}}</td>
 					<td>
 						<div class="buttonsTable">
 							<a href="{{ route('Admin.Table.show', $table->id) }}" class="" title="Ver" alt="Ver" value="ver"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
