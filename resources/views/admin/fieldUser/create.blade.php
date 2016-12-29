@@ -11,7 +11,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading"><h4>Información para aplicaiónes</h4></div>
 	<div class="panel-body">
-		{!! Form::open(['route' => 'Admin.FieldUser.store', 'method' => 'POST']) !!}
+		{!! Form::open(['route' => 'Admin.FieldUser.store', 'method' => 'POST' , 'class'=>'form-horizontal']) !!}
 
 		@foreach($aplications as $aplication)
 
@@ -75,10 +75,10 @@
 				{!! Form::select('id_user', $users,  null, ['class' => '', 'required']) !!}
 				{{ Form::hidden('info',serialize($var), ['value' => $var]) }}
 			</div>
-			<HR>
-			<div class="buttonTable">
-				{!! Form::submit('Guardar',['class' => '']) !!}
-				<a href="{{ route('Admin.FieldUser.index') }}">Cancelar</a>
+			<div class="">
+				<HR>
+				{!! Form::submit('Guardar',['class' => 'btn btn-primary pull-right']) !!}
+				<a href="{{ route('Admin.FieldUser.index') }}" class="btn btn-danger">Cancelar</a>
 			</div>
 			{!! Form::close() !!}
 	</div>

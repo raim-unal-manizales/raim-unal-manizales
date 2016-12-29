@@ -22,5 +22,9 @@ class FieldTableRepository extends BaseRepository
   {
     return $this->createObject($fieldTable)->save();
   }
+  public function listSelect($field = "name")
+  {
+    return $this->getModel()->where('id_type_field', 2)->orderBy($field,'ASC')->lists($field, 'id');
+  }
 
 }

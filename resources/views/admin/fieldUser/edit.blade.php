@@ -7,15 +7,14 @@
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Editar Campo Usuario</h1>
+  		<h1><span class="label label-primary">Editar:</span><strong>  Campos Usuario</strong></label></h1>
   </div>
-
 <!--
 	//fin de la cabezera del contenido
 -->
 
 
-	{!! Form::open(['route' => ['Admin.FieldUser.update', $fielduser], 'method' => 'PUT']) !!}
+	{!! Form::open(['route' => ['Admin.FieldUser.update', $fielduser], 'method' => 'PUT' , 'class'=>'form-horizontal']) !!}
 	<div class="zebraTabla">
     <table>
 			<tr>
@@ -75,8 +74,8 @@
 		</table>
 	</div>
 	<div class="buttonTable">
-		{!! Form::submit('Aceptar',['class' => '']) !!}
-		<a href="{{ route('Admin.FieldUser.index') }}">Cancelar</a>
+		{!! Form::submit('Aceptar',['class' => 'btn btn-primary pull-right']) !!}
+		<a href="{{ route('Admin.FieldUser.index') }}" class="btn btn-danger">Cancelar</a>
 	</div>
 
 	{!! Form::close() !!}

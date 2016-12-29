@@ -3,6 +3,15 @@
 @section('title', '')
 
 @section('content')
+	<!--
+		// cabezera del contenido
+	-->
+	  <div class="contentHeader">
+	  		<h1><span class="label label-primary">Editar:</span><strong>  Campos Usuario</strong></label></h1>
+	  </div>
+	<!--
+		//fin de la cabezera del contenido
+	-->
 <?php
 	$bandera = 0;
 	$var = [];
@@ -97,8 +106,8 @@
 		</div>
 
 		<div class="buttonTable">
-			{!! Form::submit('Guardar',['class' => '']) !!}
-			<a href="{{ route('Admin.FieldUser.index') }}">Cancelar</a>
+			{!! Form::submit('Guardar',['class' => 'btn btn-primary pull-right']) !!}
+			<a href="{{ route('Admin.FieldUser.index') }}" class="btn btn-danger">Cancelar</a>
 		</div>
 		{!! Form::close() !!}
 @endsection

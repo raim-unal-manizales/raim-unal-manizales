@@ -3,71 +3,64 @@
 @section('title', 'Crear Campo de Tabla')
 
 @section('content')
-<!-- 
+<!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Crear Campo de Tabla</h1> 
+  		<h1><span class="label label-primary">Crear:</span><strong>  Campo de Tabla</strong></label></h1>
   </div>
 
-<!-- 
+<!--
 	//fin de la cabezera del contenido
 -->
-	
-	{!! Form::open(['route'=> 'Admin.FieldTable.store','method'=> 'POST']) !!}
-		
+<div class="row">
+  <div class="col-md-7 col-md-offset-2 well">
 
+  	{!! Form::open(['route'=> 'Admin.FieldTable.store','method'=> 'POST' , 'class'=>'form-horizontal']) !!}
+  		<div class="form-group">
+  			{!! Form::label('name','Nombre: ') !!}
+  			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}
+  		</div>
 
-		<div class="fieldForm">
-			{!! Form::label('name','Nombre') !!}
-			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}		
+  		<div class="fieldForm">
+  			{!! Form::label('name_db','Nombre base datos: ') !!}
+  			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre en modelo externo','required']) !!}
+  		</div>
 
-		</div>
+  		<div class="fieldForm">
+  			{!! Form::label('description','Descripción: ') !!}
+  			{!! Form::textarea('description', null ,['class' => '']) !!}
+  		</div>
 
-		<div class="fieldForm">
-			{!! Form::label('name_db','Nombre Base Datos') !!}
-			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}		
+  		<div class="fieldForm">
+  			{!! Form::label('field_recommendation','¿Campo Para Recomendacion?: ') !!}
+  			{!! Form::select('field_recommendation', ['False'=>'No','True'=>'Si'] ,null, ['class' => '']) !!}
+  		</div>
 
-		</div>
+  		<div class="fieldForm">
+  			{!! Form::label('field_required','¿Campo Requerido?: ') !!}
+  			{!! Form::select('field_required', ['False'=>'No','True'=>'Si'] ,null, ['class' => '']) !!}
+  		</div>
 
-		<div class="fieldForm">
+  		<div class="fieldForm">
+  			{!! Form::label('id_table','Tabla: ') !!}
+  			{!! Form::select('id_table', $table ,null, ['class' => '']) !!}
 
-			{!! Form::label('description','Descripcion') !!}
+  		</div>
+  		<div class="fieldForm">
+  			{!! Form::label('id_type_field','Tipo de Campo: ') !!}
+  			{!! Form::select('id_type_field', $typeField ,null, ['class' => '']) !!}
 
-			{!! Form::textarea('description', null ,['class' => '','required']) !!}
+  		</div>
 
-		</div>
+  		<div class="">
+        <hr>
+  			<a href="{{ route('Admin.FieldTable.index') }}" class="btn btn-danger">Cancelar</a>
+        {!! Form::submit('Registrar',['class' => 'btn btn-primary pull-right']) !!}
+  		</div>
 
-		<div class="fieldForm">
-			{!! Form::label('field_recommendation','Campo Para Recomendacion') !!}
-			{!! Form::select('field_recommendation', ['True'=>'True','False'=>'False'] ,null, ['class' => '','required']) !!}		
-		</div>
-
-
-		<div class="fieldForm">
-			{!! Form::label('field_required','Campo Requerido') !!}
-			{!! Form::select('field_required', ['True'=>'True','False'=>'False'] ,null, ['class' => '','required']) !!}		
-		</div>
-
-		<div class="fieldForm">
-			{!! Form::label('id_table','Id Tabla') !!}
-			{!! Form::select('id_table', $table ,null, ['class' => '','required']) !!}			
-
-		</div>
-		<div class="fieldForm">
-			{!! Form::label('id_type_field','Id Tipo de Campo') !!}
-			{!! Form::select('id_type_field', $typeField ,null, ['class' => '','required']) !!}			
-
-		</div>
-
-		<div class="buttonForm">
-			{!! Form::submit('Registrar',['class' => '']) !!}
-			<a href="{{ route('Admin.FieldTable.index') }}">Cancelar</a>
-		</div>
-
-
-
-	{!! Form::close() !!}
-
+  	{!! Form::close() !!}
+  </div>
+</div>
 
 @endsection

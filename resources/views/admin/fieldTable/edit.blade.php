@@ -7,67 +7,58 @@
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Editar Campo de Tabla</h1>
+  		<h1><span class="label label-primary">Editar: </span><strong>  Campo de Tabla</strong></label></h1>
   </div>
-
 <!--
 	//fin de la cabezera del contenido
 -->
 
-	{!! Form::model($fieldTable,['route' => ['Admin.FieldTable.update', $fieldTable], 'method'=> 'PUT']) !!}
-
-
+	{!! Form::model($fieldTable,['route' => ['Admin.FieldTable.update', $fieldTable], 'method'=> 'PUT' , 'class'=>'form-horizontal']) !!}
 
 		<div class="fieldForm">
 			{!! Form::label('name','Nombre') !!}
-			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}		
-
+			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('name_db','Nombre Base Datos') !!}
-			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}		
-
+			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}
 		</div>
 
 		<div class="fieldForm">
-
 			{!! Form::label('description','Descripcion') !!}
-
-			{!! Form::textarea('description', null  ,['class' => '','required']) !!}
-
+			{!! Form::textarea('description', null  ,['class' => '']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('field_recommendation','Campo Para Recomendacion') !!}
-			{!! Form::select('field_recommendation', ['True'=>'True','False'=>'False'] ,null, ['class' => '','required']) !!}		
+			{!! Form::select('field_recommendation', ['True'=>'True','False'=>'False'] ,null, ['class' => '']) !!}
 		</div>
-
 
 		<div class="fieldForm">
 			{!! Form::label('field_required','Campo Requerido') !!}
-			{!! Form::select('field_required', ['True'=>'True','False'=>'False'] ,null, ['class' => '','required']) !!}			
-
+			{!! Form::select('field_required', ['True'=>'True','False'=>'False'] ,null, ['class' => '']) !!}
 		</div>
+
 		<div class="fieldForm">
-			{!! Form::label('id_table','Id Tabla') !!}
-			{!! Form::select('id_table', $table ,null, ['class' => '','required']) !!}			
+			{!! Form::label('id_table','Tabla') !!}
+			{!! Form::select('id_table', $table ,null, ['class' => '']) !!}
 
 		</div>
+
 		<div class="fieldForm">
-			{!! Form::label('id_type_field','Id Tipo de Campo') !!}
-			{!! Form::select('id_type_field', $typeField ,null, ['class' => '','required']) !!}			
-
+			{!! Form::label('id_type_field','Tipo de Campo') !!}
+			{!! Form::select('id_type_field', $typeField ,null, ['class' => '']) !!}
 		</div>
 
-		<div class="buttonForm">
-			{!! Form::submit('Editar',['class' => '']) !!}
-			<a href="{{ route('Admin.FieldTable.index') }}">Cancelar</a>
+		<div class="">
+      <hr>
+			{!! Form::submit('Editar',['class' => 'btn btn-primary pull-right']) !!}
+			<a href="{{ route('Admin.FieldTable.index') }}" class="btn btn-danger">Cancelar</a>
 		</div>
-
-
 
 	{!! Form::close() !!}
-
+</div>
+</div>
 
 @endsection

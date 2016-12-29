@@ -7,14 +7,14 @@
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Editar Usuario</h1>
+  		<h1><span class="label label-primary">Editar:</span><strong>  Usuario</strong></label></h1>
   </div>
-
 <!--
 	//fin de la cabezera del contenido
 -->
-
-	{!! Form::model($user,['route' => ['Admin.User.update', $user], 'method'=> 'PUT']) !!}
+<div class="row">
+  <div class="col-md-7 col-md-offset-2 well">
+	{!! Form::model($user,['route' => ['Admin.User.update', $user], 'method'=> 'PUT' , 'class'=>'form-horizontal']) !!}
 
   <div class="fieldForm">
     {!! Form::label('user_name','Nombre de usuario') !!}
@@ -33,16 +33,12 @@
 
 		<div class="fieldForm">
 			{!! Form::label('last_name','Apellido') !!}
-			<br>
 			{!! Form::text('last_name', null ,['class' => '', 'placeholder' => 'Apellido','required']) !!}
-
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('email','Correo Electrónico') !!}
-			<br>
 			{!! Form::email('email', null ,['class' => '', 'placeholder' => 'exmple@gmail.com','required','disabled']) !!}
-
 		</div>
 
 		<div class="fieldForm">
@@ -58,7 +54,6 @@
 		<div class="fieldForm">
 			{!! Form::label('birth_date','Fecha de Nacimiento') !!}
 			{!! Form::date('birth_date',null, ['class' => '','required']) !!}
-
 		</div>
 
 		<div class="fieldForm">
@@ -69,17 +64,17 @@
 
 		<div class="fieldForm">
 			{!! Form::label('id_rol','Rol') !!}
-			<br>
-			{!! Form::select('id_rol',$roles ,null,['class' => '','required']) !!}
-
+			{!! Form::select('id_rol',$roles ,null,['class' => '']) !!}
 		</div>
 
-		<div class="buttonForm">
-			{!! Form::submit('Aceptar',['class' => '']) !!}
-			<a href="{{ route('Creador.index') }}">Cancelar</a>
+		<div class="">
+      <hr>
+			{!! Form::submit('Aceptar',['class' => 'btn btn-primary pull-right']) !!}
+			<a href="{{ route('Creador.index') }}" class="btn btn-danger">Cancelar</a>
 		</div>
 
 	{!! Form::close() !!}
-
+</div>
+</div>
 
 @endsection

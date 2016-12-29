@@ -40,7 +40,7 @@ class OptionController extends Controller
      */
     public function create()
     {
-      $fieldTable = $this->fieldTableRepository->list();
+      $fieldTable = $this->fieldTableRepository->listSelect();
       return view('admin.option.create')->with('fieldTable', $fieldTable);
     }
 
