@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Entities\Need;
-
 use App\Repositories\NeedRepository;
 
 class NeedController extends Controller
@@ -25,7 +23,6 @@ class NeedController extends Controller
 
     public function store(Request $request)
     {
-    	$need = new Need($request->all());
-    	$need-> save();
+    	$need = $this->needRepository->store($request->all());
     }
 }

@@ -23,4 +23,9 @@ class RolRepository extends BaseRepository
     return $this->createObject($referenceLearningStyle)->save();
   }
 
+  public function whereHigher($mayorUno,$mayorDos)
+  {
+    return  $this->getModel()->where('styleUno',$mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
+  }
+
 }

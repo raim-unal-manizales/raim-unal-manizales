@@ -6,35 +6,43 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use App\Entities\User;
-use App\Entities\Aplication;
+use App\Repositories\UserRepository;
+use App\Repositories\AplicationRepository;
 
 class RedirectController extends Controller
 {
-   public function session(Request $request){
+  public $userRepository;
+  public $aplicationRepository;
 
-   		$var = $request->all();
+  public function __construct(
+    UserRepository $userRepository,
+    AplicationRepository $aplicationRepository
+  )
+  {
+    $this->userRepository = $userRepository;
+    $this->aplicationRepository = $aplicationRepository;
+  }
 
-   		$app_id = (integer)$var['app_id'];
-   		$user_id = (integer)$var['user_id'];
+  public function session(Request $request){
 
-		$user = User::find($user_id);
+   	$var = $request->all();
+   	$app_id = (integer)$var['app_id'];
+   	$user_id = (integer)$var['user_id'];
 
+		$user = $this->userRepository->find($user_id);
 		$Usuario  = $user->email;
 		$contrasenia = decrypt($user->encript);
 
-		$aplication = Aplication::find($app_id);
+		$aplication = $this->aplicationRepository->find($app_id);
 		$ruta = (String)$aplication->url;
 		$ruta = $ruta."raim/inicio_session.php?Usuario=".$Usuario."&Contrasenia=".$contrasenia;
 
 		$data = array(
 			'Usuario' => $Usuario,
 			'Contrasenia' => $contrasenia,
-			'ruta' => $ruta, );
-
-
-   		return $data;
+			'ruta' => $ruta,
+    );
+    return $data;
 
    }
 

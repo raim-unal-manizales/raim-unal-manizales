@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Entities\ReferenceLearningStyle;
-use App\Entities\LearningStyle;
-
 use App\Repositories\RLSRepository;
 use App\Repositories\LearningStyleRepository;
 
@@ -32,11 +29,8 @@ class LearningStyleController extends Controller
 
     public function store(Request $request)
     {
-
-
     	$Array_value = $this->ModeloArray();
-
-        $Array_value['user_id'] = $request->user_id;
+      $Array_value['user_id'] = $request->user_id;
 
     	$text = "";
     	foreach ($request->all() as $key => $value) {
@@ -65,14 +59,9 @@ class LearningStyleController extends Controller
     	$mayorUno = $this->MayorUno($a,$k,$v,$r);
     	$mayorDos = $this->MayorDos($s,$g);
 
-
-    	$referenceLearniingStyle = ReferenceLearningStyle::where('styleUno', $mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
-
+    	$referenceLearniingStyle = $this->rLSRepository->whereHigher($mayorUno,$mayorDos);
     	$Array_value['reference_learning_styles']= $referenceLearniingStyle[0];
-
-        $LearningStyle = new LearningStyle($Array_value);
-        $LearningStyle->save();
-
+      $LearningStyle = $this->learningStyleRepository->store($Array_value);
 
     }
     protected function MayorUno($a,$k,$v,$r)
