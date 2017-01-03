@@ -23,4 +23,9 @@ class RolRepository extends BaseRepository
     return $this->createObject($rol)->save();
   }
 
+  public function listSinAdmin()
+  {
+    return $this->getModel()->where('id', '<>', 1)->orderBy('name','ASC')->lists('name', 'id');
+  }
+
 }

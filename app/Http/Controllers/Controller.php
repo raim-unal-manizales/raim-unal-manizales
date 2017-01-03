@@ -22,6 +22,20 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function getneedEtnica()
+    {
+        $needEtnica = Need::select('E1')->distinct()->where('E1', '<>','')->get()->lists('E1')->toArray();
+
+        array_push($needEtnica, '');
+
+        if (!in_array('Embera', $needEtnica)) {
+            array_push($needEtnica, 'Embera');
+        }
+        if (!in_array('Otra', $needEtnica)) {
+            array_push($needEtnica, 'Otra');
+        }
+        return $needEtnica;
+    }
 
     public function session_all($id,$tipo_accion){
 

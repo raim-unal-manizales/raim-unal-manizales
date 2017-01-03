@@ -6,7 +6,7 @@ use App\Entities\ReferenceLearningStyle;
 /**
  * Reference Learning Style Repository
  */
-class RolRepository extends BaseRepository
+class RLSRepository extends BaseRepository
 {
   public function getModel()
   {
@@ -26,6 +26,10 @@ class RolRepository extends BaseRepository
   public function whereHigher($mayorUno,$mayorDos)
   {
     return  $this->getModel()->where('styleUno',$mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
+  }
+  public function idDefectNull()
+  {
+    return  $this->getModel()->where('learningStile', 'Defect-null')->lists('id')->toArray();
   }
 
 }

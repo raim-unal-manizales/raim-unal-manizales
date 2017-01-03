@@ -6,7 +6,7 @@ use App\Entities\LearningStyle;
 /**
  * Reference Learning Style Repository
  */
-class RolRepository extends BaseRepository
+class LearningStyleReposiroty extends BaseRepository
 {
   public function getModel()
   {

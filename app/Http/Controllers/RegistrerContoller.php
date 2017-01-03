@@ -7,60 +7,66 @@ use App\Http\Controllers\Auth;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Entities\User;
-use App\Entities\FieldUser;
-use App\Entities\Aplication;
-use App\Entities\Table;
-use App\Entities\TypeField;
-use App\Entities\FieldTable;
-use App\Entities\Option;
-use App\Entities\Rol;
-use App\Entities\LearningStyle;
-use App\Entities\Personalization;
-use App\Entities\Need;
-use App\Entities\ReferenceLearningStyle;
+use App\Repositories\RolRepository;
+use App\Repositories\NeedRepository;
+use App\Repositories\UserRepository;
+use App\Repositories\LearningStyleReposiroty;
+use App\Repositories\PersonalizationRepository;
+use App\Repositories\AplicationRepository;
+use App\Repositories\RLSRepository;
+use App\Repositories\FieldUserRepository;
 
 class RegistrerContoller extends Controller
 {
+  public $rolRepository;
+  public $needRepository;
+  public $userRepository;
+  public $learningStyleRepository;
+  public $personalizationRepository;
+  public $aplicationRepository;
+  public $rLSRepository;
+  public $fieldUserRepository;
+
+  public function __construct(
+    RolRepository $rolRepository,
+    NeedRepository $needRepository,
+    UserRepository $userRepository,
+    LearningStyleReposiroty $learningStyleRepository,
+    PersonalizationRepository $personalizationRepository,
+    AplicationRepository $aplicationRepository,
+    RLSRepository $rLSRepository,
+    FieldUserRepository $fieldUserRepository
+  )
+  {
+    $this->rolRepository = $rolRepository;
+    $this->needRepository = $needRepository;
+    $this->userRepository = $userRepository;
+    $this->learningStyleRepository = $learningStyleRepository;
+    $this->personalizationRepository = $personalizationRepository;
+    $this->aplicationRepository = $aplicationRepository;
+    $this->rLSRepository = $rLSRepository;
+    $this->fieldUserRepository = $fieldUserRepository;
+  }
     public function create()
     {
-    	$rol = Rol::where('id', '<>', 1)->orderBy('name','ASC')->lists('name', 'id');
+    	$rol = $this->rolRepository->listSinAdmin();
+    	$aplications= $this->aplicationRepository->listRequareInfo();
+
       $needEtnica = $this->getneedEtnica();
-    	$aplications = $this->Information_App();
 
       return view('public.register_user')
         			    ->with('rol', $rol)
         			    ->with('aplications',$aplications)
                   ->with('needEtnica',$needEtnica);
     }
-    
-    private function getneedEtnica()
-    {
-        $needEtnica = Need::select('E1')->distinct()->where('E1', '<>','')->get()->lists('E1')->toArray();
-
-        array_push($needEtnica, '');
-
-        if (!in_array('Embera', $needEtnica)) {
-            array_push($needEtnica, 'Embera');
-        }
-        array_push($needEtnica, 'Otra');
-        return $needEtnica;
-    }
-
-    public function store(Request $request)
-    {
-    	$personalization = new Personalization($request->all());
-    	$personalization->save();
-
-    }
 
     public function createUser(Request $request){
 
     	$data = $request->all();
-    	$user = new User();
-    	$learningStyle = new LearningStyle();
-    	$personalization = new Personalization();
-    	$need = new Need();
+    	$user = $this->userRepository->getModel();
+    	$learningStyle = $this->learningStyleRepository->getModel();
+    	$personalization = $this->personalizationRepository->getModel();
+    	$need = $this->needRepository->getModel();
     	$bandera = 0;
     	$array_tem_aplication[]= null;
     	$array_tem_LeranindStyle[]=null;
@@ -71,7 +77,7 @@ class RegistrerContoller extends Controller
     		switch ($bandera) {
     			case '0':
     				if ($this->termination($value)) {
-    					$id_user = $this->storeUser($user->toArray());
+              $id_user = $this->userRepository->store($user->toArray())->id;
     					$bandera++;
     				}else{
     					$user->$key= $value;
@@ -98,7 +104,7 @@ class RegistrerContoller extends Controller
     			case '3':
     				if ($this->termination($value)) {
     					$need->user_id = $id_user;
-    					$need-> save();
+              $need = $this->needRepository->store($need->toArray());
     					$bandera++;
     				}else{
     					$need->$key= $value;
@@ -115,7 +121,7 @@ class RegistrerContoller extends Controller
                         if ($personalization->interline == '') {
                             $personalization->interline = 0;
                         }
-    					$personalization-> save();
+              $personalization = $this->personalizationRepository->store($personalization->toArray());
     					$bandera++;
     				}else{
     					$personalization->$key=$value;
@@ -125,29 +131,10 @@ class RegistrerContoller extends Controller
     				break;
     		}
     	}
-
-
-
         $resultado = $this->session_all($id_user,'Create');
-
-
-        //dd($resultado);
-
         //$user = Auth::user();
-
         return redirect()->route('Public.index');
-
     }
-
-    protected function storeUser($user)
-    {
-        $user  = new User($user);
-        $user -> password = bcrypt($user->password);
-        $user -> encript = encrypt($user->password);
-        $userCreate = User::create($user->toArray());
-        return $userCreate->id;
-    }
-
 
     protected function storeAll($datos,$id_user)
     {
@@ -168,12 +155,10 @@ class RegistrerContoller extends Controller
                 $values['id_option'] = $option;
                 $values['id_user']   = $id_user;
 
-                $fieldEspecific  = new FieldUser($values);
-                $fieldEspecific -> save();
+                $fieldEspecific = $this->fieldUserRepository->store($values);
              }
         }
     }
-
 
 	protected function termination($value)
 	{
@@ -182,45 +167,7 @@ class RegistrerContoller extends Controller
 		}else{
 			return false;
 		}
-
-
 	}
-
-
-    protected function Information_App()
-    {
-        $aplications = Aplication::where('rquiered_information','True')->get();
-
-        $aplications->each(function ($aplications)
-        {
-            $tables = Table::where('id_app',$aplications->id)->get();
-
-            $tables->each(function ($tables)
-            {
-                $fieldTables = FieldTable::where('id_table',$tables->id)->get();
-
-                $fieldTables->each(function ($fieldTables)
-                {
-                    $id_fiel_tables = $fieldTables->id;
-
-                    $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
-                    $fieldTables-> types_fields = $types_fields;
-
-                    $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
-                    $fieldTables-> options = $options;
-
-                });
-
-            $tables-> fields_tables = $fieldTables->all();
-            });
-
-        $aplications -> tablas = $tables;
-         });
-
-        return $aplications;
-    }
-
-
 
 /* Estilos de aprendizaje  */
 
@@ -229,8 +176,6 @@ class RegistrerContoller extends Controller
     	$Array_value = $this->ModeloArray();
 
         $Array_value['user_id'] = $id_user;
-
-
         if ($learningStyle[0] == 'Si') {
             $text = "";
             foreach ($learningStyle as $key => $value) {
@@ -259,14 +204,11 @@ class RegistrerContoller extends Controller
             $mayorUno = $this->MayorUno($a,$k,$v,$r);
             $mayorDos = $this->MayorDos($s,$g);
 
-
-            $referenceLearniingStyle = ReferenceLearningStyle::where('styleUno', $mayorUno)->where('styleTwo',$mayorDos)->lists('id')->toArray();
-
-
+            $referenceLearniingStyle = $this->rLSRepository->whereHigher($mayorUno,$mayorDos);
             $Array_value['reference_learning_styles']= $referenceLearniingStyle[0];
 
         }else{
-            $learningStile =  ReferenceLearningStyle::where('learningStile', 'Defect-null')->lists('id')->toArray();
+            $learningStile =  $this->rLSRepository->idDefectNull();
             $Array_value['reference_learning_styles'] = $learningStile[0];
             $Array_value['visual'] = 0;
             $Array_value['kinestesic'] = 0;
@@ -275,11 +217,7 @@ class RegistrerContoller extends Controller
             $Array_value['global'] = 0;
             $Array_value['sequential'] = 0;
         }
-
-
-        $LearningStyle = new LearningStyle($Array_value);
-        $LearningStyle->save();
-
+        $LearningStyle = $this->learningStyleRepository->store($Array_value);
 
     }
     protected function MayorUno($a,$k,$v,$r)

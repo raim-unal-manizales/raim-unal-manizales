@@ -28,9 +28,7 @@ class UserRepository extends BaseRepository
     $user = $this->createObject($user);
     $user->password = bcrypt($user->password);
     $user->encript = encrypt($user->password);
-    $result = $user->save();
-
-    return $user;
+    return $this->getModel()->create($user->toArray());    
   }
 
   public function findRol($id)

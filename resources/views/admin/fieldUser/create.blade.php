@@ -9,7 +9,7 @@
 	 ?>
 <br>
 <div class="panel panel-default">
-	<div class="panel-heading"><h4>Información para aplicaiónes</h4></div>
+	<div class="panel-heading"><h4>Información para aplicaiones</h4></div>
 	<div class="panel-body">
 		{!! Form::open(['route' => 'Admin.FieldUser.store', 'method' => 'POST' , 'class'=>'form-horizontal']) !!}
 
@@ -26,7 +26,7 @@
 
 									@if($fields_table->types_field->html == "select")
 										{!! Form::label($fields_table->id,$fields_table->name) !!}
-										{!! Form::select($bandera, $fields_table->options,  $fields_table-> value, ['class' => '', 'required']) !!}
+										{!! Form::select($bandera, $fields_table->options->lists('name','id'),  $fields_table-> value, ['class' => '', 'required']) !!}
 
 										<?php $select = 1 ?>
 
@@ -38,9 +38,7 @@
 									@elseif($fields_table->types_field->html == "number")
 
 										{!! Form::label($fields_table->id,$fields_table->name) !!}
-
 										{!! Form::number($bandera, $fields_table-> value ,['class' => '','required']) !!}
-										<!--<input type="{{ $type_field->html}}"></input>-->
 
 									@else
 

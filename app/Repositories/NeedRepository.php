@@ -10,12 +10,12 @@ class NeedRepository extends BaseRepository
 {
   public function getModel()
   {
-    return new Nedd();
+    return new Need();
   }
 
   public function createObject($need)
   {
-    return new Nedd($need);
+    return new Need($need);
   }
 
   public function store($need)
