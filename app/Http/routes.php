@@ -250,11 +250,47 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 		'uses' 	=> 'EstudianteController@editApps',
 		'as'	=> 'Estudiante.EditApps'
 	]);
+  Route::get('/{id}/editAll',[
+    'uses' 	=> 'EstudianteController@editAll',
+    'as'	=> 'Estudiante.editAll'
+  ]);
+
 	Route::POST('/updateAll',[
 		'uses' 	=> 'EstudianteController@updateAll',
 		'as'	=> 'Estudiante.UpdateAll'
 	]);
-
+  Route::get('{id}/estilosEdit',[
+    'uses' 	=> 'EstudianteController@estilosEdit',
+    'as'	=> 'Estudiante.estilosEdit'
+  ]);
+  Route::get('User/{id}/estilosCreate',[
+    'uses' 	=> 'EstudianteController@estilosCreate',
+    'as'	=> 'Estudiante.estilosCreate'
+  ]);
+  Route::post('User/{id}/storeEstilosEdit',[
+    'uses' 	=> 'EstudianteController@storeEstilosEdit',
+    'as'	=> 'Estudiante.storeEstilosEdit'
+  ]);
+  Route::post('User/{id}/storeEstilosCreate',[
+    'uses' 	=> 'EstudianteController@storeEstilosCreate',
+    'as'	=> 'Estudiante.storeEstilosCreate'
+  ]);
+  Route::get('User/{id}/needEdit',[
+    'uses' 	=> 'EstudianteController@needEdit',
+    'as'	=> 'Estudiante.needEdit'
+  ]);
+  Route::get('/{id}/needCreate',[
+    'uses' 	=> 'EstudianteController@needCreate',
+    'as'	=> 'Estudiante.needCreate'
+  ]);
+  Route::post('/{id}/storeNeedEdit',[
+    'uses' 	=> 'EstudianteController@storeNeedEdit',
+    'as'	=> 'Estudiante.storeNeedEdit'
+  ]);
+  Route::post('/{id}/storeNeedCreate',[
+    'uses' 	=> 'EstudianteController@storeNeedCreate',
+    'as'	=> 'Estudiante.storeNeedCreate'
+  ]);
 
 
 

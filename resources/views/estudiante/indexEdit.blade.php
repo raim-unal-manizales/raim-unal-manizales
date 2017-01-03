@@ -1,6 +1,6 @@
 @extends('template.main')
 
-@section('title', 'Seccion de  Creador')
+@section('title', 'Seccion de  Estudiante')
 
 @section('content')
 
@@ -20,7 +20,7 @@
 
 								<a href="" class=""><h3 class="text-center"></h3></a>
 								<hr>
-								<i class="fa fa-folder-open-o"></i> <a href="{{ route('Creador.edit', $user->id) }}">Información General</a>
+								<i class="fa fa-folder-open-o"></i> <a href="{{ route('Estudiante.edit', $user->id) }}">Información General</a>
 
 								<div class="pull-right">
 									<i class="glyphicon glyphicon-share-alt"></i>
@@ -41,7 +41,7 @@
 
 								<a href="" class=""><h3 class="text-center"></h3></a>
 								<hr>
-								<i class="fa fa-folder-open-o"></i> <a href="{{ route('Creador.EditApps', $user->id) }}">Información de Apps</a>
+								<i class="fa fa-folder-open-o"></i> <a href="{{ route('Estudiante.EditApps', $user->id) }}">Información de Apps</a>
 
 								<div class="pull-right">
 									<i class="glyphicon glyphicon-share-alt"></i>
@@ -66,9 +66,9 @@
 								<i class="fa fa-folder-open-o"></i>
 
                 @if ($user->need->NEED == "Si")
-                  <a href="{{ route('Creador.estilosCreate', $user->id) }}">Editar estilos de aprendizaje</a>
+                  <a href="{{ route('Estudiante.estilosCreate', $user->id) }}">Editar estilos de aprendizaje</a>
                 @else
-                  <a href="{{ route('Creador.estilosEdit', $user->id) }}">Crear estilos de aprendizaje</a>
+                  <a href="{{ route('Estudiante.estilosEdit', $user->id) }}">Crear estilos de aprendizaje</a>
                 @endif
 
 								<div class="pull-right">
@@ -91,7 +91,7 @@
 
                 <a href="" class=""><h3 class="text-center"></h3></a>
                 <hr>
-                <i class="fa fa-folder-open-o"></i> <a href="{{ route('Creador.index') }}">Necesidades Especiales</a>
+                <i class="fa fa-folder-open-o"></i> <a href="{{ route('Estudiante.index') }}">Necesidades Especiales</a>
 
                 <div class="pull-right">
                   <i class="glyphicon glyphicon-share-alt"></i>

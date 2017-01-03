@@ -65,7 +65,7 @@
 
 		<div class="fieldForm">
 			{!! Form::label('id_rol','Rol') !!}
-			{!! Form::select('id_rol',$roles ,null,['class' => '']) !!}
+			{!! Form::select('id_rol',$roles ,null,['class' => '','disabled']) !!}
 		</div>
 
 		<div class="">

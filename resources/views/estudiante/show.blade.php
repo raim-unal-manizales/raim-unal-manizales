@@ -6,8 +6,8 @@
 
   <div class="contentHeader">
   		<h1>Datos De Usuario</h1>
-   		<a href=" {{ route('Estudiante.edit', $user->id) }}" class="">Editar Informacion</a>
-  
+   		<a href=" {{ route('Estudiante.editAll', $user->id) }}" class="">Editar Informacion</a>
+
   </div>
 
 	<table>
@@ -55,7 +55,7 @@
 			</tr>
 			<tr>
 				<td>Rol</td>
-				<td>{!! $user_rol->name!!}</td>
+				<td>{!! $user->rol->name!!}</td>
 			</tr>
 	</table>
 
@@ -67,27 +67,27 @@
 		</tr>
 
 		@foreach($aplication->tablas as $table)
-					
+
 			<tr>
 				<td>{{ $table->name }}</td>
 				<td></td>
-			</tr>	
-			
-				@foreach($table->fields_tables as $fields_table)				
-				<tr>										
-					<td>{{ $fields_table->name }}</td>	
-					<td>{{ $fields_table->value }}</td>			
-				</tr>	
+			</tr>
+
+				@foreach($table->fields_tables as $fields_table)
+				<tr>
+					<td>{{ $fields_table->name }}</td>
+					<td>{{ $fields_table->value }}</td>
+				</tr>
 				@endforeach
-			
+
 		@endforeach
 		</table>
 	@endforeach
-		
-		
+
+
 
 		<div class="buttonTable">
-			
+
 			<a href="{{ route('Estudiante.index') }}">Aceptar</a>
 		</div>
 	<!--</form>	-->
