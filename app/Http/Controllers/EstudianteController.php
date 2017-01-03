@@ -35,26 +35,6 @@ class EstudianteController extends Controller
 
         return view('estudiante.aplications')->with('aplications', $aplications);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -205,18 +185,7 @@ class EstudianteController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-        public function editApps($id)
+    public function editApps($id)
     {
 
        if ($id == Auth::user()->id) {
@@ -271,9 +240,6 @@ class EstudianteController extends Controller
 
                         $options= Option::where('id_field_table',$id_fiel_tables)->lists('name', 'id');
                         $fieldTables-> options = $options;
-
-
-
                     });
 
                 $tables-> fields_tables = $fieldTables->all();
@@ -302,9 +268,6 @@ class EstudianteController extends Controller
         $info = unserialize($datos["info"]);
         $user = $datos["id_user"];
 
-
-
-
         foreach ($info as $key => $values) {
 
             $position = $values['position'];
@@ -321,10 +284,6 @@ class EstudianteController extends Controller
             $values['id_option'] = $option;
             $values['id_user']   = $user;
 
-
-
-
-
             if ($values['defect_value'] == null) {
 
                 if ($values['value'] != null) {
@@ -336,16 +295,13 @@ class EstudianteController extends Controller
                 $fielduser = FieldUser::find($values['id_defect']);
                 $fielduser ->fill($values);
 
-                //dd($fielduser);
                 $fielduser->save();
-
             };
 
         }
 
-        $resultado = $this->session_all($user,'Update');
-
-       return redirect()->route('Estudiante.index');
+      $resultado = $this->session_all($user,'Update');
+      return redirect()->route('Estudiante.index');
     }
 
 

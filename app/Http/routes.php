@@ -172,6 +172,45 @@ Route::get('/', function () {
 				'uses' 	=> 'CreadorController@updateAll',
 				'as'	=> 'Creador.UpdateAll'
 			]);
+
+      Route::get('/{id}/editAll',[
+        'uses' 	=> 'CreadorController@editAll',
+        'as'	=> 'Creador.editAll'
+      ]);
+
+      Route::get('{id}/estilosEdit',[
+        'uses' 	=> 'CreadorController@estilosEdit',
+        'as'	=> 'Creador.estilosEdit'
+      ]);
+      Route::get('User/{id}/estilosCreate',[
+        'uses' 	=> 'CreadorController@estilosCreate',
+        'as'	=> 'Creador.estilosCreate'
+      ]);
+      Route::post('User/{id}/storeEstilosEdit',[
+        'uses' 	=> 'CreadorController@storeEstilosEdit',
+        'as'	=> 'Creador.storeEstilosEdit'
+      ]);
+      Route::post('User/{id}/storeEstilosCreate',[
+        'uses' 	=> 'CreadorController@storeEstilosCreate',
+        'as'	=> 'Creador.storeEstilosCreate'
+      ]);
+      Route::get('User/{id}/needEdit',[
+        'uses' 	=> 'CreadorController@needEdit',
+        'as'	=> 'Creador.needEdit'
+      ]);
+      Route::get('/{id}/needCreate',[
+        'uses' 	=> 'CreadorController@needCreate',
+        'as'	=> 'Creador.needCreate'
+      ]);
+      Route::post('/{id}/storeNeedEdit',[
+        'uses' 	=> 'CreadorController@storeNeedEdit',
+        'as'	=> 'Creador.storeNeedEdit'
+      ]);
+      Route::post('/{id}/storeNeedCreate',[
+        'uses' 	=> 'CreadorController@storeNeedCreate',
+        'as'	=> 'Creador.storeNeedCreate'
+      ]);
+
 		//Route::patch($uri, $callback);
 		//Route::delete($uri, $callback);
 
@@ -324,10 +363,6 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 				'as'	=> 'Public.listAplications'
 			]);
 
-		Route::get('/Regirter',[
-				'uses' 	=> 'PublicController@register',
-				'as'	=> 'Public.Register'
-			]);
 		Route::post('/store',[
 				'uses' 	=> 'PublicController@store',
 				'as'	=> 'Public.store'
