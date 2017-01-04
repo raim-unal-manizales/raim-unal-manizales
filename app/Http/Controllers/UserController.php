@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $rol = $this->rolRepository->list();
+        $rol = $this->rolRepository->lists();
         return view('admin.user.create')->with('rol', $rol);
     }
 
@@ -83,7 +83,7 @@ class UserController extends Controller
     public function edit($id)
     {
       $user = $this->userRepository->findRol($id);
-      $roles = $this->rolRepository->list();
+      $roles = $this->rolRepository->lists();
 
       return view('admin.user.edit')
                     ->with('user', $user)

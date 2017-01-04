@@ -44,8 +44,8 @@ class FieldTableController extends Controller
      */
     public function create()
     {
-        $table = $this->tableRepository->list();
-        $typeField = $this->typeFieldRepository->list();
+        $table = $this->tableRepository->lists();
+        $typeField = $this->typeFieldRepository->lists();
         return view('admin.fieldTable.create')
                     ->with('table', $table)
                     ->with('typeField', $typeField);
@@ -85,8 +85,8 @@ class FieldTableController extends Controller
     public function edit($id)
     {
         $fieldTable = $this->fieldTableRepository->find($id);
-        $table = $this->tableRepository->list();
-        $typeField = $this->typeFieldRepository->list();
+        $table = $this->tableRepository->lists();
+        $typeField = $this->typeFieldRepository->lists();
 
         return view('admin.FieldTable.edit')
                     ->with('fieldTable', $fieldTable)

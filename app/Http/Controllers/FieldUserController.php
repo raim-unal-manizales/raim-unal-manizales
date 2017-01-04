@@ -47,7 +47,7 @@ class FieldUserController extends Controller
     public function create()
     {
       $aplications= $this->aplicationRepository->listRequareInfo();
-      $users = $this->userRepository->list("user_name");
+      $users = $this->userRepository->lists("user_name");
       return view('admin.fieldUser.create')
                   ->with('aplications',$aplications)
                   ->with('users',$users);

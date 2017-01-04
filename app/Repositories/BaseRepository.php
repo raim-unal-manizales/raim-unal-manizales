@@ -36,7 +36,7 @@ abstract class BaseRepository
   {
     return  $this->getModel()->orderBy('id','ASC')->paginate(10);
   }
-  public function list($field = "name")
+  public function lists($field = "name")
   {
     return $this->getModel()->orderBy($field,'ASC')->lists($field, 'id');
   }

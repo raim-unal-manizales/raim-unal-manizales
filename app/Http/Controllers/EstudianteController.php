@@ -79,7 +79,7 @@ class EstudianteController extends Controller
         if ($id == Auth::user()->id) {
 
           $user = $this->userRepository->find($id);
-          $roles = $this->rolRepository->list();
+          $roles = $this->rolRepository->lists();
 
           return view('estudiante.edit')
                     ->with('user', $user)

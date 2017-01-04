@@ -77,7 +77,7 @@ class OptionController extends Controller
     public function edit($id)
     {
         $option = $this->optionFieldRepository->find($id);
-        $fieldTable = $this->fieldTableRepository->list();
+        $fieldTable = $this->fieldTableRepository->lists();
 
         return view('admin.option.edit')
                     ->with('option', $option)

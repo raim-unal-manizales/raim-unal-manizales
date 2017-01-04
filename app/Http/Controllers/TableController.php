@@ -40,7 +40,7 @@ class TableController extends Controller
      */
     public function create()
     {
-        $aplication = $this->aplicationRepository->list();
+        $aplication = $this->aplicationRepository->lists();
         return view('admin.table.create')->with('aplication', $aplication);
     }
 
@@ -77,7 +77,7 @@ class TableController extends Controller
     public function edit($id)
     {
         $table = $this->tableRepository->find($id);
-        $aplications = $this->aplicationRepository->list();
+        $aplications = $this->aplicationRepository->lists();
 
         return view('admin.table.edit')
                     ->with('table', $table)

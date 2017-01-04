@@ -1,6 +1,6 @@
 <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        
+
 
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,14 +29,14 @@
                 @if(Auth::user())
                     <ul class="dropdown-menu dropdown-user">
                     @if(Auth::user()->id_rol == 1)
-                        
+
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Opciones</a>
                         </li>
 
-                    @elseif(Auth::user()->id_rol == 2)    
-                        
+                    @elseif(Auth::user()->id_rol == 2)
+
                         <li><a href="{{ route('Creador.show', Auth::user()->id)}}"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Opciones</a>
@@ -49,8 +49,8 @@
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Opciones</a>
                         </li>
-                    @endif    
-                        <li class="divider"></li>    
+                    @endif
+                        <li class="divider"></li>
                         <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Cerrar Sesión</a>
                         </li>
                     </ul>
@@ -137,7 +137,7 @@
                         </ul>
                     </li>
                         @if (!Auth::guest())
-                          
+
                             @if (Auth::user()->id_rol == 1)
                                 <li>
                                     <a href="#" aria-expanded="true">Panel de administración<span class="fa arrow"></span></a>
@@ -155,7 +155,7 @@
                                 </li>
                                 <li><a href="{{ route('Public.searchOa') }}">Buscar objetos de aprendizaje</a></li>
                             @elseif(Auth::user()->id_rol == 2)
-                                
+
                                 <li><a href="{{ url('/Creador') }}">Ver aplicaciones</a></li>
                                 <li><a href="{{ route('Public.searchOa') }}">Buscar objetos de aprendizaje</a></li>
 
@@ -166,7 +166,7 @@
                                 <li><a href="{{ route('Public.searchOa', Auth::user()->id) }}">Buscar objetos de aprendizaje</a></li>
 
                             @endif
-                        
+
                         @else
                             <li><a href="{{ route('Public.listAplications') }}">Ver aplicaciones</a></li>
                             <li><a href="{{ route('Public.searchOa') }}">Buscar objetos de aprendizaje</a></li>

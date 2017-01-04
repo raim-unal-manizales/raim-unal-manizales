@@ -71,7 +71,7 @@ class CreadorController extends Controller
     {
         if ($id == Auth::user()->id) {
             $user = $this->userRepository->find($id);
-            $roles = $this->rolRepository->list();
+            $roles = $this->rolRepository->lists();
 
             return view('creador.edit')
                         ->with('user', $user)
