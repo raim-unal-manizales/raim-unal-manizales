@@ -25,7 +25,8 @@ function filtroReglasIniciales(listaOA, userProfile){
         }
 
         if($.inArray(lom.language.toLowerCase().trim(), listaIdioma) > -1  &&
-            userProfile.nivel_escolaridad.toLowerCase().trim().indexOf(lom.context.toLowerCase().trim()) !== -1){
+            (userProfile.nivel_escolaridad.toLowerCase().trim().indexOf(lom.context.toLowerCase().trim()) !== -1 ||
+            lom.context.toLowerCase().trim() === 'otro')){
             listaOAFiltroInicial.push(lom);
         }
     });

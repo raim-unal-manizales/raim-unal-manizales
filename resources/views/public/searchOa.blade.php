@@ -104,7 +104,7 @@
                             //console.log(xml);
 
                             var lom = processXml(xml.xml, xml.rep_id, xml.lo_id);
-                            //console.log(lom);
+                            console.log(lom);
                             listaOA.push(lom);
 
                             lom.typicalLearningTimeHours = 0;
