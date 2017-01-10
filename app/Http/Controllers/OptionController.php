@@ -53,6 +53,8 @@ class OptionController extends Controller
     public function store(Request $request)
     {
       $option =$this->optionFieldRepository->store($request->all());
+
+      flash( "Se ha creado la opción de forma exitosa" , "success");
       return redirect()->route('Admin.Option.index');
     }
 
@@ -94,6 +96,8 @@ class OptionController extends Controller
     public function update(Request $request, $id)
     {
         $option = $this->optionFieldRepository->update($request->all(),$id);
+
+        flash( "Se ha editado la opción de forma exitosa" , "success");
         return redirect()->route('Admin.Option.index');
     }
 
@@ -106,6 +110,8 @@ class OptionController extends Controller
     public function destroy($id)
     {
         $option = $this->optionFieldRepository->destroy($id);
+
+        flash( "Se ha eliminado la opción de forma exitosa" , "warning");
         return redirect()->route('Admin.Option.index');
     }
 

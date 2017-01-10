@@ -61,6 +61,8 @@ class FieldTableController extends Controller
     public function store(Request $request)
     {
         $fieldTable  = $this->fieldTableRepository->store($request->all());
+
+        flash( "Se ha creado el campo de tabla de forma exitosa" , "success");
         return redirect()->route('Admin.FieldTable.index');
     }
 
@@ -104,6 +106,8 @@ class FieldTableController extends Controller
     public function update(Request $request, $id)
     {
         $fieldTable = $this->fieldTableRepository->update($request->all(), $id);
+
+        flash( "Se ha editado el campo de tabla de forma exitosa" , "success");
         return redirect()->route('Admin.FieldTable.index');
     }
 
@@ -116,6 +120,8 @@ class FieldTableController extends Controller
     public function destroy($id)
     {
         $fieldTable = $this->fieldTableRepository->destroy($id);
+
+        flash( "Se ha eliminado el campo de tabla de forma exitosa" , "warning");
         return redirect()->route('Admin.FieldTable.index');
     }
 

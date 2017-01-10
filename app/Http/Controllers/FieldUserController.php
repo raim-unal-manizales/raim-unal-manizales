@@ -81,6 +81,7 @@ class FieldUserController extends Controller
             $fieldEspecific  = $this->fieldUserRepository->store($values);
          }
          $fieldusers = $this->fieldUserRepository->orderBy();
+         flash( "Se ha editado el  de forma exitosa" , "success");
          return view('admin.fieldUser.index')->with('fieldusers',$fieldusers);
     }
 
@@ -118,6 +119,8 @@ class FieldUserController extends Controller
     public function update(Request $request, $id)
     {
         $fielduser = $this->fieldUserRepository->updateFieldUser($request->all(),$id);
+
+        flash( "Se ha editado el campo de usuario de forma exitosa" , "success");
         return redirect()->route('Admin.FieldUser.index');
     }
 
@@ -130,6 +133,8 @@ class FieldUserController extends Controller
     public function destroy($id)
     {
         $fielduser = $this->fieldUserRepository->destroy($id);
+
+        flash( "Se ha eliminado el campo de usuario de forma exitosa" , "warning");
         return redirect()->route('Admin.FieldUser.index');
     }
 
@@ -153,7 +158,9 @@ class FieldUserController extends Controller
         $info = unserialize($datos["info"]);
         $user = $datos["id_user"];
         $this->UpdateFormat($datos, $info, $user);
-       return redirect()->route('Admin.FieldUser.index');
+
+      flash( "Se han creado los campos de usuario de forma exitosa" , "success");
+      return redirect()->route('Admin.FieldUser.index');
     }
 
     private function UpdateFormat($datos, $info, $user)

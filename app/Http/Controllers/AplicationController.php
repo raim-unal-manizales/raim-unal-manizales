@@ -48,6 +48,8 @@ class AplicationController extends Controller
     {
       $aplication = $this->aplicationRepository->store($request->all());
       $aplications = $this->aplicationRepository->orderBy();
+
+      flash( "Se ha creado la Aplicación de forma exitosa" , "success");
       return view('admin.aplication.index')->with('aplications',$aplications);
     }
     /**
@@ -84,6 +86,8 @@ class AplicationController extends Controller
     public function update(Request $request, $id)
     {
         $aplication = $this->aplicationRepository->updateAplication($request->all(),$id);
+
+        flash( "Se ha editado la Aplicación de forma exitosa" , "success");
         return redirect()->route('Admin.Aplication.index');
     }
 
@@ -96,6 +100,8 @@ class AplicationController extends Controller
     public function destroy($id)
     {
         $aplication = $this->aplicationRepository->destroy($id);
+
+        flash( "Se ha eliminado la Aplicación de forma exitosa" , "warning");
         return redirect()->route('Admin.Aplication.index');
     }
     public function delete($id)

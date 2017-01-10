@@ -19,6 +19,8 @@
 <!--
 	//cuerpo del contenido
 -->
+@include('flash::message')
+
   <div class="">
 
 	<table class="zebraTabla">

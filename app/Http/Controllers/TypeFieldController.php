@@ -46,6 +46,8 @@ class TypeFieldController extends Controller
     public function store(Request $request)
     {
         $typeField  =  $this->typeFieldRepository->store($request->all());
+
+        flash( "Se ha creado el tipo de campo de forma exitosa" , "success");
         return redirect()->route('Admin.TypeField.index');
     }
 
@@ -83,6 +85,8 @@ class TypeFieldController extends Controller
     public function update(Request $request, $id)
     {
         $typeField = $this->typeFieldRepository->update($request->all(), $id);
+
+        flash( "Se ha editado el tipo de campo de forma exitosa" , "success");
         return redirect()->route('Admin.TypeField.index');
     }
 
@@ -95,6 +99,8 @@ class TypeFieldController extends Controller
     public function destroy($id)
     {
         $typeField = $this->typeFieldRepository->destroy($id);
+
+        flash( "Se ha eliminado el tipo de campo de forma exitosa" , "warning");
         return redirect()->route('Admin.TypeField.index');
     }
     public function delete($id)

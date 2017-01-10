@@ -53,6 +53,8 @@ class TableController extends Controller
     public function store(Request $request)
     {
         $table  = $this->tableRepository->store($request->all());
+
+        flash( "Se ha creado la tabla de forma exitosa" , "success");
         return redirect()->route('Admin.Table.index');
     }
 
@@ -94,6 +96,8 @@ class TableController extends Controller
     public function update(Request $request, $id)
     {
         $table = $this->tableRepository->update($request->all(), $id);
+
+        flash( "Se ha editado la tabla de forma exitosa" , "success");
         return redirect()->route('Admin.Table.index');
     }
 
@@ -106,6 +110,8 @@ class TableController extends Controller
     public function destroy($id)
     {
         $table = $this->tableRepository->destroy($id);
+
+        flash( "Se ha eliminado la tabla de forma exitosa" , "warning");
         return redirect()->route('Admin.Table.index');
     }
     public function delete($id)

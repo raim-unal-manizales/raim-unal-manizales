@@ -103,6 +103,7 @@ class EstudianteController extends Controller
       $resultado = $this->session_all($id,'Update');
 
       $user =$this->userRepository->findNeed($id);
+      flash( "has editado tu información personal de forma exitosa" , "success");
       return view('estudiante.indexEdit')->with('user', $user);
     }
 
@@ -128,6 +129,7 @@ class EstudianteController extends Controller
         $this->UpdateFormat($datos, $info, $user);
 
         $user =$this->userRepository->findNeed($user);
+        flash( "has editado la informacion de envio a aplicaciones de forma exitosa" , "success");
         return view('estudiante.indexEdit')->with('user', $user);
     }
 
