@@ -8,11 +8,18 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-11">
             <div class="panel panel-default">
                 <div class="panel-heading">Inicio sesión</div>
 
                 <div class="panel-body">
+
+                  <div class="col-md-7 col-md-offset-2 well">
+                  <div class="">
+                    <img src="{{ asset('images/user-init.png') }} " alt="" style="width: 150px; height: 150px;" class="col-md-offset-4">
+                  </div>
+                  <br/>
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {!! csrf_field() !!}
 
@@ -46,9 +53,9 @@
                                 @endif
                             </div>
                         </div>
-                    </div>   
+                    </div>
 
-                    <!-- 
+                    <!--
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
@@ -71,6 +78,9 @@
                     </div>
 
                     </form>
+                  </div>
+
+
                 </div>
             </div>
         </div>
