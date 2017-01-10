@@ -1,9 +1,9 @@
        <div>
             <table class="inicial" id="inicial">
 
-            <!-- Pregunta inicial para saber si el usuario posee alguna NEED-->             
-                <tr> 
-                    <td><strong><label>¿Presenta algún tipo de necesidad especial?</label></strong></td>                  
+            <!-- Pregunta inicial para saber si el usuario posee alguna NEED-->
+                <tr>
+                    <td><strong><label>¿Presenta algún tipo de necesidad especial?</label></strong></td>
                 </tr>
                 <tr>
                     <td>
@@ -17,7 +17,7 @@
                             <strong> No </strong> Presento una necesidad especial
                     </td>
                 </tr>
-            <!-- Fin de pregunta inicial para saber si el usuario posee alguna NEED-->  
+            <!-- Fin de pregunta inicial para saber si el usuario posee alguna NEED-->
 
             <tr style="display: none;" id="tipo_necesidad" ><td>&nbsp;</td></tr>
 
@@ -51,10 +51,10 @@
                                 <td><input type="radio" name="V1" id="V1" value="Baja_vision">Baja Visión</td>
                             </tr>
                         </table>
-                    </td>    
-                </tr>  
+                    </td>
+                </tr>
 
-                <tr style="display: none;" class="visual2" id="visual2">      
+                <tr style="display: none;" class="visual2" id="visual2">
 
                     <td>
                         <table style="display: none;" class="visual3" id="visual3">
@@ -63,23 +63,23 @@
                                     <strong><label>¿Cuál de los siguientes textos puede comprender con mayor facilidad?</label></strong>
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                             </tr>
                             <tr>
                                 <td><input type="radio" name="V2" id="V2" value="V2_OpcionUno">
-                                    <img src="/images/img_need_visual/1.1.jpg">
+                                    <img src="{{ asset('/images/img_need_visual/1.1.jpg') }} ">
                                 </td>
                                 <td><input type="radio" name="V2" id="V2" value="V2_OpcionDos">
-                                    <img src="/images/img_need_visual/1.3.jpg">
+                                    <img src="{{ asset('/images/img_need_visual/1.3.jpg') }}">
                                 </td>
                             <tr>
                             <tr>
                                 <td><input type="radio" name="V2" id="V2" value="V2_OpcionTres">
-                                    <img src="/images/img_need_visual/1.7.jpg">
+                                    <img src="{{ asset('/images/img_need_visual/1.7.jpg ') }}">
                                 </td>
                                 <td><input type="radio" name="V2" id="V2" value="V2_OpcionCuatro">
-                                    <img src="/images/img_need_visual/2.0.jpg">
+                                    <img src="{{ asset('/images/img_need_visual/2.0.jpg') }}">
                                 </td>
                             <tr>
                         </table>
@@ -197,7 +197,7 @@
                                     <strong> No </strong> Utilizo tecnologías asistivas
                                 </td>
                             </tr>
-                        </table> 
+                        </table>
                     </td>
                 </tr>
 
@@ -241,7 +241,7 @@
                             </tr>
 
                             <tr><td>&nbsp;</td></tr>
-                            
+
                             <tr>
                                 <td>
                                     <strong><label>¿Presenta dificultades para recordar o concentrarse?</label></strong>
@@ -256,7 +256,7 @@
                                     <strong> No </strong> Presento dificultades para recordar o concentrarme
                                 </td>
                             </tr>
-                        </table> 
+                        </table>
                     </td>
                 </tr>
 
@@ -285,14 +285,14 @@
                                         <?php endforeach ?>
                                     </select>
                                     <div id="OtraNeedEtnica">
-                                        
+
                                     </div>
                                 </td>
                             </tr>
-                        </table> 
+                        </table>
                     </td>
                 </tr>
-            </table>    
+            </table>
          </div>
 
         <div class="fieldForm">
