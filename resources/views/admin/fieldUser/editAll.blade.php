@@ -12,6 +12,7 @@
 	<!--
 		//fin de la cabezera del contenido
 	-->
+
 <?php
 	$bandera = 0;
 	$var = [];
@@ -20,6 +21,7 @@
 <div class="panel panel-default">
 <div class="panel-heading"><h4>Información para aplicaiones</h4></div>
 <div class="panel-body">
+	@include('partials.displayErrors')
 {!! Form::open(['route' => ['Admin.FieldUser.UpdateAll'], 'method' => 'POST', 'class'=>'form-horizontal']) !!}
 	@foreach($aplications as $aplication)
 
@@ -47,7 +49,7 @@
 											@endif
 
 
-											{!! Form::select($bandera, $fields_table->options,  $fields_table-> value, ['class' => '', 'required']) !!}
+											{!! Form::select($bandera, $fields_table->options,  $fields_table-> value, ['class' => '',]) !!}
 
 											<?php $select = 1 ?>
 
@@ -55,20 +57,20 @@
 
 											{!! Form::label($fields_table->id,$fields_table->name) !!}
 											<!--<textarea name="{{ $type_field->id}}" ></textarea>-->
-											{!! Form::textarea($bandera, $fields_table-> value ,['class' => '','required']) !!}
+											{!! Form::textarea($bandera, $fields_table-> value ,['class' => '']) !!}
 
 										@elseif($type_field->html == "number")
 
 											{!! Form::label($fields_table->id,$fields_table->name) !!}
 
-											{!! Form::number($bandera, $fields_table-> value ,['class' => '','required']) !!}
+											{!! Form::number($bandera, $fields_table-> value ,['class' => '']) !!}
 											<!--<input type="{{ $type_field->html}}"></input>-->
 
 										@else
 
 											{!! Form::label($fields_table->id,$fields_table->name) !!}
 
-											{!! Form::text($bandera, $fields_table-> value ,['class' => '','required']) !!}
+											{!! Form::text($bandera, $fields_table-> value ,['class' => '']) !!}
 										@endif
 
 										<?php

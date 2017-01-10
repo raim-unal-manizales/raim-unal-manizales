@@ -12,18 +12,20 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
 	{!! Form::open(['route'=> 'Admin.User.store','method'=> 'POST' , 'class'=>'form-horizontal']) !!}
 
 		<div class="fieldForm">
 			{!! Form::label('user_name','Nombre de Usuario') !!}
-			{!! Form::text('user_name', null ,['class' => '', 'placeholder' => 'Nombre de Usuario','required']) !!}
+			{!! Form::text('user_name', null ,['class' => '', 'placeholder' => 'Nombre de Usuario']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('first_name','Primer Nombre') !!}
-			{!! Form::text('first_name', null ,['class' => '', 'placeholder' => 'Primer Nombre','required']) !!}
+			{!! Form::text('first_name', null ,['class' => '', 'placeholder' => 'Primer Nombre']) !!}
 		</div>
 
 		<div class="fieldForm">
@@ -38,7 +40,7 @@
 
 		<div class="fieldForm">
 			{!! Form::label('email','Correo Electrónico') !!}
-			{!! Form::email('email', null ,['class' => '', 'placeholder' => 'exmple@gmail.com','required']) !!}
+			{!! Form::email('email', null ,['class' => '', 'placeholder' => 'exmple@gmail.com']) !!}
 		</div>
 		<div class="fieldForm">
             {!! Form::label('educativeLevel','Nivel Educativo') !!}
@@ -51,7 +53,7 @@
 		</div>
 		<div class="fieldForm">
 			{!! Form::label('birth_date','Fecha de Nacimiento') !!}
-			{!! Form::date('birth_date', null, ['class' => '','required']) !!}
+			{!! Form::date('birth_date', null, ['class' => '']) !!}
 		</div>
 		<div class="fieldForm">
 			{!! Form::label('language','Idioma') !!}
@@ -65,7 +67,7 @@
 
 		<div class="fieldForm">
 			{!! Form::label('password','Contraseña') !!}
-			{!! Form::password('password', ['class' => '', 'placeholder' => '**********','required']) !!}
+			{!! Form::password('password', ['class' => '', 'placeholder' => '**********']) !!}
 		</div>
 
 		<div class="">

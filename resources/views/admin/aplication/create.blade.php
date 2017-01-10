@@ -13,13 +13,15 @@
 <!--
 	//fin de la cabezera del contenido    ,'novalidate' => 'novalidate'
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
 
   	{!! Form::open(['route' => 'Admin.Aplication.store', 'method' => 'POST','files' => true, 'class'=>'form-horizontal']) !!}
   		<div class="fieldForm">
   			{!! Form::label('name','Nombre') !!}
-  			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre De Aplicatión','required']) !!}
+  			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre De Aplicatión']) !!}
   		</div>
   		<div class="fieldForm">
   			{!! Form::label('url','Url') !!}
@@ -35,23 +37,23 @@
   		</div>
   		<div class="fieldForm">
   			{!! Form::label('rquiered_information','¿Requiere Información?') !!}
-  			{!! Form::select('rquiered_information',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '', 'required']) !!}
+  			{!! Form::select('rquiered_information',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '']) !!}
   		</div>
   		<div class="fieldForm">
   			{!! Form::label('rquiered_personalization','¿Requiere Personalización?') !!}
-  			{!! Form::select('rquiered_personalization',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '', 'required']) !!}
+  			{!! Form::select('rquiered_personalization',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '']) !!}
   		</div>
   		<div class="fieldForm">
   			{!! Form::label('rquiered_NEDD','¿Requiere NEED?') !!}
-  			{!! Form::select('rquiered_NEDD',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '', 'required']) !!}
+  			{!! Form::select('rquiered_NEDD',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '']) !!}
   		</div>
   		<div class="fieldForm">
   			{!! Form::label('rquiered_learningStyle','¿Requiere Estilos de aprendizaje?') !!}
-  			{!! Form::select('rquiered_learningStyle',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '', 'required']) !!}
+  			{!! Form::select('rquiered_learningStyle',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '']) !!}
   		</div>
       <div class="fieldForm">
         {!! Form::label('systemRoute','¿Rutas definidad por framework?') !!}
-        {!! Form::select('systemRoute',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '', 'required']) !!}
+        {!! Form::select('systemRoute',['True'=> 'Si', 'False'=> 'No'], 'False', ['class' => '']) !!}
       </div>
   		<div class="fieldForm">
   			{!! Form::label('description','Descripción') !!}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\TypeFieldRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\TypeFieldRepository;
 
@@ -43,7 +44,7 @@ class TypeFieldController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TypeFieldRequest $request)
     {
         $typeField  =  $this->typeFieldRepository->store($request->all());
 
@@ -82,7 +83,7 @@ class TypeFieldController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TypeFieldRequest $request, $id)
     {
         $typeField = $this->typeFieldRepository->update($request->all(), $id);
 

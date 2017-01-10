@@ -12,9 +12,9 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
 
-
-	{!! Form::open(['route' => ['Admin.FieldUser.update', $fielduser], 'method' => 'PUT' , 'class'=>'form-horizontal']) !!}
+	{!! Form::model($fielduser,['route' => ['Admin.FieldUser.update', $fielduser], 'method' => 'PUT' , 'class'=>'form-horizontal']) !!}
 	<div class="zebraTabla">
     <table>
 			<tr>
@@ -48,22 +48,22 @@
 				<td>
 				<?php $bandera = 0; ?>
 
-					@if($fielduser->type_field_name == "select")
+					@if($fielduser->fields_tables->types_field->html == "select")
 
-						{!! Form::select('value', $fielduser->options,  null, ['class' => '', 'required']) !!}
+						{!! Form::select('value', $fielduser->fields_tables->options->lists('name','id'),  null, ['class' => '',]) !!}
 
 						<?php $bandera = 1; ?>
 
-					@elseif($fielduser->type_field_name == "textarea")
+					@elseif($fielduser->fields_tables->types_field->html == "textarea")
 
-						{!! Form::textarea('value', $fielduser->value ,['class' => '','required']) !!}
+						{!! Form::textarea('value', $fielduser->value ,['class' => '']) !!}
 
-					@elseif($fielduser->type_field_name == "number")
+					@elseif($fielduser->fields_tables->types_field->html == "number")
 
-						{!! Form::number('value', $fielduser->value ,['class' => '','required']) !!}
+						{!! Form::number('value', $fielduser->value ,['class' => '']) !!}
 
 					@else
-						{!! Form::text('value', $fielduser->value ,['class' => '','required']) !!}
+						{!! Form::text('value', $fielduser->value ,['class' => '']) !!}
 					@endif
 
 					{{ Form::hidden('info', $bandera , ['value' => $bandera]) }}

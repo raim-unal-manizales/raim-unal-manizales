@@ -12,18 +12,20 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
 	{!! Form::model($user,['route' => ['Admin.User.update', $user], 'method'=> 'PUT' , 'class'=>'form-horizontal']) !!}
 
   <div class="fieldForm">
     {!! Form::label('user_name','Nombre de usuario') !!}
-    {!! Form::text('user_name', null ,['class' => '', 'placeholder' => 'Primer Nombre','required','disabled']) !!}
+    {!! Form::text('user_name', null ,['class' => '', 'placeholder' => 'Primer Nombre','disabled']) !!}
   </div>
 
 		<div class="fieldForm">
 			{!! Form::label('first_name','Primer Nombre') !!}
-			{!! Form::text('first_name', null  ,['class' => '', 'placeholder' => 'Primer Nombre','required']) !!}
+			{!! Form::text('first_name', null  ,['class' => '', 'placeholder' => 'Primer Nombre']) !!}
 		</div>
 
 		<div class="fieldForm">
@@ -33,32 +35,32 @@
 
 		<div class="fieldForm">
 			{!! Form::label('last_name','Apellido') !!}
-			{!! Form::text('last_name', null ,['class' => '', 'placeholder' => 'Apellido','required']) !!}
+			{!! Form::text('last_name', null ,['class' => '', 'placeholder' => 'Apellido']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('email','Correo Electrónico') !!}
-			{!! Form::email('email', null ,['class' => '', 'placeholder' => 'exmple@gmail.com','required','disabled']) !!}
+			{!! Form::email('email', null ,['class' => '', 'placeholder' => 'exmple@gmail.com','disabled']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('institution','Institución') !!}
-			{!! Form::text('institution', null ,['class' => '', 'placeholder' => '','required']) !!}
+			{!! Form::text('institution', null ,['class' => '', 'placeholder' => '']) !!}
 
 		</div>
 		<div class="fieldForm">
             {!! Form::label('educativeLevel','Nivel Educativo') !!}
-            {!! Form::select('educativeLevel', ['Preescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica secundaria'=>'Básica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'Otros'] ,null, ['class' => '', 'required']) !!}
+            {!! Form::select('educativeLevel', ['Preescolar'=>'Preescolar','Basica Primaria'=>'Básica Primaria','Basica secundaria'=>'Básica secundaria','Media'=>'Media','Superior'=>'Superior','General'=>'Otros'] ,null, ['class' => '',]) !!}
         </div>
 
 		<div class="fieldForm">
 			{!! Form::label('birth_date','Fecha de Nacimiento') !!}
-			{!! Form::date('birth_date',null, ['class' => '','required']) !!}
+			{!! Form::date('birth_date',null, ['class' => '']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('language','Idioma') !!}
-			{!! Form::select('language', ['Español'=>'Español','Ingles'=>'Inglés'] , null, ['class' => '','required']) !!}
+			{!! Form::select('language', ['Español'=>'Español','Ingles'=>'Inglés'] , null, ['class' => '']) !!}
 
 		</div>
 

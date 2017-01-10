@@ -12,7 +12,7 @@
 	<div class="panel-heading"><h4>Información para aplicaiónes</h4></div>
 	<div class="panel-body">
 
-
+@include('partials.displayErrors')
 	{!! Form::open(['route' => ['Creador.UpdateAll'], 'method' => 'POST', 'class'=>'form-horizontal']) !!}
 		@foreach($aplications as $aplication)
 

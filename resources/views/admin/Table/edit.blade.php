@@ -12,13 +12,15 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
-	{!! Form::model($table,['route' => ['Admin.Table.update', $table], 'method'=> 'PUT','novalidate' => 'novalidate', 'class'=>'form-horizontal']) !!}
+	{!! Form::model($table,['route' => ['Admin.Table.update', $table], 'method'=> 'PUT', 'class'=>'form-horizontal']) !!}
 
 		<div class="fieldForm">
 			{!! Form::label('name','Nombre') !!}
-			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}
+			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre']) !!}
 		</div>
 
 		<div class="fieldForm">

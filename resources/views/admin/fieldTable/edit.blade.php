@@ -12,17 +12,20 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
 
+<div class="row">
+  <div class="col-md-7 col-md-offset-2 well">
 	{!! Form::model($fieldTable,['route' => ['Admin.FieldTable.update', $fieldTable], 'method'=> 'PUT' , 'class'=>'form-horizontal']) !!}
 
 		<div class="fieldForm">
 			{!! Form::label('name','Nombre') !!}
-			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}
+			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre']) !!}
 		</div>
 
 		<div class="fieldForm">
 			{!! Form::label('name_db','Nombre Base Datos') !!}
-			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}
+			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre']) !!}
 		</div>
 
 		<div class="fieldForm">

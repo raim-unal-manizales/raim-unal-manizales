@@ -14,6 +14,8 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
 
@@ -21,7 +23,7 @@
 
 		<div class="fieldForm">
 			{!! Form::label('name','Nombre') !!}
-			{!! Form::text('name', null,['class' => '', 'placeholder' => 'Nombre Del Rol','required']) !!}
+			{!! Form::text('name', null,['class' => '', 'placeholder' => 'Nombre Del Rol']) !!}
 		</div>
 
 		<div class="fieldForm">

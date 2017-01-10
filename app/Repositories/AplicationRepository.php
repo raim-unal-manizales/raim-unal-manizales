@@ -20,7 +20,7 @@ class AplicationRepository extends BaseRepository
   public function store($aplication)
   {
     $aplication = $this->createObject($aplication);
-    if (empty($aplication->logo)) {
+    if (!empty($aplication->logo)) {
           $aplication->logo = $this->uploadFile($aplication);
     }
     return $aplication->save();
@@ -33,7 +33,7 @@ class AplicationRepository extends BaseRepository
 
     $aplication = $this->getModel()->find($id);
     $aplication-> fill($new);
-    if (empty($aplication->logo)) {
+    if (!empty($aplication->logo)) {
       $name= $this->uploadFile($aplication);
     }
     $aplication -> logo = $name;

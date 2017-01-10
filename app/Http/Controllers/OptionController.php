@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\OptionRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\OptionFieldRepository;
 use App\Repositories\FieldTableRepository;
@@ -50,7 +51,7 @@ class OptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OptionRequest $request)
     {
       $option =$this->optionFieldRepository->store($request->all());
 
@@ -93,7 +94,7 @@ class OptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OptionRequest $request, $id)
     {
         $option = $this->optionFieldRepository->update($request->all(),$id);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\RolRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\RolRepository;
 
@@ -43,7 +44,7 @@ class RolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RolRequest $request)
     {
         $rol = $this->rolRepository->store($request->all());
 
@@ -82,7 +83,7 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RolRequest $request, $id)
     {
         $rol = $this->rolRepository->update($request->all(), $id);
 

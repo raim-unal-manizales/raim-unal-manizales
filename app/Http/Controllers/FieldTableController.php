@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\FieldTableRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\TableRepository;
 use App\Repositories\TypeFieldRepository;
@@ -58,7 +59,7 @@ class FieldTableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FieldTableRequest $request)
     {
         $fieldTable  = $this->fieldTableRepository->store($request->all());
 
@@ -103,7 +104,7 @@ class FieldTableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FieldTableRequest $request, $id)
     {
         $fieldTable = $this->fieldTableRepository->update($request->all(), $id);
 

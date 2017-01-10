@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\FieldUserRequest;
 use App\Http\Controllers\Controller;
 
 use App\Repositories\FieldUserRepository;
@@ -116,7 +117,7 @@ class FieldUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FieldUserRequest $request, $id)
     {
         $fielduser = $this->fieldUserRepository->updateFieldUser($request->all(),$id);
 

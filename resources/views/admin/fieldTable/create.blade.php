@@ -13,18 +13,20 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
 
   	{!! Form::open(['route'=> 'Admin.FieldTable.store','method'=> 'POST' , 'class'=>'form-horizontal']) !!}
   		<div class="form-group">
   			{!! Form::label('name','Nombre: ') !!}
-  			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre','required']) !!}
+  			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre']) !!}
   		</div>
 
   		<div class="fieldForm">
   			{!! Form::label('name_db','Nombre base datos: ') !!}
-  			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre en modelo externo','required']) !!}
+  			{!! Form::text('name_db', null ,['class' => '', 'placeholder' => 'Nombre en modelo externo']) !!}
   		</div>
 
   		<div class="fieldForm">

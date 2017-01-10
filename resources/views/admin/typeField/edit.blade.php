@@ -13,13 +13,15 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
 	{!! Form::model($typeField,['route' => ['Admin.TypeField.update', $typeField], 'method'=> 'PUT', 'class'=>'form-horizontal']) !!}
 
 		<div class="fieldForm">
 			{!! Form::label('name','Nombre') !!}
-			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre Del campo','required']) !!}
+			{!! Form::text('name', null ,['class' => '', 'placeholder' => 'Nombre Del campo']) !!}
 		</div>
 
 		<div class="fieldForm">

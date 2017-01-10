@@ -11,6 +11,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading"><h4>Información para aplicaiones</h4></div>
 	<div class="panel-body">
+		@include('partials.displayErrors')
 		@include('flash::message')
 		{!! Form::open(['route' => 'Admin.FieldUser.store', 'method' => 'POST' , 'class'=>'form-horizontal']) !!}
 
@@ -27,25 +28,33 @@
 
 									@if($fields_table->types_field->html == "select")
 										{!! Form::label($fields_table->id,$fields_table->name) !!}
-										{!! Form::select($bandera, $fields_table->options->lists('name','id'),  $fields_table-> value, ['class' => '', 'required']) !!}
+										{!! Form::select(
+											$bandera,
+											$fields_table->options->lists('name','id'),
+											$fields_table-> value,
+											[
+												'required' => $fields_table->field_required,
+												'class' => ''
+											])
+										!!}
 
 										<?php $select = 1 ?>
 
 									@elseif($fields_table->types_field->html == "textarea")
 
 										{!! Form::label($fields_table->id,$fields_table->name) !!}
-										{!! Form::textarea($bandera, $fields_table-> value ,['class' => '','required']) !!}
+										{!! Form::textarea($bandera, $fields_table-> value ,['class' => '']) !!}
 
 									@elseif($fields_table->types_field->html == "number")
 
 										{!! Form::label($fields_table->id,$fields_table->name) !!}
-										{!! Form::number($bandera, $fields_table-> value ,['class' => '','required']) !!}
+										{!! Form::number($bandera, $fields_table-> value ,['class' => '']) !!}
 
 									@else
 
 										{!! Form::label($fields_table->id,$fields_table->name) !!}
 
-										{!! Form::text($bandera, $fields_table-> value ,['class' => '','required']) !!}
+										{!! Form::text($bandera, $fields_table-> value ,['class' => '']) !!}
 									@endif
 
 									<?php
@@ -71,7 +80,7 @@
 		@endforeach
 			<div class="fieldForm">
 				{!! Form::label('id_user','Usuario') !!}
-				{!! Form::select('id_user', $users,  null, ['class' => '', 'required']) !!}
+				{!! Form::select('id_user', $users,  null, ['class' => '']) !!}
 				{{ Form::hidden('info',serialize($var), ['value' => $var]) }}
 			</div>
 			<div class="">

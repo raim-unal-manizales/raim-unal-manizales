@@ -12,6 +12,8 @@
 <!--
 	//fin de la cabezera del contenido
 -->
+@include('partials.displayErrors')
+
 <div class="row">
   <div class="col-md-7 col-md-offset-2 well">
 	{!! Form::open(['route' => 'Admin.Rol.store', 'method' => 'POST','novalidate' => 'novalidate', 'class'=>'form-horizontal']) !!}
@@ -21,7 +23,7 @@
 		</div>
 
 		<div class="fieldForm">
-			{!! Form::label('description','Descripcion') !!}
+			{!! Form::label('description','Descripción') !!}
 			{!! Form::textarea('description', null ,['class' => '']) !!}
 		</div>
 
