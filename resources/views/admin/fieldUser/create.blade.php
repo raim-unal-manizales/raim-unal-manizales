@@ -11,6 +11,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading"><h4>Información para aplicaiones</h4></div>
 	<div class="panel-body">
+		@include('flash::message')
 		{!! Form::open(['route' => 'Admin.FieldUser.store', 'method' => 'POST' , 'class'=>'form-horizontal']) !!}
 
 		@foreach($aplications as $aplication)

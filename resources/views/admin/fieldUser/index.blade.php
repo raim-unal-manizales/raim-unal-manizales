@@ -42,7 +42,7 @@
 					<td>{{ $fielduser->fields_tables->types_field->name}}</td>
 
 					@if($fielduser->fields_tables->types_field->name == "select")
-						<td>{{ $fielduser->fields_tables->option->name}}</td>
+						<td>{{ $fielduser->fields_tables->options->find($fielduser->id_option)->name}}</td>
 					@else
 						<td>{{ $fielduser->value}}</td>
 					@endif

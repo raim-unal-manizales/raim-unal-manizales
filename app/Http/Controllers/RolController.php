@@ -46,6 +46,8 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $rol = $this->rolRepository->store($request->all());
+
+        flash( "Se a creado el rol ".$rol->name." de forma exitosa" , "success");
         return redirect()->route('Admin.Rol.index');
     }
 
@@ -82,7 +84,9 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = $this->rolRepository->update($request->all(), $id);
+        $rol = $this->rolRepository->update($request->all(), $id);
+
+        flash( "Se a editado el rol de forma exitosa" , "success");
         return redirect()->route('Admin.Rol.index');
     }
 
@@ -95,13 +99,15 @@ class RolController extends Controller
     public function destroy($id)
     {
         $rol = $this->rolRepository->destroy($id);
+
+        flash( "Se a eliminado el rol de forma exitosa" , "warning");
         return redirect()->route('Admin.Rol.index');
     }
+
     public function delete($id)
     {
         $rol = $this->rolRepository->find($id);
         return view('admin.rol.destroy')->with('rol', $rol);
-
     }
 
 }

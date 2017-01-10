@@ -56,8 +56,10 @@ class UserController extends Controller
         $user=$this->userRepository->store($request->all());
 
         if ($user->id_rol == 1) {
+           flash( "Se a creado el usuario: ".$user->user_name." de forma exitosa" , "success");
            return redirect()->route('Admin.User.index');
         }else {
+            flash( "Hola, ".$user->user_name." Debes incluir esta información para prestarte un mejor servicio" , "info");
             return redirect()->route('Admin.FieldUser.create');
         }
     }
@@ -100,6 +102,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = $this->userRepository->updateUser($request->all(), $id);
+
+        flash( "Se a editado el usuario de forma exitosa" , "success");
         return view('admin.user.indexEdit')->with('user', $user);
     }
 
@@ -112,6 +116,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = $this->userRepository->destroy($id);
+
+        flash( "Se a eliminado el usuario de forma exitosa" , "warning");
         return redirect()->route('Admin.User.index');
     }
 

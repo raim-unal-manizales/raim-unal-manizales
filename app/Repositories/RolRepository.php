@@ -20,7 +20,7 @@ class RolRepository extends BaseRepository
 
   public function store($rol)
   {
-    return $this->createObject($rol)->save();
+    return $this->getModel()->create($rol);
   }
 
   public function listSinAdmin()

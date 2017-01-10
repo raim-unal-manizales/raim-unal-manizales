@@ -11,9 +11,7 @@
 
     <title>@yield('title', 'RAIM')</title>
 
-    <link href="{{ asset('plugins/toastr-master/build/toastr.min.css') }}" rel="stylesheet">
-    
-    
+
     <!-- Pluguin formularios por pasos-->
     <link href="{{ asset('plugins/SmartWizard/styles/smart_wizard.css') }}" rel="stylesheet">
 
@@ -59,9 +57,7 @@
     </div>
 
     <div id="page-wrapper">
-
-        {!! Toastr::render() !!}
-
+      
         @yield('content')
     </div>
     <!-- /#page-wrapper -->
@@ -142,7 +138,7 @@
           range: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1}."),
           max: jQuery.validator.format("Por favor, escribe un valor menor o igual a {0}."),
           min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
-          
+
         });
     });
 </script>

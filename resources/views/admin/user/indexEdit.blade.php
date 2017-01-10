@@ -7,7 +7,7 @@
 <div class="contentHeader row">
 	<h1 class="pull-left">Opciones de Usuario</h1>
 </div>
-
+@include('flash::message')
 <div class="row">
         <div class="col-lg-3 col-md-6">
 					<div class="col.md-2">

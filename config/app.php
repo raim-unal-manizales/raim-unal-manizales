@@ -156,17 +156,17 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-
+        /*
+         * External Service Providers...
+         */
         Collective\Html\HtmlServiceProvider::class,
-        //Grimthorr\LaravelToast\ServiceProvider::class,
-        
-       //Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-       Barryvdh\Cors\ServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
-       narutimateum\Toastr\ToastrServiceProvider::class,
-
-
-       App\Providers\DataDinamicServerProvider::class,
+        /*
+         * personal Service Providers...
+         */
+        App\Providers\DataDinamicServerProvider::class,
 
     ],
 
@@ -214,14 +214,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-
+        /*
+         * External Aliases...
+         */
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        //'Toast' => Grimthorr\LaravelToast\Facade::class,
-        
-        //'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
-        //'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
-        'Toastr' => narutimateum\Toastr\Facades\Toastr::class,
+        'Flash' => Laracasts\Flash\Flash::class,
 
     ],
 
