@@ -14,8 +14,6 @@ use App\Entities\FieldTable;
 use App\Entities\Option;
 use App\Entities\User;
 use App\Entities\Rol;
-
-
 /**
 *
 */
