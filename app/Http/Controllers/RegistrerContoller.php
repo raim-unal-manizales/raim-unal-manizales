@@ -198,8 +198,8 @@ class RegistrerContoller extends Controller
             $Array_value['auditory'] = round( $this->porcentaje($a,$suma), 2, PHP_ROUND_HALF_DOWN);
             $Array_value['reader'] = round( $this->porcentaje($r,$suma), 2, PHP_ROUND_HALF_DOWN);
 
-            $Array_value['global'] = round( $this->porcentaje($s,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
-            $Array_value['sequential'] = round($this->porcentaje($g,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
+            $Array_value['global'] = round( $this->porcentaje($g,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
+            $Array_value['sequential'] = round($this->porcentaje($s,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
 
             $mayorUno = $this->MayorUno($a,$k,$v,$r);
             $mayorDos = $this->MayorDos($s,$g);

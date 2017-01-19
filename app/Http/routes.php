@@ -217,7 +217,7 @@ Route::get('/', function () {
 
 	});
 
-  
+
 Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiante' ],function(){
 
 	Route::get('/', function () {
@@ -273,7 +273,7 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
     'uses' 	=> 'EstudianteController@storeEstilosEdit',
     'as'	=> 'Estudiante.storeEstilosEdit'
   ]);
-  Route::post('User/{id}/storeEstilosCreate',[
+  Route::post('User/storeEstilosCreate',[
     'uses' 	=> 'EstudianteController@storeEstilosCreate',
     'as'	=> 'Estudiante.storeEstilosCreate'
   ]);

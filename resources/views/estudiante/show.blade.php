@@ -6,7 +6,7 @@
   <div class="contentHeader">
   		<h1>Perfil de usuario</h1>
   </div>
-
+@include('flash::message')
   <div class="row">
     <!-- Inicio de Informacion Basica-->
     <div class="col-md-4">
@@ -61,7 +61,7 @@
                       {!! $user->learningStyle->first()->reference_styles->description !!}
                     </p>
                     <hr>
-                    <a href="{{ route('Estudiante.edit', $user->id) }}" class="btn btn-primary center-block">Volver a realizar test</a>
+                    <a href="{{ route('Estudiante.estilosCreate', $user->id) }}" class="btn btn-primary center-block">Volver a realizar test</a>
                   </div>
                   <div class="col-md-5">
                     <h4>Distribucion de estilos</h4>
@@ -141,7 +141,7 @@
 <div class="panel panel-default">
   <div class="panel-heading text-right">
         <h3 class="panel-title text-left">Infomación de aplicaciones</h3>
-        <a href=" {{ route('Estudiante.editAll', $user->id) }}" class="btn btn-primary">Editar Needs</a>
+        <a href=" {{ route('Estudiante.EditApps', $user->id) }}" class="btn btn-primary">Editar información de aplicaciones</a>
   </div>
   <div class="panel panel-body">
     @foreach ($aplications as $aplication)
@@ -161,7 +161,8 @@
                       <ul class="list-group">
                         @foreach($table->fields_tables as $fields_table)
                           <li class="list-group-item">
-                            <b>{{ $fields_table->name }}: </b>{{ $fields_table->value }}
+                            <b>{{ $fields_table->name }}: </b>
+                            <p class="pull-right">{{ $fields_table->value }}</p>
                         </li>
                         @endforeach
                       </ul>
@@ -172,7 +173,7 @@
                 <div class="">
                   <div class="panel panel-default">
                     <div class="panel-body">
-                      <p class="text-center">No requiere Información para funcionaar</p>
+                      <p class="text-center">No requiere Información para funcionar</p>
                     </div>
                   </div>
                 </div>
