@@ -149,7 +149,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-md-4 text-cente">
-              <img class="profile-user-img img-responsive img-circle center-block" width="50" height="50" src="{{ asset(''.$aplication->url) }} " alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle center-block" width="50" height="50" src="{{ $aplication->logo }} " alt="User profile picture">
               <h4><p class="text-center">{{ $aplication->name }}</p></h4>
             </div>
             <div class="col-md-8">

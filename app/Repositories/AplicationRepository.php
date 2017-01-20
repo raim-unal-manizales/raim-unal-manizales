@@ -48,7 +48,7 @@ class AplicationRepository extends BaseRepository
   public function uploadFile($aplication)
   {
     $file = $aplication->logo;
-    $name = '/raim/images/logo_aplication/logo_'.time().'.'.$file->getClientOriginalExtension();
+    $name = '/images/logo_aplication/logo_'.time().'.'.$file->getClientOriginalExtension();
     $path = $this->uploadPath().'/images/logo_aplication/';
     $file->move($path, $name);
 
