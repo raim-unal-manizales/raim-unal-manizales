@@ -42,7 +42,7 @@ class TableController extends Controller
     public function create()
     {
         $aplication = $this->aplicationRepository->lists();
-        return view('admin.table.create')->with('aplication', $aplication);
+        return view('admin.Table.create')->with('aplication', $aplication);
     }
 
     /**
@@ -68,7 +68,7 @@ class TableController extends Controller
     public function show($id)
     {
         $table = $this->tableRepository->find($id);
-        return view('admin.table.show')->with('table', $table);
+        return view('admin.Table.show')->with('table', $table);
     }
 
     /**
@@ -82,7 +82,7 @@ class TableController extends Controller
         $table = $this->tableRepository->find($id);
         $aplications = $this->aplicationRepository->lists();
 
-        return view('admin.table.edit')
+        return view('admin.Table.edit')
                     ->with('table', $table)
                     ->with('aplications', $aplications);
     }
@@ -118,6 +118,6 @@ class TableController extends Controller
     public function delete($id)
     {
         $table = $this->tableRepository->find($id);
-        return view('admin.table.destroy')->with('table', $table);
+        return view('admin.Table.destroy')->with('table', $table);
     }
 }
