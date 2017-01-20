@@ -4,7 +4,7 @@
 
 @section('content')
 
-
+@include('flash::message')
 
     <div class="contentHeader row">
         <h1 class="pull-left">RAIM: Implementación de un framework apoyado en tecnologías móviles y de realidad aumentada para entornos educativos ubicuos, adaptativos, accesibles e interactivos para todos.</h1>
@@ -58,4 +58,3 @@
     </div>
 
 @endsection
-

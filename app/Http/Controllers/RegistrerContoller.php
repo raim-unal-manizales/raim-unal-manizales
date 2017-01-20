@@ -63,6 +63,7 @@ class RegistrerContoller extends Controller
     public function createUser(Request $request){
 
     	$data = $request->all();
+      $dataLearnindDeff = $data['inicial-Learning'];
     	$user = $this->userRepository->getModel();
     	$learningStyle = $this->learningStyleRepository->getModel();
     	$personalization = $this->personalizationRepository->getModel();
@@ -133,6 +134,24 @@ class RegistrerContoller extends Controller
     	}
         $resultado = $this->session_all($id_user,'Create');
         //$user = Auth::user();
+
+
+        if ($dataLearnindDeff == "Si") {
+          $learningStyleName = $this->userRepository->find($id_user)->learningStyle->first()->reference_styles->learningStile;
+          $learningStyleDes = $this->userRepository->find($id_user)->learningStyle->first()->reference_styles->description;
+          $mensaje = "Su estilo de aprendizaje es: ".$learningStyleName.": ".$learningStyleDes."";
+        }else {
+          $mensaje = "Tu informacion no esta completa, te invito a que completes tu perfil";
+        }
+
+        flash("
+        ¡¡¡ Se ha registrado de forma exitosa !!!.
+        <br>
+        <br>
+        <p class='text-justify'>".$mensaje."</p>
+        <br>
+        Visita tu perfil dando clik en tu nombre de usuario en la parte superior derecha de tu pantalla para acceder a la opcion 'Perfil'." , "success");
+
         return redirect()->route('Public.index');
     }
 
