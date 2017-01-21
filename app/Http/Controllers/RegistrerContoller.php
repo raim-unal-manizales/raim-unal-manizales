@@ -209,7 +209,7 @@ class RegistrerContoller extends Controller
             $s = substr_count($text, 'S');
             $g = substr_count($text, 'G');
 
-            $suma = $a + $k + $v * $r;
+            $suma = $a + $k + $v + $r;
             $suma_dos = $s + $g;
 
             $Array_value['visual'] = round( $this->porcentaje($v,$suma), 2, PHP_ROUND_HALF_DOWN);

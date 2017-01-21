@@ -55,11 +55,11 @@ Route::get('/', function () {
         'uses' 	=> 'UserController@estilosCreate',
         'as'	=> 'Admin.User.estilosCreate'
       ]);
-      Route::post('User/{id}/storeEstilosEdit',[
+      Route::post('User/storeEstilosEdit',[
         'uses' 	=> 'UserController@storeEstilosEdit',
         'as'	=> 'Admin.User.storeEstilosEdit'
       ]);
-      Route::post('User/{id}/storeEstilosCreate',[
+      Route::post('User/storeEstilosCreate',[
         'uses' 	=> 'UserController@storeEstilosCreate',
         'as'	=> 'Admin.User.storeEstilosCreate'
       ]);
@@ -71,11 +71,11 @@ Route::get('/', function () {
         'uses' 	=> 'UserController@needCreate',
         'as'	=> 'Admin.User.needCreate'
       ]);
-      Route::post('User/{id}/storeNeedEdit',[
+      Route::post('User/storeNeedEdit',[
         'uses' 	=> 'UserController@storeNeedEdit',
         'as'	=> 'Admin.User.storeNeedEdit'
       ]);
-      Route::post('User/{id}/storeNeedCreate',[
+      Route::post('User/storeNeedCreate',[
         'uses' 	=> 'UserController@storeNeedCreate',
         'as'	=> 'Admin.User.storeNeedCreate'
       ]);
@@ -186,11 +186,11 @@ Route::get('/', function () {
         'uses' 	=> 'CreadorController@estilosCreate',
         'as'	=> 'Creador.estilosCreate'
       ]);
-      Route::post('User/{id}/storeEstilosEdit',[
+      Route::post('User/storeEstilosEdit',[
         'uses' 	=> 'CreadorController@storeEstilosEdit',
         'as'	=> 'Creador.storeEstilosEdit'
       ]);
-      Route::post('User/{id}/storeEstilosCreate',[
+      Route::post('User/storeEstilosCreate',[
         'uses' 	=> 'CreadorController@storeEstilosCreate',
         'as'	=> 'Creador.storeEstilosCreate'
       ]);
@@ -202,11 +202,11 @@ Route::get('/', function () {
         'uses' 	=> 'CreadorController@needCreate',
         'as'	=> 'Creador.needCreate'
       ]);
-      Route::post('/{id}/storeNeedEdit',[
+      Route::post('/storeNeedEdit',[
         'uses' 	=> 'CreadorController@storeNeedEdit',
         'as'	=> 'Creador.storeNeedEdit'
       ]);
-      Route::post('/{id}/storeNeedCreate',[
+      Route::post('/storeNeedCreate',[
         'uses' 	=> 'CreadorController@storeNeedCreate',
         'as'	=> 'Creador.storeNeedCreate'
       ]);
@@ -265,35 +265,21 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
     'uses' 	=> 'EstudianteController@estilosEdit',
     'as'	=> 'Estudiante.estilosEdit'
   ]);
-  Route::get('User/{id}/estilosCreate',[
-    'uses' 	=> 'EstudianteController@estilosCreate',
-    'as'	=> 'Estudiante.estilosCreate'
-  ]);
-  Route::post('User/{id}/storeEstilosEdit',[
+
+  Route::post('User/storeEstilosEdit',[
     'uses' 	=> 'EstudianteController@storeEstilosEdit',
     'as'	=> 'Estudiante.storeEstilosEdit'
   ]);
-  Route::post('User/storeEstilosCreate',[
-    'uses' 	=> 'EstudianteController@storeEstilosCreate',
-    'as'	=> 'Estudiante.storeEstilosCreate'
-  ]);
+
   Route::get('User/{id}/needEdit',[
     'uses' 	=> 'EstudianteController@needEdit',
     'as'	=> 'Estudiante.needEdit'
   ]);
-  Route::get('/{id}/needCreate',[
-    'uses' 	=> 'EstudianteController@needCreate',
-    'as'	=> 'Estudiante.needCreate'
-  ]);
+
   Route::post('/{id}/storeNeedEdit',[
     'uses' 	=> 'EstudianteController@storeNeedEdit',
     'as'	=> 'Estudiante.storeNeedEdit'
   ]);
-  Route::post('/{id}/storeNeedCreate',[
-    'uses' 	=> 'EstudianteController@storeNeedCreate',
-    'as'	=> 'Estudiante.storeNeedCreate'
-  ]);
-
 
 
 });

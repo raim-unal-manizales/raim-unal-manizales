@@ -12,6 +12,10 @@ use App\Repositories\AplicationRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\FieldUserRepository;
 use App\Repositories\RolRepository;
+use App\Repositories\RLSRepository;
+use App\Repositories\LearningStyleReposiroty;
+
+use App\Http\Controllers\Base\LearningStyleBaseController;
 
 class EstudianteController extends Controller
 {
@@ -19,18 +23,28 @@ class EstudianteController extends Controller
   public $userRepository;
   public $fieldUserRepository;
   public $rolRepository;
+  public $rLSRepository;
+  public $learningStyleRepository;
+
+  public $learningStyleBaseController;
 
   public function __construct(
       AplicationRepository $aplicationRepository,
       UserRepository $userRepository,
       FieldUserRepository $fieldUserRepository,
-      RolRepository $rolRepository
+      RolRepository $rolRepository,
+      RLSRepository $rLSRepository,
+      LearningStyleReposiroty $learningStyleRepository,
+      LearningStyleBaseController $learningStyleBaseController
   )
   {
     $this->aplicationRepository = $aplicationRepository;
     $this->userRepository = $userRepository;
     $this->fieldUserRepository = $fieldUserRepository;
     $this->rolRepository = $rolRepository;
+    $this->rLSRepository = $rLSRepository;
+    $this->learningStyleRepository = $learningStyleRepository;
+    $this->learningStyleBaseController = $learningStyleBaseController;
   }
     /**
      * Display a listing of the resource.
@@ -167,151 +181,27 @@ class EstudianteController extends Controller
 
     public function estilosEdit($id)
     {
-      # code...
+      return view('estudiante.editLearningStyle')->with('id', $id);
     }
-    public function estilosCreate($id)
-    {
-      return view('estudiante.createLearningStyle')->with('id', $id);
-    }
+
     public function storeEstilosEdit(Request $request)
     {
-      # code...
-    }
-    public function storeEstilosCreate(Request $request)
-    {
       $id_user = currentUser()->id;
-      $this->storeLearningStyle($array_tem_LeranindStyle,$id_user);
-      dd($request->all());
+      $this->learningStyleBaseController->storeLearningStyle($request->all(),$id_user,"edit");
+
+      flash( "has editado tu informacion de  estilos de aprendizaje de forma exitosa" , "success");
+      return redirect()->route('Estudiante.show',$id_user);
     }
+
     public function needEdit($id)
     {
       # code...
     }
-    public function needCreate($id)
-    {
-      # code...
-    }
+
     public function storeNeedEdit(Request $request)
     {
       # code...
     }
-    public function storeNeedCreate(Request $request)
-    {
-      # code...
-    }
 
 
-
-
-
-    /* Estilos de aprendizaje  */
-
-        protected function storeLearningStyle($learningStyle,$id_user)
-        {
-        	$Array_value = $this->ModeloArray();
-
-            $Array_value['user_id'] = $id_user;
-            if ($learningStyle['inicial-Learning'] == 'Si') {
-                $text = "";
-                foreach ($learningStyle as $key => $value) {
-                    $text .= $value;
-                }
-
-                $a = substr_count($text, 'A');
-                $k = substr_count($text, 'K');
-                $v = substr_count($text, 'V');
-                $r = substr_count($text, 'R');
-
-                $s = substr_count($text, 'S');
-                $g = substr_count($text, 'G');
-
-                $suma = $a + $k + $v * $r;
-                $suma_dos = $s + $g;
-
-                $Array_value['visual'] = round( $this->porcentaje($v,$suma), 2, PHP_ROUND_HALF_DOWN);
-                $Array_value['kinestesic'] = round( $this->porcentaje($k,$suma), 2, PHP_ROUND_HALF_DOWN);
-                $Array_value['auditory'] = round( $this->porcentaje($a,$suma), 2, PHP_ROUND_HALF_DOWN);
-                $Array_value['reader'] = round( $this->porcentaje($r,$suma), 2, PHP_ROUND_HALF_DOWN);
-
-                $Array_value['global'] = round( $this->porcentaje($g,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
-                $Array_value['sequential'] = round($this->porcentaje($s,$suma_dos), 2, PHP_ROUND_HALF_DOWN);
-
-                $mayorUno = $this->MayorUno($a,$k,$v,$r);
-                $mayorDos = $this->MayorDos($s,$g);
-
-                $referenceLearniingStyle = $this->rLSRepository->whereHigher($mayorUno,$mayorDos);
-                $Array_value['reference_learning_styles']= $referenceLearniingStyle[0];
-
-            }else{
-                $learningStile =  $this->rLSRepository->idDefectNull();
-                $Array_value['reference_learning_styles'] = $learningStile[0];
-                $Array_value['visual'] = 0;
-                $Array_value['kinestesic'] = 0;
-                $Array_value['auditory'] = 0;
-                $Array_value['reader'] = 0;
-                $Array_value['global'] = 0;
-                $Array_value['sequential'] = 0;
-            }
-            $LearningStyle = $this->learningStyleRepository->store($Array_value);
-
-        }
-        protected function MayorUno($a,$k,$v,$r)
-        {
-        	if ($a >= $k) {
-        		if ($a >= $v) {
-        			if ($a >= $r) {
-        				return "A";
-        			}else{
-        				return "R";
-        			}
-        		}elseif ($v >= $r) {
-        			return "V";
-        		}else{
-        			return "R";
-        		}
-        	}elseif ($k >= $v) {
-        		if ($k >= $r) {
-        			return "K";
-        		}else {
-        			return "R";
-        		}
-        	}elseif ($v >= $r) {
-        		return "V";
-        	}else{
-        		return "R";
-        	}
-        }
-
-        protected function MayorDos($s,$g){
-
-        	if ($s >= $g) {
-        		return "S";
-        	}else{
-        		return "G";
-        	}
-
-        }
-
-        protected function porcentaje($valor,$maximo){
-
-        	return $valor/$maximo*100;
-        }
-
-        protected function ModeloArray(){
-
-        	return  array(
-        		'user_id' => '' ,
-        		'reference_learning_styles' => '' ,
-        		'visual' => '' ,
-        		'kinestesic' => '' ,
-        		'auditory' => '' ,
-        		'reader' => '' ,
-        		'global' => '' ,
-        		'sequential' => ''
-
-        		);
-
-        }
-
-    /* Fin de estilos de aprendizaje */
 }

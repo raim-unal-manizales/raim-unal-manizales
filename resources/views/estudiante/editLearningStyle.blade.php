@@ -1,18 +1,19 @@
 @extends('template.main')
 
-@section('title', 'Crear Usuario')
+@section('title', 'Editar estilos de aprendizaje')
 
 @section('content')
 
 <div class="row row-centered">
     <br>
     <div class="col-md-12">
-        {!! Form::open(['route'=> 'Estudiante.storeEstilosCreate','method'=> 'POST','id'=>'commentForm', 'class'=>'form-horizontal']) !!}
+        {!! Form::open(['route'=> 'Estudiante.storeEstilosEdit','method'=> 'POST','id'=>'commentForm', 'class'=>'form-horizontal']) !!}
 
           <h3>Estilos de Aprendizaje</h3>
 
           @include('partialsUserProfil.learning_style')
           <div class="">
+
             <a href="{{ route('Estudiante.show',$id) }}" class="btn btn-danger">Cancelar</a>
             {!! Form::submit('Aceptar',['class' => 'btn btn-primary pull-right']) !!}
             <hr>

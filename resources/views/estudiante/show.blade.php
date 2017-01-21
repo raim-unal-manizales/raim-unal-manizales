@@ -50,7 +50,7 @@
      <!-- Inicio de estilos de aprendizaje -->
             <div class="panel panel-default">
               <div class="panel-body">
-                @if ($user->learningStyle())
+                @if ($user->learningStyle()->first()->reference_learning_styles !== 1 )
                   <div class="col-md-7">
                     <h4>Estilo de aprendizaje dominante</h4>
                     <hr>
@@ -61,7 +61,7 @@
                       {!! $user->learningStyle->first()->reference_styles->description !!}
                     </p>
                     <hr>
-                    <a href="{{ route('Estudiante.estilosCreate', $user->id) }}" class="btn btn-primary center-block">Volver a realizar test</a>
+                    <a href="{{ route('Estudiante.estilosEdit', $user->id) }}" class="btn btn-primary center-block">Volver a realizar test</a>
                   </div>
                   <div class="col-md-5">
                     <h4>Distribucion de estilos</h4>
@@ -92,8 +92,14 @@
                     </div>
                   </div>
                 @else
-                  <div class="col-md-7">
-                    no tiene
+                  <div class="col-md-12">
+                    <h4>Estilo de aprendizaje dominante</h4>
+                    <p class="text-justify">
+                      Aun no tienes completado el test de estilos de aprendizaje, esta información es importante
+                      para poder recomendarte objetos de aprendizaje mas acordes con tu forma de entender el mundo.
+                      Por favor realiza el test en el siguiente enlace:
+                    </p>
+                    <a href="{{ route('Estudiante.estilosEdit', $user->id) }}" class="btn btn-primary center-block">Realizar test</a>
                   </div>
                 @endif
 
@@ -149,7 +155,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-md-4 text-cente">
-              <img class="profile-user-img img-responsive img-circle center-block" width="50" height="50" src="{{ $aplication->logo }} " alt="User profile picture">
+              <img class="profile-user-img img-responsive img-rounded center-block" width="150" height="150" src="{{asset($aplication->logo)}} " alt="User profile picture">
               <h4><p class="text-center">{{ $aplication->name }}</p></h4>
             </div>
             <div class="col-md-8">
