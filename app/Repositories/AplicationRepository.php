@@ -33,7 +33,7 @@ class AplicationRepository extends BaseRepository
 
     $aplication = $this->getModel()->find($id);
     $aplication-> fill($new);
-    if (!empty($aplication->logo)) {
+    if (!empty($new->logo)) {
       $name= $this->uploadFile($aplication);
     }
     $aplication -> logo = $name;

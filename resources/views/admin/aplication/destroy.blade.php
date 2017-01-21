@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td>Logo</td>
-				<td><img src="{{$aplication->logo}}" class="img-responsive"></td>
+				<td><img class="img-responsive img-rounded center-block" width="150" height="150" src="{{asset($aplication->logo)}} " alt="Aplication profile picture"></td>
 			</tr>
 			<tr>
 				<td>Tipo</td>
