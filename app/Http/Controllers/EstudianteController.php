@@ -23,8 +23,6 @@ class EstudianteController extends Controller
   public $userRepository;
   public $fieldUserRepository;
   public $rolRepository;
-  public $rLSRepository;
-  public $learningStyleRepository;
 
   public $learningStyleBaseController;
 
@@ -33,8 +31,6 @@ class EstudianteController extends Controller
       UserRepository $userRepository,
       FieldUserRepository $fieldUserRepository,
       RolRepository $rolRepository,
-      RLSRepository $rLSRepository,
-      LearningStyleReposiroty $learningStyleRepository,
       LearningStyleBaseController $learningStyleBaseController
   )
   {
@@ -42,8 +38,6 @@ class EstudianteController extends Controller
     $this->userRepository = $userRepository;
     $this->fieldUserRepository = $fieldUserRepository;
     $this->rolRepository = $rolRepository;
-    $this->rLSRepository = $rLSRepository;
-    $this->learningStyleRepository = $learningStyleRepository;
     $this->learningStyleBaseController = $learningStyleBaseController;
   }
     /**

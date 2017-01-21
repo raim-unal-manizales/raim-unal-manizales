@@ -59,26 +59,16 @@ Route::get('/', function () {
         'uses' 	=> 'UserController@storeEstilosEdit',
         'as'	=> 'Admin.User.storeEstilosEdit'
       ]);
-      Route::post('User/storeEstilosCreate',[
-        'uses' 	=> 'UserController@storeEstilosCreate',
-        'as'	=> 'Admin.User.storeEstilosCreate'
-      ]);
       Route::get('User/{id}/needEdit',[
         'uses' 	=> 'UserController@needEdit',
         'as'	=> 'Admin.User.needEdit'
       ]);
-      Route::get('User/{id}/needCreate',[
-        'uses' 	=> 'UserController@needCreate',
-        'as'	=> 'Admin.User.needCreate'
-      ]);
+
       Route::post('User/storeNeedEdit',[
         'uses' 	=> 'UserController@storeNeedEdit',
         'as'	=> 'Admin.User.storeNeedEdit'
       ]);
-      Route::post('User/storeNeedCreate',[
-        'uses' 	=> 'UserController@storeNeedCreate',
-        'as'	=> 'Admin.User.storeNeedCreate'
-      ]);
+
 			Route::get('User',[
 				'uses' 	=> 'UserController@index',
 				'as'	=> 'Admin.User.index'
@@ -95,11 +85,6 @@ Route::get('/', function () {
 				'uses' 	=> 'TableController@delete',
 				'as'	=> 'Admin.Table.delete'
 			]);
-			/*
-			Route::get('Table/index',[
-				'uses' 	=> 'TableController@index',
-				'as'	=> 'Admin.Table.index'
-			]);*/
 
 		Route::resource('Option','OptionController');
 			Route::get('Option/{id}/delete',[
@@ -135,11 +120,6 @@ Route::get('/', function () {
 				'uses' 	=> 'FieldUserController@data',
 				'as'	=> 'Admin.FieldUser.data'
 			]);
-
-
-
-
-
 	});
 
 

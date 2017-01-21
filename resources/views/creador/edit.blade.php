@@ -72,7 +72,7 @@
 		<div class="">
       <hr>
 			{!! Form::submit('Aceptar',['class' => 'btn btn-primary pull-right']) !!}
-			<a href="{{ route('Creador.index') }}" class="btn btn-danger">Cancelar</a>
+			<a href="{{ route('Creador.show', $user->id) }}" class="btn btn-danger">Cancelar</a>
 		</div>
 
 	{!! Form::close() !!}

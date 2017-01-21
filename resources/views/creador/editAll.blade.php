@@ -100,7 +100,7 @@
 
 			<div class="buttonTable">
 				{!! Form::submit('Guardar',['class' => 'btn btn-primary pull-right']) !!}
-				<a href="{{ route('Creador.index') }}" class="btn btn-danger">Cancelar</a>
+				<a href="{{ route('Creador.show', $user_id) }}" class="btn btn-danger">Cancelar</a>
 			</div>
 	{!! Form::close() !!}
 

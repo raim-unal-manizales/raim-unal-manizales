@@ -13,6 +13,8 @@ use App\Repositories\UserRepository;
 use App\Repositories\FieldUserRepository;
 use App\Repositories\RolRepository;
 
+use App\Http\Controllers\Base\LearningStyleBaseController;
+
 class CreadorController extends Controller
 {
   public $aplicationRepository;
@@ -20,17 +22,21 @@ class CreadorController extends Controller
   public $fieldUserRepository;
   public $rolRepository;
 
+  public $learningStyleBaseController;
+
   public function __construct(
       AplicationRepository $aplicationRepository,
       UserRepository $userRepository,
       FieldUserRepository $fieldUserRepository,
-      RolRepository $rolRepository
+      RolRepository $rolRepository,
+      LearningStyleBaseController $learningStyleBaseController
   )
   {
     $this->aplicationRepository = $aplicationRepository;
     $this->userRepository = $userRepository;
     $this->fieldUserRepository = $fieldUserRepository;
     $this->rolRepository = $rolRepository;
+    $this->learningStyleBaseController = $learningStyleBaseController;
   }
     /**
      * Display a listing of the resource.
@@ -97,7 +103,7 @@ class CreadorController extends Controller
 
         $user =$this->userRepository->findNeed($id);
         flash( "has editado tu información personal de forma exitosa" , "success");
-        return view('creador.indexEdit')->with('user', $user);
+        return redirect()->route('Creador.show',$user->id);
 
     }
 
@@ -129,7 +135,7 @@ class CreadorController extends Controller
 
         $user =$this->userRepository->findNeed($user);
         flash( "has editado la informacion de envio a aplicaciones de forma exitosa" , "success");
-        return view('creador.indexEdit')->with('user', $user);
+        return redirect()->route('Creador.show',$user->id);
     }
 
     private function UpdateFormat($datos, $info, $user)
@@ -158,37 +164,25 @@ class CreadorController extends Controller
 
     public function estilosEdit($id)
     {
-      # code...
+      return view('creador.editLearningStyle')->with('id', $id);
     }
-    public function estilosCreate($id)
+
+    public function storeEstilosEdit(Request $request)
     {
-      # code...
+      $id_user = currentUser()->id;
+      $this->learningStyleBaseController->storeLearningStyle($request->all(),$id_user,"edit");
+
+      flash( "has editado tu informacion de  estilos de aprendizaje de forma exitosa" , "success");
+      return redirect()->route('Creador.show',$id_user);
     }
-    public function storeEstilosEdit(Resouce $resource)
-    {
-      # code...
-    }
-    public function storeEstilosCreate(Resouce $resource)
-    {
-      # code...
-    }
+
     public function needEdit($id)
     {
       # code...
     }
-    public function needCreate($id)
+
+    public function storeNeedEdit(Request $request)
     {
       # code...
     }
-    public function storeNeedEdit(Resouce $resource)
-    {
-      # code...
-    }
-    public function storeNeedCreate(Resouce $resource)
-    {
-      # code...
-    }
-
-
-
 }

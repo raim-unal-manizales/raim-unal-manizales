@@ -55,9 +55,8 @@
 					</td>
 					<td>
 						<div class="buttonsTable">
-							<a href="{{ route('Admin.User.show', $user->id) }}" class="" title="Ver" alt="Ver" value="ver"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 
-							<a href="{{ route('Admin.User.editAll', $user->id) }}" class="" title="Editar" alt="Editar" value="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+							<a href="{{ route('Admin.User.show', $user->id) }}" class="" title="Editar" alt="Editar" value="Editar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 
 							<a href="{{ route('Admin.User.delete', $user->id) }}" class="" title="Eliminar" alt="Eliminar" value="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 
