@@ -166,10 +166,12 @@
                       <h5 class="panel-title">{{ $table->name }}</h5>
                       <ul class="list-group">
                         @foreach($table->fields_tables as $fields_table)
-                          <li class="list-group-item">
-                            <b>{{ $fields_table->name }}: </b>
-                            <p class="pull-right">{{ $fields_table->value }}</p>
-                        </li>
+                          @if ($fields_table->name !== "contraseña")
+                            <li class="list-group-item">
+                              <b>{{ $fields_table->name }}: </b>
+                              <p class="pull-right">{{ $fields_table->value }}</p>
+                            </li>
+                          @endif
                         @endforeach
                       </ul>
                     </div>
