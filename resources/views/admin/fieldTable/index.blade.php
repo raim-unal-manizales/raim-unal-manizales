@@ -27,7 +27,8 @@
 			<th>#</th>
 			<th>Name</th>
 			<th>Name Base Datos</th>
-			<th>tabla</th>
+      <th>Relación Local</th>
+      <th>tabla</th>
 			<th>tipo de campo</th>
 			<th>recomendacion</th>
 			<th>requerido</th>
@@ -40,10 +41,23 @@
 					<td>{{ $fieldTable-> id}}</td>
 					<td>{{ $fieldTable-> name}}</td>
 					<td>{{ $fieldTable-> name_db}}</td>
-					<td>{{ $fieldTable->table->name}}</td>
+          <td>{{ $fieldTable-> locale_relation}}</td>
+          <td>{{ $fieldTable->table->name}}</td>
 					<td>{{ $fieldTable->types_field->name }}</td>
-					<td>{{ $fieldTable-> field_recommendation}}</td>
-					<td>{{ $fieldTable-> field_required}}</td>
+          <td>
+            @if($fieldTable-> field_recommendation == "True")
+              <span class="label label-success">{{ $fieldTable-> field_recommendation}}</span>
+            @else
+              <span class="label label-default">{{ $fieldTable-> field_recommendation}}</span>
+            @endif
+          </td>
+          <td>
+            @if($fieldTable-> field_required == "True")
+              <span class="label label-success">{{ $fieldTable-> field_required}}</span>
+            @else
+              <span class="label label-default">{{ $fieldTable-> field_required}}</span>
+            @endif
+          </td>
 
 					<td>
 						<div class="buttonsTable">

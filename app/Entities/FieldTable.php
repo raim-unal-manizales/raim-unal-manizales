@@ -9,10 +9,9 @@ class FieldTable extends Entity
 
 	protected $table = "fields_tables";
 
-    protected $fillable = ['id', 'id_table', 'id_type_field','name', 'name_db', 'description' , 'field_required','field_recommendation'];
+    protected $fillable = ['id', 'id_table', 'id_type_field','name', 'name_db', 'description' , 'field_required','field_recommendation','locale_relation'];
 
     //protected $dates = ['deleted_at'];
-
 
     public function table(){
         return $this->belongsTo('App\Entities\Table', 'id_table');

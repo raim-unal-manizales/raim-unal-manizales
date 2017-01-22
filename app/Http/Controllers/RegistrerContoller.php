@@ -64,11 +64,13 @@ class RegistrerContoller extends Controller
 
     	$data = $request->all();
       $dataLearnindDeff = $data['inicial-Learning'];
-    	$user = $this->userRepository->getModel();
+
+      $user = $this->userRepository->getModel();
     	$learningStyle = $this->learningStyleRepository->getModel();
     	$personalization = $this->personalizationRepository->getModel();
     	$need = $this->needRepository->getModel();
-    	$bandera = 0;
+
+      $bandera = 0;
     	$array_tem_aplication[]= null;
     	$array_tem_LeranindStyle[]=null;
     	$id_user = 0;
@@ -137,8 +139,20 @@ class RegistrerContoller extends Controller
 
 
         if ($dataLearnindDeff == "Si") {
-          $learningStyleName = $this->userRepository->find($id_user)->learningStyle->first()->reference_styles->learningStile;
-          $learningStyleDes = $this->userRepository->find($id_user)->learningStyle->first()->reference_styles->description;
+          $learningStyleName = $this->userRepository
+                                    ->find($id_user)
+                                    ->learningStyle
+                                    ->first()
+                                    ->reference_styles
+                                    ->learningStile;
+
+          $learningStyleDes= $this->userRepository
+                                  ->find($id_user)
+                                  ->learningStyle
+                                  ->first()
+                                  ->reference_styles
+                                  ->description;
+
           $mensaje = "Su estilo de aprendizaje es: ".$learningStyleName.": ".$learningStyleDes."";
         }else {
           $mensaje = "Tu informacion no esta completa, te invito a que completes tu perfil";
@@ -157,7 +171,7 @@ class RegistrerContoller extends Controller
 
     protected function storeAll($datos,$id_user)
     {
-
+        $user= $this->userRepository->find($id_user);
         $info = unserialize(array_pop($datos));
         $cantidad = count($info);
         if ($cantidad > 0) {
@@ -165,15 +179,19 @@ class RegistrerContoller extends Controller
 
                 $position = $values['position'];
                 $value =    $datos[$position-1001];
-                if ($values['select'] == 1) {
+
+                if ($values['locale_relation']) {
+                  $value = $user->$value;
+                  $option = 0;
+                }elseif ($values['select'] == 1) {
                     $option = $value;
                 }else {
                     $option = 0;
                 }
+
                 $values['value'] = $value;
                 $values['id_option'] = $option;
                 $values['id_user']   = $id_user;
-
                 $fieldEspecific = $this->fieldUserRepository->store($values);
              }
         }

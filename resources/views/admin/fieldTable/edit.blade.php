@@ -53,6 +53,29 @@
 			{!! Form::label('id_type_field','Tipo de Campo') !!}
 			{!! Form::select('id_type_field', $typeField ,null, ['class' => '']) !!}
 		</div>
+    
+    <div class="fieldForm">
+      {!! Form::label('locale_relation','Relación Local: ') !!}
+      {!! Form::select(
+              'locale_relation',
+              [
+                'Otro'            => 'No Existente',
+                'user_name'       => 'Nombre de Usuario',
+                'first_name'      => 'Primer Nombre',
+                'second_name'     => 'Segundo Nombre',
+                'last_name'       => 'Apellido',
+                'educativeLevel'  => 'Nivel Educativo',
+                'institution'     => 'Institución Educativo',
+                'email'           => 'Correo Electronico',
+                'encript'         => 'Contraseña',
+                'birth_date'      => 'Fecha de Nacimiento',
+                'language'        => 'Lengua Nativa'
+              ] ,
+              null,
+              ['class' => '']
+          )
+      !!}
+    </div>
 
 		<div class="">
       <hr>

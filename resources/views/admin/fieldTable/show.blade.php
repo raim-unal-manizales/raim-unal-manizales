@@ -1,13 +1,13 @@
 @extends('template.main')
 
-@section('title', 'ver Tabla')
+@section('title', 'Ver campo de tabla')
 
 @section('content')
 <!--
 	// cabezera del contenido
 -->
   <div class="contentHeader">
-  		<h1>Ver Tabla</h1>
+  		<h1>Ver campo de tabla</h1>
   </div>
 
 <!--
@@ -31,6 +31,10 @@
 				<td>Nombre Base Datos</td>
 				<td>{!! $fieldTable->name_db !!}</td>
 			</tr>
+      <tr>
+        <td>Relación Local</td>
+        <td>{!! $fieldTable->locale_relation !!}</td>
+      </tr>
 			<tr>
 				<td>Descripcion</td>
 				<td>{!! $fieldTable->description !!}</td>

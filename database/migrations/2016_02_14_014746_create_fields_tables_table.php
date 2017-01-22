@@ -13,7 +13,7 @@ class CreateFieldsTablesTable extends Migration
     public function up()
     {
         Schema::create('fields_tables', function (Blueprint $table) {
-            
+
             $table->increments('id');
             $table->integer('id_table');
             $table->integer('id_type_field');
@@ -22,12 +22,13 @@ class CreateFieldsTablesTable extends Migration
             $table->string('name_db');
             $table->enum('field_recommendation',['True','False']);
             $table->enum('field_required',['True','False']);
+            $table->string('locale_relation')->default('Otro');
 
             $table->string('description')->nullable()->default(null);
 
             $table->foreign('id_table')->references('id')->on('tables')->onDelete('cascade');
             $table->foreign('id_type_field')->references('id')->on('types_fields')->onDelete('cascade');
-            
+
             $table->timestamps();
             //$table->SoftDeletes();
         });
