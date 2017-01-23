@@ -1,8 +1,6 @@
 <?php
 	$bandera = 1000;
 	$var = [];
-	$locale_relation = false;
-	$select = 0;
  ?>
 
 	<br>
@@ -24,7 +22,7 @@
 											$locale_relation = false;
 											$select = 0;
 										 ?>
-										 
+
 										@if ($fields_table->locale_relation !== "Otro")
 												{{ Form::hidden($bandera, $fields_table->locale_relation , ['value' => $fields_table->locale_relation]) }}
 												<?php $locale_relation = true ?>
@@ -65,12 +63,10 @@
 											$bandera++;
 											$var[$bandera] = array(
 													"position" 				=> $bandera,
-													//"id_user"				=> '',
 													"id_field_table"	=> $fields_table->id,
 													"select"					=> $select,
-													//"id_app"				=> $aplication->id,
-													//"id_table"			=> $table->id,
-													//"id_type_field"	=> $type_field->id,
+													"defect_value"		=> null,
+													"id_defect"				=> null,
 													"locale_relation" => $locale_relation
 												);
 										 ?>

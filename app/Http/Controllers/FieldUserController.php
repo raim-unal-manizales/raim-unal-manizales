@@ -12,22 +12,27 @@ use App\Repositories\FieldUserRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\AplicationRepository;
 
+use App\Http\Controllers\Base\FieldUserBaseController;
+
 
 class FieldUserController extends Controller
 {
   public $fieldUserRepository;
   public $aplicationRepository;
   public $userRepository;
+  public $fieldUserBaseController;
 
   public function __construct(
     FieldUserRepository $fieldUserRepository,
     AplicationRepository $aplicationRepository,
-    UserRepository $userRepository
+    UserRepository $userRepository,
+    FieldUserBaseController $fieldUserBaseController
   )
   {
     $this->fieldUserRepository = $fieldUserRepository;
     $this->aplicationRepository = $aplicationRepository;
     $this->userRepository = $userRepository;
+    $this->fieldUserBaseController = $fieldUserBaseController;
   }
     /**
      * Display a listing of the resource.
@@ -155,36 +160,13 @@ class FieldUserController extends Controller
 
     public function updateAll(Request $request)
     {
-        $datos = $request->all();
-        $info = unserialize($datos["info"]);
-        $user = $datos["id_user"];
-        $this->UpdateFormat($datos, $info, $user);
+      $datos = $request->all();
+      $info = unserialize($datos["info"]);
+      $id_user = $datos["id_user"];
+      $this->fieldUserBaseController->storeFieldsUser($datos, $info, $id_user,1);
 
       flash( "Se han creado los campos de usuario de forma exitosa" , "success");
       return redirect()->route('Admin.FieldUser.index');
     }
 
-    private function UpdateFormat($datos, $info, $user)
-    {
-      foreach ($info as $key => $values) {
-          $position = $values['position'];
-          $value =    $datos[$position-1];
-          if ($values['select'] == 1) {
-              $option = $value;
-          }else {
-              $option = 0;
-          }
-          $values['value'] = $value;
-          $values['id_option'] = $option;
-          $values['id_user']   = $user;
-
-          if ($values['defect_value'] == null) {
-              if ($values['value'] != null) {
-                  $fieldEspecific  = $this->fieldUserRepository->store($values);
-              }
-          }else{
-              $fieldEspecific = $this->fieldUserRepository->update($values, $values['id_defect']);
-          };
-      }
-    }
 }

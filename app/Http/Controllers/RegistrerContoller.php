@@ -16,6 +16,8 @@ use App\Repositories\AplicationRepository;
 use App\Repositories\RLSRepository;
 use App\Repositories\FieldUserRepository;
 
+use App\Http\Controllers\Base\FieldUserBaseController;
+
 class RegistrerContoller extends Controller
 {
   public $rolRepository;
@@ -27,6 +29,8 @@ class RegistrerContoller extends Controller
   public $rLSRepository;
   public $fieldUserRepository;
 
+  public $fieldUserBaseController;
+
   public function __construct(
     RolRepository $rolRepository,
     NeedRepository $needRepository,
@@ -35,7 +39,8 @@ class RegistrerContoller extends Controller
     PersonalizationRepository $personalizationRepository,
     AplicationRepository $aplicationRepository,
     RLSRepository $rLSRepository,
-    FieldUserRepository $fieldUserRepository
+    FieldUserRepository $fieldUserRepository,
+    FieldUserBaseController $fieldUserBaseController
   )
   {
     $this->rolRepository = $rolRepository;
@@ -46,6 +51,7 @@ class RegistrerContoller extends Controller
     $this->aplicationRepository = $aplicationRepository;
     $this->rLSRepository = $rLSRepository;
     $this->fieldUserRepository = $fieldUserRepository;
+    $this->fieldUserBaseController = $fieldUserBaseController;
   }
     public function create()
     {
@@ -171,30 +177,8 @@ class RegistrerContoller extends Controller
 
     protected function storeAll($datos,$id_user)
     {
-        $user= $this->userRepository->find($id_user);
         $info = unserialize(array_pop($datos));
-        $cantidad = count($info);
-        if ($cantidad > 0) {
-             foreach ($info as $key => $values) {
-
-                $position = $values['position'];
-                $value =    $datos[$position-1001];
-
-                if ($values['locale_relation']) {
-                  $value = $user->$value;
-                  $option = 0;
-                }elseif ($values['select'] == 1) {
-                    $option = $value;
-                }else {
-                    $option = 0;
-                }
-
-                $values['value'] = $value;
-                $values['id_option'] = $option;
-                $values['id_user']   = $id_user;
-                $fieldEspecific = $this->fieldUserRepository->store($values);
-             }
-        }
+        $this->fieldUserBaseController->storeFieldsUser($datos, $info, $id_user, 1001);
     }
 
 	protected function termination($value)

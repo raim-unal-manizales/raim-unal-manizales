@@ -14,6 +14,7 @@ use App\Repositories\FieldUserRepository;
 use App\Repositories\RolRepository;
 
 use App\Http\Controllers\Base\LearningStyleBaseController;
+use App\Http\Controllers\Base\FieldUserBaseController;
 
 class CreadorController extends Controller
 {
@@ -23,13 +24,15 @@ class CreadorController extends Controller
   public $rolRepository;
 
   public $learningStyleBaseController;
+  public $fieldUserBaseController;
 
   public function __construct(
       AplicationRepository $aplicationRepository,
       UserRepository $userRepository,
       FieldUserRepository $fieldUserRepository,
       RolRepository $rolRepository,
-      LearningStyleBaseController $learningStyleBaseController
+      LearningStyleBaseController $learningStyleBaseController,
+      FieldUserBaseController $fieldUserBaseController
   )
   {
     $this->aplicationRepository = $aplicationRepository;
@@ -37,6 +40,7 @@ class CreadorController extends Controller
     $this->fieldUserRepository = $fieldUserRepository;
     $this->rolRepository = $rolRepository;
     $this->learningStyleBaseController = $learningStyleBaseController;
+    $this->fieldUserBaseController = $fieldUserBaseController;
   }
     /**
      * Display a listing of the resource.
@@ -110,7 +114,7 @@ class CreadorController extends Controller
     public function editApps($id)
     {
        if ($id == Auth::user()->id) {
-            $aplications =  $this->Consult_Aplications($id);
+            $aplications= $this->aplicationRepository->listRequareInfo();
             return view('creador.editAll')
                     ->with('aplications', $aplications)
                     ->with('user_id',$id);
@@ -128,38 +132,14 @@ class CreadorController extends Controller
 
     public function updateAll(Request $request)
     {
-        $datos = $request->all();
-        $info = unserialize($datos["info"]);
-        $user = $datos["id_user"];
-        $this->UpdateFormat($datos, $info, $user);
+      $datos = $request->all();
+      $info = unserialize($datos["info"]);
+      $id_user = $datos["id_user"];
+      $this->fieldUserBaseController->storeFieldsUser($datos, $info, $id_user,1);
 
-        $user =$this->userRepository->findNeed($user);
-        flash( "has editado la informacion de envio a aplicaciones de forma exitosa" , "success");
-        return redirect()->route('Creador.show',$user->id);
-    }
-
-    private function UpdateFormat($datos, $info, $user)
-    {
-      foreach ($info as $key => $values) {
-          $position = $values['position'];
-          $value =    $datos[$position-1];
-          if ($values['select'] == 1) {
-              $option = $value;
-          }else {
-              $option = 0;
-          }
-          $values['value'] = $value;
-          $values['id_option'] = $option;
-          $values['id_user']   = $user;
-
-          if ($values['defect_value'] == null) {
-              if ($values['value'] != null) {
-                  $fieldEspecific  = $this->fieldUserRepository->store($values);
-              }
-          }else{
-              $fieldEspecific = $this->fieldUserRepository->update($values, $values['id_defect']);
-          };
-      }
+      $user =$this->userRepository->findNeed($id_user);
+      flash( "has editado la informacion de envio a aplicaciones de forma exitosa" , "success");
+      return redirect()->route('Creador.show',$user->id);
     }
 
     public function estilosEdit($id)
