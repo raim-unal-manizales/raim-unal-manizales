@@ -12,6 +12,7 @@ use App\Repositories\RolRepository;
 use App\Repositories\AplicationRepository;
 
 use App\Http\Controllers\Base\LearningStyleBaseController;
+use App\Http\Controllers\Base\FieldUserBaseController;
 
 class UserController extends Controller
 {
@@ -20,18 +21,21 @@ class UserController extends Controller
   public $aplicationRepository;
 
   public $learningStyleBaseController;
+  public $fieldUserBaseController;
 
   public function __construct(
     AplicationRepository $aplicationRepository,
     UserRepository $userRepository,
     RolRepository $rolRepository,
-    LearningStyleBaseController $learningStyleBaseController
+    LearningStyleBaseController $learningStyleBaseController,
+    FieldUserBaseController $fieldUserBaseController
   )
   {
     $this->aplicationRepository = $aplicationRepository;
     $this->userRepository = $userRepository;
     $this->rolRepository = $rolRepository;
     $this->learningStyleBaseController = $learningStyleBaseController;
+    $this->fieldUserBaseController = $fieldUserBaseController;
   }
     /**
      * Display a listing of the resource.
@@ -116,6 +120,8 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $user = $this->userRepository->updateUser($request->all(), $id);
+
+        $edit_locale_relation = $this->fieldUserBaseController->traslateLocaleRelation($id);
 
         flash( "Se ha editado el usuario de forma exitosa" , "success");
         return redirect()->route('Admin.User.show',$user->id);

@@ -103,6 +103,8 @@ class CreadorController extends Controller
     {
         $user = $this->userRepository->update($request->all(), $id);
 
+        $edit_locale_relation = $this->fieldUserBaseController->traslateLocaleRelation($id);
+
         $resultado = $this->session_all($id,'Update');
 
         $user =$this->userRepository->findNeed($id);

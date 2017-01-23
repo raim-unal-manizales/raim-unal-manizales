@@ -27,4 +27,9 @@ class FieldTableRepository extends BaseRepository
     return $this->getModel()->where('id_type_field', 2)->orderBy($field,'ASC')->lists($field, 'id');
   }
 
+  public function getLocaleRelation()
+  {
+    return $this->getModel()->where('locale_relation', '!=', 'Otro')->get();
+  }
+
 }

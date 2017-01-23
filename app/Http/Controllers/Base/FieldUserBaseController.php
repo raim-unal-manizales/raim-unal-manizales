@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\FieldUserRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\FieldTableRepository;
 
 
 class FieldUserBaseController extends Controller
@@ -14,14 +15,34 @@ class FieldUserBaseController extends Controller
 
   public $fieldUserRepository;
   public $userRepository;
+  public $fieldTableRepository;
 
   public function __construct(
     UserRepository $userRepository,
-    FieldUserRepository $fieldUserRepository
+    FieldUserRepository $fieldUserRepository,
+    FieldTableRepository $fieldTableRepository
   )
   {
     $this->fieldUserRepository = $fieldUserRepository;
     $this->userRepository = $userRepository;
+    $this->fieldTableRepository = $fieldTableRepository;
+  }
+
+  public function traslateLocaleRelation($id)
+  {
+    $user= $this->userRepository->find($id);
+    $fieldsForLocaleRelation = $this->fieldTableRepository->getLocaleRelation();
+
+    foreach ($fieldsForLocaleRelation as  $fieldForLocaleRelation) {
+
+      $fieldUser = $this->fieldUserRepository->getForUserAndFielTable($user->id,$fieldForLocaleRelation->id)->first();
+      $locale_relation = $fieldForLocaleRelation->locale_relation;
+      $fieldUser->value = $user->$locale_relation;
+
+      $fieldEspecific = $this->fieldUserRepository->update($fieldUser->toArray(), $fieldUser->id);
+
+    }
+
   }
 
   public function storeFieldsUser($datos, $info, $id_user,$ajuste)

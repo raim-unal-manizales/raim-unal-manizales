@@ -31,5 +31,9 @@ class FieldUserRepository extends BaseRepository
     }
     return $fielduser->save();
   }
+  public function getForUserAndFielTable($user_id,$fieldTable_id)
+  {
+    return $this->getModel()->where('id_user', $user_id)->where('id_field_table', $fieldTable_id)->get();
+  }
 
 }
