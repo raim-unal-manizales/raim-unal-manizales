@@ -52,6 +52,7 @@
     <script src="{{ asset('js/initialAdaptionRules.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/needAdaptionRules.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/lsAdaptionRules.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/RulesConstants.js') }}" type="text/javascript"></script>
 
     <script>
         $(document).ready(function (){
@@ -131,6 +132,8 @@
                         });
 
                         if(existUserProfile && listaOA.length > 0){
+
+                            alert(RulesConstants.lrt_narrative_text);
 
                             var listaOAInicial = filtroReglasIniciales(listaOA, userProfile);
 
@@ -367,7 +370,10 @@
 
             lom.interactivityType = $(xml).find("lom\\:interactivitytype").text();
 
-            lom.learningResourceType = $(xml).find("lom\\:learningresourcetype").text();
+            lom.learningResourceType = [];
+            for(var i = 0; i < $(xml).find("lom\\:learningresourcetype").length; i ++){
+                lom.learningResourceType.push($(xml).find("lom\\:learningresourcetype").get(i).innerText);
+            }
 
             lom.interactivityLevel = $(xml).find("lom\\:interactivitylevel").text();
 

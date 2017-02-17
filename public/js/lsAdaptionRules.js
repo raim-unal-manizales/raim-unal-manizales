@@ -12,16 +12,24 @@ function filtroReglasLsAuditivo(listaOA, userProfile){
         if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 'g'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'narrativetext' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'lecture' ||
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === RulesConstants.lrt_narrative_text ||
+                lom.learningResourceType.toLocaleLowerCase().trim() === RulesConstants.lrt_lecture ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'audio' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'video') &&
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'video') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'medium' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'high') ||
+                ($.inArray(RulesConstants.lrt_narrative_text, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_lecture, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_audio, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_video, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_medium ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_high) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_expositive ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
+
             ){
                 lom.value += 1;
 
@@ -31,16 +39,23 @@ function filtroReglasLsAuditivo(listaOA, userProfile){
         }else if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 's'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'narrativetext' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'lecture' ||
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === RulesConstants.lrt_narrative_text ||
+                lom.learningResourceType.toLocaleLowerCase().trim() === RulesConstants.lrt_lecture ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'audio' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'video') &&
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'video') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'very low' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'low') ||
+                ($.inArray(RulesConstants.lrt_narrative_text, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_lecture, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_audio, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_video, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_low) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_expositive ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
             ){
                 lom.value += 1;
 
@@ -63,17 +78,24 @@ function filtroReglasLsKinestesico(listaOA, userProfile){
         if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 'g'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'selfassessment' ||
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === 'selfassessment' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'exercise' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'problemstatement' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'simulation') &&
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'simulation') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'medium' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'high' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'very high') ||
+                ($.inArray(RulesConstants.lrt_self_assessment, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_exercise, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_problem_statement, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_simulation, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_medium ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_high ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_very_high) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_active ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
             ){
                 lom.value += 1;
 
@@ -83,17 +105,25 @@ function filtroReglasLsKinestesico(listaOA, userProfile){
         }else if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 's'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'exercise' ||
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === 'exercise' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'simulation' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'experiment' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'selfassessment' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'problemstatement') &&
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'problemstatement') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'medium' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'high') ||
+                ($.inArray(RulesConstants.lrt_exercise, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_simulation, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_experiment, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_self_assessment, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_problem_statement, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_medium ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_high) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_active ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
             ){
                 lom.value += 1;
 
@@ -116,14 +146,19 @@ function filtroReglasLsLector(listaOA, userProfile){
         if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 'g'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'narrativetext' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'presentation') &&
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === RulesConstants.lrt_narrative_text ||
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'presentation') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'medium' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'high') ||
+                ($.inArray(RulesConstants.lrt_narrative_text, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_presentation, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_medium ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_high) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_expositive ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
             ){
                 lom.value += 1;
 
@@ -133,16 +168,22 @@ function filtroReglasLsLector(listaOA, userProfile){
         }else if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 's'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'narrativetext' ||
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === RulesConstants.lrt_narrative_text ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'presentation' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'questionnaire') &&
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'questionnaire') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'very low' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'low' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'medium' ) ||
+                ($.inArray(RulesConstants.lrt_narrative_text, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_presentation, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_questionnaire, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_medium) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'expositive' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_expositive ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
             ){
                 lom.value += 1;
 
@@ -165,20 +206,29 @@ function filtroReglasLsVisual(listaOA, userProfile){
         if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 'g'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'diagram' ||
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === 'diagram' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'figure' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'graph' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'selfassessment' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'table') &&
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'table') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'very low' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'low' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'medium' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'high' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'very high') ||
+                ($.inArray(RulesConstants.lrt_diagram, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_figure, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_graph, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_self_assessment, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_table, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_medium ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_high ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_very_high) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_active ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
+
             ){
                 lom.value += 1;
 
@@ -188,18 +238,26 @@ function filtroReglasLsVisual(listaOA, userProfile){
         }else if(userProfile.ls_dicotomia.toLocaleLowerCase().trim() === 's'){
 
             if(
-                (lom.learningResourceType.toLocaleLowerCase().trim() === 'diagram' ||
+                /*(lom.learningResourceType.toLocaleLowerCase().trim() === 'diagram' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'selfassessment' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'simulation' ||
                 lom.learningResourceType.toLocaleLowerCase().trim() === 'questionnaire' ||
-                lom.learningResourceType.toLocaleLowerCase().trim() === 'slide') &&
+                lom.learningResourceType.toLocaleLowerCase().trim() === 'slide') &&*/
 
-                (lom.interactivityLevel.toLocaleLowerCase().trim() === 'very low' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'low' ||
-                lom.interactivityLevel.toLocaleLowerCase().trim() === 'medium') ||
+                ($.inArray(RulesConstants.lrt_diagram, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_self_assessment, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_simulation, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_questionnaire, lom.learningResourceType) > -1 ||
+                $.inArray(RulesConstants.lrt_slide, lom.learningResourceType) > -1) &&
 
-                (lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
-                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')
+                (lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLocaleLowerCase().trim() === RulesConstants.il_medium) ||
+
+                /*(lom.interactivityType.toLocaleLowerCase().trim() === 'active' ||
+                lom.interactivityType.toLocaleLowerCase().trim() === 'mixed')*/
+                (lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_active ||
+                lom.interactivityType.toLocaleLowerCase().trim() === RulesConstants.it_mixed)
             ){
                 lom.value += 1;
 

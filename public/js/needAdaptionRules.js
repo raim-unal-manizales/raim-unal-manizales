@@ -36,19 +36,23 @@ function filtroReglasNeedCognitiva(listaOA, userProfile){
         //Cognitiva
         if(userProfile.need_c1.toLocaleLowerCase().trim() === 'si'){
 
-            if(lom.auditory.toLocaleLowerCase().trim() === 'voz' ||
-                lom.auditory.toLocaleLowerCase().trim() === 'sonido' ||
+            if(lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice ||
+                lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_sound ||
                 lom.visual.toLocaleLowerCase().trim() === 'si'){
                 lom.value += 1;
             }
-        }else if(userProfile.need_c2.toLocaleLowerCase().trim() === 'si'){
+        }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === 'muy bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'medio'){
+        if(userProfile.need_c2.toLocaleLowerCase().trim() === 'si'){
+
+            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 1;
             }
-        }else if(userProfile.need_c3.toLocaleLowerCase().trim() === 'si'){
+        }
+
+        if(userProfile.need_c3.toLocaleLowerCase().trim() === 'si'){
 
             if(lom.typicalLearningTimeMinutes !== 0 ||
                 lom.typicalLearningTimeHours !== 0){
@@ -134,9 +138,9 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
                 lom.value += 0.9;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === 'muy bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'medio'){
+            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 0.1;
             }
         }else if(userProfile.need_a2.toLocaleLowerCase().trim() === 'no' &&
@@ -147,9 +151,9 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
                 lom.value += 0.8;
             }
 
-            if(lom.format.toLowerCase().trim() === 'texto' ||
-                lom.format.toLowerCase().trim() === 'imagen' ||
-                lom.format.toLowerCase().trim() === 'aplicacion'){
+            if(lom.format.toLowerCase().trim() === RulesConstants.f_text ||
+                lom.format.toLowerCase().trim() === RulesConstants.f_image ||
+                lom.format.toLowerCase().trim() === RulesConstants.f_application){
                 lom.value += 0.2;
             }
         }else if(userProfile.need_a2.toLocaleLowerCase().trim() === 'si' &&
@@ -161,15 +165,15 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
                 lom.value += 0.8;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === 'muy bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'medio'){
+            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 0.1;
             }
 
-            if(lom.format.toLowerCase().trim() === 'texto' ||
-                lom.format.toLowerCase().trim() === 'imagen' ||
-                lom.format.toLowerCase().trim() === 'aplicacion'){
+            if(lom.format.toLowerCase().trim() === RulesConstants.f_text ||
+                lom.format.toLowerCase().trim() === RulesConstants.f_image ||
+                lom.format.toLowerCase().trim() === RulesConstants.f_application){
                 lom.value += 0.1;
             }
         }
@@ -195,19 +199,19 @@ function filtroReglasNeedVision(listaOA, userProfile){
         //Visión nula
         if(userProfile.need_v1.toLocaleLowerCase().trim() === 'vision_nula'){
 
-            if(lom.auditory.toLocaleLowerCase().trim() === 'voz' &&
+            if(lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
                 lom.hearingAlternative.toLowerCase().trim() === 'si'){
                 lom.value += 0.8;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === 'muy bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'medio'){
+            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 0.1;
             }
 
-            if(lom.format.toLowerCase().trim() === 'audio' ||
-                lom.format.toLowerCase().trim() === 'video'){
+            if(lom.format.toLowerCase().trim() === RulesConstants.f_audio ||
+                lom.format.toLowerCase().trim() === RulesConstants.f_video){
                 lom.value += 0.1;
             }
         }
@@ -215,22 +219,22 @@ function filtroReglasNeedVision(listaOA, userProfile){
         //Visión baja
         if(userProfile.need_v1.toLocaleLowerCase().trim() === 'baja_vision'){
 
-            if((lom.auditory.toLocaleLowerCase().trim() === 'voz' &&
+            if((lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
                 lom.hearingAlternative.toLowerCase().trim() === 'si') ||
                 (lom.textual.toLocaleLowerCase().trim() === 'si' &&
                 lom.textualAlternative.toLowerCase().trim() === 'si')){
                 lom.value += 0.7;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === 'bajo' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'medio' ||
-                lom.interactivityLevel.toLowerCase().trim() === 'alto'){
+            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium ||
+                lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_high){
                 lom.value += 0.15;
             }
 
-            if(lom.format.toLowerCase().trim() === 'audio' ||
-                lom.format.toLowerCase().trim() === 'video' ||
-                lom.format.toLowerCase().trim() === 'texto'){
+            if(lom.format.toLowerCase().trim() === RulesConstants.f_audio ||
+                lom.format.toLowerCase().trim() === RulesConstants.f_video ||
+                lom.format.toLowerCase().trim() === RulesConstants.f_text){
                 lom.value += 0.15;
             }
         }
