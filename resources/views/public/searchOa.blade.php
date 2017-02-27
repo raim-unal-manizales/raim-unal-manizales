@@ -272,7 +272,7 @@
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
                     '<strong>Descripción: </strong><a class="descripcion-lo" href="' +
                     lom.location + '" target="_blank">' + lom.description + '</a><br>' +
-                    '<strong>Palabras clave: </strong>' + ((lom.keyword) ? lom.keyword.toUpperCase() : '') + '<br>' +
+                    '<strong>Palabras clave: </strong>' + lom.keyword + '<br>' +
                     '<strong>Formato: </strong>' + lom.format + '<br>' +
                     '<strong>Puntuación de adpatación: </strong>' + lom.value + '<br>' +
                     '</div>' +
@@ -352,7 +352,10 @@
 
             lom.description = $(xml).find("lom\\:general").find("lom\\:description").text();
 
-            lom.format = $(xml).find("lom\\:technical").find("lom\\:format").text();
+            lom.format = [];
+            for(var i = 0; i < $(xml).find("lom\\:technical").find("lom\\:format").length; i ++){
+                lom.format.push($(xml).find("lom\\:technical").find("lom\\:format").get(i).innerText);
+            }
 
             lom.location = $(xml).find("lom\\:technical").find("lom\\:location").text();
 
@@ -371,8 +374,8 @@
             lom.interactivityType = $(xml).find("lom\\:interactivitytype").text();
 
             lom.learningResourceType = [];
-            for(var i = 0; i < $(xml).find("lom\\:learningresourcetype").length; i ++){
-                lom.learningResourceType.push($(xml).find("lom\\:learningresourcetype").get(i).innerText);
+            for(var j = 0; j < $(xml).find("lom\\:learningresourcetype").length; j ++){
+                lom.learningResourceType.push($(xml).find("lom\\:learningresourcetype").get(j).innerText);
             }
 
             lom.interactivityLevel = $(xml).find("lom\\:interactivitylevel").text();
@@ -409,7 +412,10 @@
 
             lom.subtitles = $(xml).find("lom\\:subtitles").text();
 
-            lom.keyword = $(xml).find("lom\\:keyword").first().text();
+            lom.keyword = [];
+            for(var k = 0; k < $(xml).find("lom\\:general").find("lom\\:keyword").length; k ++){
+                lom.keyword.push($(xml).find("lom\\:general").find("lom\\:keyword").get(k).innerText);
+            }
 
             lom.coverage = $(xml).find("lom\\:coverage").text();
 

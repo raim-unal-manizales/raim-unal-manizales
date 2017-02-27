@@ -18,7 +18,7 @@ function LOMMetadata(){
 
     var description;
 
-    var format;
+    var format = [];
 
     var location;
 
@@ -32,7 +32,7 @@ function LOMMetadata(){
 
     var interactivityType;
 
-    var learningResourceType;
+    var learningResourceType = [];
 
     var interactivityLevel;
 
@@ -72,7 +72,7 @@ function LOMMetadata(){
 
     var subtitles;
     
-    var keyword;
+    var keyword = [];
     
     var coverage;
 }

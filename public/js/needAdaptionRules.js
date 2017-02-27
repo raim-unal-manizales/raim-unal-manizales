@@ -38,7 +38,7 @@ function filtroReglasNeedCognitiva(listaOA, userProfile){
 
             if(lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice ||
                 lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_sound ||
-                lom.visual.toLocaleLowerCase().trim() === 'si'){
+                lom.visual.toLocaleLowerCase().trim() === RulesConstants.a_yes){
                 lom.value += 1;
             }
         }
@@ -94,20 +94,20 @@ function filtroReglasNeedMotriz(listaOA, userProfile){
         if(userProfile.need_m2.toLocaleLowerCase().trim() === 'no' &&
             userProfile.need_m1.toLocaleLowerCase().trim() === 'si'){
 
-            if(lom.mouse.toLocaleLowerCase().trim() === 'si'){
+            if(lom.mouse.toLocaleLowerCase().trim() === RulesConstants.a_yes){
                 lom.value += 1;
             }
         }else if(userProfile.need_m2.toLocaleLowerCase().trim() === 'si' &&
             userProfile.need_m1.toLocaleLowerCase().trim() === 'no'){
 
-            if(lom.keyboard.toLocaleLowerCase().trim() === 'si'){
+            if(lom.keyboard.toLocaleLowerCase().trim() === RulesConstants.a_yes){
                 lom.value += 1;
             }
         }else if(userProfile.need_m2.toLocaleLowerCase().trim() === 'si' &&
             userProfile.need_m1.toLocaleLowerCase().trim() === 'si'){
 
-            if(lom.mouse.toLocaleLowerCase().trim() === 'si' ||
-                lom.keyboard.toLocaleLowerCase().trim() === 'si'){
+            if(lom.mouse.toLocaleLowerCase().trim() === RulesConstants.a_yes ||
+                lom.keyboard.toLocaleLowerCase().trim() === RulesConstants.a_yes){
                 lom.value += 1;
             }
         }
@@ -134,7 +134,7 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
         if(userProfile.need_a2.toLocaleLowerCase().trim() === 'si' &&
             userProfile.need_a3.toLocaleLowerCase().trim() === 'no'){
 
-            if(lom.signLanguage.toLocaleLowerCase().trim() === 'si'){
+            if(lom.signLanguage.toLocaleLowerCase().trim() === RulesConstants.a_yes){
                 lom.value += 0.9;
             }
 
@@ -146,8 +146,8 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
         }else if(userProfile.need_a2.toLocaleLowerCase().trim() === 'no' &&
             userProfile.need_a3.toLocaleLowerCase().trim() === 'si'){
 
-            if(lom.textual.toLocaleLowerCase().trim() === 'si' &&
-                lom.textualAlternative.toLocaleLowerCase().trim() === 'si'){
+            if(lom.textual.toLocaleLowerCase().trim() === RulesConstants.a_yes &&
+                lom.textualAlternative.toLocaleLowerCase().trim() === RulesConstants.a_yes){
                 lom.value += 0.8;
             }
 
@@ -159,9 +159,9 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
         }else if(userProfile.need_a2.toLocaleLowerCase().trim() === 'si' &&
             userProfile.need_a3.toLocaleLowerCase().trim() === 'si'){
 
-            if(lom.signLanguage.toLocaleLowerCase().trim() === 'si' ||
-                (lom.textual.toLocaleLowerCase().trim() === 'si' &&
-                lom.textualAlternative.toLocaleLowerCase().trim() === 'si')){
+            if(lom.signLanguage.toLocaleLowerCase().trim() === RulesConstants.a_yes ||
+                (lom.textual.toLocaleLowerCase().trim() === RulesConstants.a_yes &&
+                lom.textualAlternative.toLocaleLowerCase().trim() === RulesConstants.a_yes)){
                 lom.value += 0.8;
             }
 
@@ -200,7 +200,7 @@ function filtroReglasNeedVision(listaOA, userProfile){
         if(userProfile.need_v1.toLocaleLowerCase().trim() === 'vision_nula'){
 
             if(lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
-                lom.hearingAlternative.toLowerCase().trim() === 'si'){
+                lom.hearingAlternative.toLowerCase().trim() === RulesConstants.a_yes){
                 lom.value += 0.8;
             }
 
@@ -220,9 +220,9 @@ function filtroReglasNeedVision(listaOA, userProfile){
         if(userProfile.need_v1.toLocaleLowerCase().trim() === 'baja_vision'){
 
             if((lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
-                lom.hearingAlternative.toLowerCase().trim() === 'si') ||
-                (lom.textual.toLocaleLowerCase().trim() === 'si' &&
-                lom.textualAlternative.toLowerCase().trim() === 'si')){
+                lom.hearingAlternative.toLowerCase().trim() === RulesConstants.a_yes) ||
+                (lom.textual.toLocaleLowerCase().trim() === RulesConstants.a_yes &&
+                lom.textualAlternative.toLowerCase().trim() === RulesConstants.a_yes)){
                 lom.value += 0.7;
             }
 
