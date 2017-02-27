@@ -44,11 +44,11 @@
                             <li class="previous"><a href="#">Anterior</a></li>
                             <li class="next last" style="display:none;"><a href="#">Final</a></li>
                             <li class="next"><a href="#">Siguiente</a></li>
-                            <li class="finish"><input  type="submit" class="btn" value="enviar" href="javascript:;"></input></li>
+                            <li class="finish"><input id="sendRegistry" type="submit" class="btn" value="enviar" href="javascript:;"></input></li>
                         </ul>
                     </div>
             </div>
-        {!! Form::close() !!} 
+        {!! Form::close() !!} keyword
     </div>
 </div>
 

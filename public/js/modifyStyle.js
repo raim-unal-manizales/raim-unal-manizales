@@ -18,17 +18,15 @@ $().ready(function(){
 
     modifyButtonForm();
 
-    increaseSize();
-
-    decreaseSize();
+    changeFontSize();
 
     highContrast();
 
     changeFontFamily();
 
-    increaseInterlineSpace();
+    changeInterlineSpace();
 
-    decreaseInterlineSpace();
+    loadInterfacePersonalization();
 });
 
 function modifyTables(){
@@ -115,7 +113,34 @@ function modifyButtonForm(){
     buttonForm.addClass('col-sm-4 col-sm-offset-4');
 }
 
-function increaseSize(){
+function loadInterfacePersonalization(){
+
+    $('.tab5').click(function(){
+        $('li#accessibilityNav').css('display', 'none');
+
+        changeFontSize('input#fontSize');
+        changeInterlineSpace('input#interline');
+
+        var contrastOptionSelected = $('select#contrastNav').find("option:selected");
+        var contrastValueSelected = contrastOptionSelected.val();
+        $('select#contrast').val(contrastValueSelected);
+        highContrast('select#contrast');
+
+        var fontOptionSelected = $('select#fontNav').find("option:selected");
+        var fontValueSelected = fontOptionSelected.val();
+        $('select#font').val(fontValueSelected);
+        changeFontFamily('select#font');
+    });
+
+    $('input#sendRegistry').click(function(){
+        $('li#accessibilityNav').css('display', '');
+    });
+
+}
+
+function changeFontSize(selector){
+
+    selector = (typeof selector == 'undefined') ? 'input#fontSizeNav' : selector ;
 
     var selectors = [];
 
@@ -127,77 +152,34 @@ function increaseSize(){
     selectors.push($('h5'));
     selectors.push($('h6'));
 
-    $('#increase').click(function(){
+    $(selector).val(parseInt($('body').css('font-size')));
+
+    $(selector).change(function(){
+
+        var size = parseInt($(selector).val());
 
         $.each(selectors, function(){
-            var actualSize = this.css('font-size');
+            /*var actualSize = this.css('font-size');
             var actualSizeFloat = parseFloat(actualSize);
-            var newSize = actualSizeFloat * 1.2;
-            this.css('font-size', newSize);
+            var newSize = actualSizeFloat * 1.2;*/
+            this.css('font-size', size);
         });
 
         //console.log(size);
     });
 }
 
-function decreaseSize(){
+function highContrast(selector){
 
-    var selectors = [];
-
-    selectors.push($('body'));
-    selectors.push($('h1'));
-    selectors.push($('h2'));
-    selectors.push($('h3'));
-    selectors.push($('h4'));
-    selectors.push($('h5'));
-    selectors.push($('h6'));
-
-    $('#decrease').click(function(){
-
-        $.each(selectors, function(){
-            var actualSize = this.css('font-size');
-            var actualSizeFloat = parseFloat(actualSize);
-            var newSize = actualSizeFloat * 0.8;
-            this.css('font-size', newSize);
-        });
-
-        //console.log(size);
-    });
-
-    /*
-    $('#disminuir').mouseover(function(){
-        console.log('over');
-    });
-
-    $('#disminuir').mouseout(function(){
-        console.log('out');
-    });
-    */
-}
-
-function highContrast(){
+    selector = (typeof selector == 'undefined') ? 'select#contrastNav' : selector ;
 
     var selectors = [];
 
     selectors.push($('*'));
 
-    /*selectors.push($('table'));
-    selectors.push($('#wrapper'));
-    selectors.push($('.row'));
-    selectors.push($('p'));
-    selectors.push($('#page-wrapper'));
-    selectors.push($('div'));
-    */
-
-    /*
-    selectors.push($('header'));
-    selectors.push($('nav'));
-    selectors.push($('section'));
-    selectors.push($('footer'));
-*/
     var activeHC;
 
-    $('#contrast').change(function(){
+    $(selector).change(function(){
 
         var optionSelected = $(this).find("option:selected");
         var valueSelected = optionSelected.val();
@@ -214,20 +196,23 @@ function highContrast(){
 
         activeHC = valueSelected;
 
+        if(selector === 'select#contrastNav'){
+            $('select#contrast').val(valueSelected);
+        }else if(selector === 'select#contrast'){
+            $('select#contrastNav').val(valueSelected);
+        }
     });
 }
 
-function changeFontFamily(){
+function changeFontFamily(selector){
+
+    selector = (typeof selector == 'undefined') ? 'select#fontNav' : selector ;
 
     var selectors = [];
 
     selectors.push($('body'));
-    /*selectors.push($('header'));
-    selectors.push($('nav'));
-    selectors.push($('section'));
-    selectors.push($('footer'));*/
 
-    $('#font').change(function(){
+    $(selector).change(function(){
 
         var optionSelected = $(this).find("option:selected");
         var valueSelected = optionSelected.val();
@@ -237,11 +222,20 @@ function changeFontFamily(){
         $.each(selectors, function(){
             this.css('font-family', valueSelected);
         });
+
+        if(selector === 'select#fontNav'){
+            $('select#font').val(valueSelected);
+        }else if(selector === 'select#font'){
+            $('select#fontNav').val(valueSelected);
+        }
     });
 
 }
 
-function increaseInterlineSpace(){
+function changeInterlineSpace(selector){
+
+    selector = (typeof selector == 'undefined') ? '#interlineNav' : selector ;
+
     var selectors = [];
 
     selectors.push($('body'));
@@ -251,39 +245,18 @@ function increaseInterlineSpace(){
     selectors.push($('footer'));
     selectors.push($('td'));
 
-    $('#increaseInterline').click(function(){
+    $(selector).val(parseInt($('body').css('line-height')));
+
+    $(selector).change(function(){
+
+        var interline = parseInt($(selector).val());
 
         $.each(selectors, function(){
 
-            var actualInterline = this.css('line-height');
+            /*var actualInterline = this.css('line-height');
             var actualInterlineFloat = parseFloat(actualInterline);
-            var newInterline = actualInterlineFloat + 1;
-            this.css('line-height', newInterline + 'px');
-
-            //console.log(this.selector);
-            //console.log(newInterline);
-        });
-    });
-}
-
-function decreaseInterlineSpace(){
-    var selectors = [];
-
-    selectors.push($('body'));
-    selectors.push($('header'));
-    selectors.push($('nav'));
-    selectors.push($('section'));
-    selectors.push($('footer'));
-    selectors.push($('td'));
-
-    $('#decreaseInterline').click(function(){
-
-        $.each(selectors, function(){
-
-            var actualInterline = this.css('line-height');
-            var actualInterlineFloat = parseFloat(actualInterline);
-            var newInterline = actualInterlineFloat - 1;
-            this.css('line-height', newInterline + 'px');
+            var newInterline = actualInterlineFloat + 1;*/
+            this.css('line-height', interline + 'px');
 
             //console.log(this.selector);
             //console.log(newInterline);

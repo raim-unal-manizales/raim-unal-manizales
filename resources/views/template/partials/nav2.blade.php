@@ -71,24 +71,32 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li>
+                    <li id="accessibilityNav">
                         <a href="#">Accesibilidad<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a><label id="increase" for="">Aumentar Fuente</label></a>
+                                <a>
+                                    <label id="fontSizeLabel" for="fontSizeNav">Cambiar Fuente</label>
+                                    <br>
+                                    <input style="color: #555;" type="number" name="fontSizeNav" id="fontSizeNav" class="fontSize" min="1" max="99">
+                                </a>
                             </li>
                             <li>
-                                <a><label id="decrease" for="">Disminuir Fuente</label></a>
+                                <a>
+                                    <label id="interlineLabel" for="interlineNav">Cambiar Interlineado</label>
+                                    <br>
+                                    <input style="color: #555;" type="number" name="interlineNav" id="interlineNav" class="interline" min="1" max="99">
+                                </a>
                             </li>
-                            <li>
+                            <!--li>
                                 <a><label id="increaseInterline" for="">Aumentar Interlineado</label></a>
                             </li>
                             <li>
                                 <a><label id="decreaseInterline" for="">Disminuir Interlineado</label></a>
-                            </li>
+                            </li-->
                             <li>
                                 <a><label id="" for="contrast">Contraste</label>
-                                    <select class="form-control" id="contrast">
+                                    <select class="form-control" id="contrastNav">
                                         <option value="">Normal</option>
                                         <option value="highContrast1">Negro - Blanco</option>
                                         <option value="highContrast2">Amarillo - Negro</option>
@@ -98,7 +106,7 @@
                             </li>
                             <li>
                                 <a><label id="" for="font">Fuente</label>
-                                    <select class="form-control" id="font">
+                                    <select class="form-control" id="fontNav">
                                         <option value="">Normal</option>
                                         <option value="Arial">Arial</option>
                                         <option value="Georgia">Georgia</option>
@@ -106,7 +114,7 @@
                                         <option value="Courier">Courier</option>
                                         <option value="monospace">Monospace</option>
                                         <option value="Serif">Serif</option>
-                                        <option value="'Comic Sans MS'">Comic Sans</option>
+                                        <option value="Comic Sans MS">Comic Sans</option>
                                     </select>
                                 </a>
                             </li>
