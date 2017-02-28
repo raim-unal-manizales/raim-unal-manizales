@@ -151,9 +151,9 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
                 lom.value += 0.8;
             }
 
-            if(lom.format.toLowerCase().trim() === RulesConstants.f_text ||
-                lom.format.toLowerCase().trim() === RulesConstants.f_image ||
-                lom.format.toLowerCase().trim() === RulesConstants.f_application){
+            if($.inArray(RulesConstants.f_text, lom.format) > -1 ||
+                $.inArray(RulesConstants.f_image, lom.format) > -1 ||
+                $.inArray(RulesConstants.f_application, lom.format) > -1){
                 lom.value += 0.2;
             }
         }else if(userProfile.need_a2.toLocaleLowerCase().trim() === 'si' &&
@@ -171,9 +171,9 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
                 lom.value += 0.1;
             }
 
-            if(lom.format.toLowerCase().trim() === RulesConstants.f_text ||
-                lom.format.toLowerCase().trim() === RulesConstants.f_image ||
-                lom.format.toLowerCase().trim() === RulesConstants.f_application){
+            if($.inArray(RulesConstants.f_text, lom.format) > -1 ||
+                $.inArray(RulesConstants.f_image, lom.format) > -1 ||
+                $.inArray(RulesConstants.f_application, lom.format) > -1){
                 lom.value += 0.1;
             }
         }
@@ -210,8 +210,8 @@ function filtroReglasNeedVision(listaOA, userProfile){
                 lom.value += 0.1;
             }
 
-            if(lom.format.toLowerCase().trim() === RulesConstants.f_audio ||
-                lom.format.toLowerCase().trim() === RulesConstants.f_video){
+            if($.inArray(RulesConstants.f_audio, lom.format) > -1 ||
+                $.inArray(RulesConstants.f_video, lom.format) > -1){
                 lom.value += 0.1;
             }
         }
@@ -232,9 +232,9 @@ function filtroReglasNeedVision(listaOA, userProfile){
                 lom.value += 0.15;
             }
 
-            if(lom.format.toLowerCase().trim() === RulesConstants.f_audio ||
-                lom.format.toLowerCase().trim() === RulesConstants.f_video ||
-                lom.format.toLowerCase().trim() === RulesConstants.f_text){
+            if($.inArray(RulesConstants.f_audio, lom.format) > -1 ||
+                $.inArray(RulesConstants.f_video, lom.format) > -1 ||
+                $.inArray(RulesConstants.f_text, lom.format) > -1){
                 lom.value += 0.15;
             }
         }

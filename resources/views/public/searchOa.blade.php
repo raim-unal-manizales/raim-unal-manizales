@@ -352,7 +352,7 @@
 
             lom.format = [];
             for(var i = 0; i < $(xml).find("lom\\:technical").find("lom\\:format").length; i ++){
-                lom.format.push($(xml).find("lom\\:technical").find("lom\\:format").get(i).innerText);
+                lom.format.push($(xml).find("lom\\:technical").find("lom\\:format").get(i).innerText.toLowerCase().trim());
             }
 
             lom.location = $(xml).find("lom\\:technical").find("lom\\:location").text();
@@ -373,7 +373,7 @@
 
             lom.learningResourceType = [];
             for(var j = 0; j < $(xml).find("lom\\:learningresourcetype").length; j ++){
-                lom.learningResourceType.push($(xml).find("lom\\:learningresourcetype").get(j).innerText);
+                lom.learningResourceType.push($(xml).find("lom\\:learningresourcetype").get(j).innerText.toLowerCase().trim());
             }
 
             lom.interactivityLevel = $(xml).find("lom\\:interactivitylevel").text();
@@ -412,7 +412,7 @@
 
             lom.keyword = [];
             for(var k = 0; k < $(xml).find("lom\\:general").find("lom\\:keyword").length; k ++){
-                lom.keyword.push($(xml).find("lom\\:general").find("lom\\:keyword").get(k).innerText);
+                lom.keyword.push($(xml).find("lom\\:general").find("lom\\:keyword").get(k).innerText.toLowerCase().trim());
             }
 
             lom.coverage = $(xml).find("lom\\:coverage").text();
