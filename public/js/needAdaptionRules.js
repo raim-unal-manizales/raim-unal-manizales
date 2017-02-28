@@ -11,7 +11,8 @@ function filtroReglasNeedEtnica(listaOA, userProfile){
         //lom.value = 0;
 
         //Étnica
-        if(userProfile.need_e1.toLocaleLowerCase().trim() === lom.educationalLanguage.toLocaleLowerCase().trim()){
+        if(userProfile.need_e1.toLocaleLowerCase().trim() === 'embera' &&
+            lom.educationalLanguage.toLocaleLowerCase().trim() === 'em'){
             lom.value += 1;
         }
 
