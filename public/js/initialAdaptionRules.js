@@ -10,7 +10,10 @@ function filtroReglasIniciales(listaOA, userProfile){
 
         var listaIdioma = [];
 
-        if(userProfile.idioma.toLowerCase().trim() === 'español'){
+        if(userProfile.need_e1.toLowerCase().trim() === 'embera'){
+            listaIdioma.push('em');
+            listaIdioma.push('embera');
+        }else if(userProfile.idioma.toLowerCase().trim() === 'español'){
             listaIdioma.push('español');
             listaIdioma.push('es');
             listaIdioma.push('esp');
