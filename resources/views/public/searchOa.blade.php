@@ -133,8 +133,6 @@
 
                         if(existUserProfile && listaOA.length > 0){
 
-                            alert(RulesConstants.lrt_narrative_text);
-
                             var listaOAInicial = filtroReglasIniciales(listaOA, userProfile);
 
                             var listaOAMostrar = [];
