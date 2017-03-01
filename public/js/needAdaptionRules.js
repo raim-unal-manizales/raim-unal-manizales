@@ -136,37 +136,40 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
             userProfile.need_a3.toLocaleLowerCase().trim() === 'no'){
 
             if(lom.signLanguage.toLocaleLowerCase().trim() === RulesConstants.a_yes){
-                lom.value += 0.9;
+                //lom.value += 0.9;
+                lom.value += 1;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+            /*if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 0.1;
-            }
+            }*/
         }else if(userProfile.need_a2.toLocaleLowerCase().trim() === 'no' &&
             userProfile.need_a3.toLocaleLowerCase().trim() === 'si'){
 
             if(lom.textual.toLocaleLowerCase().trim() === RulesConstants.a_yes &&
                 lom.textualAlternative.toLocaleLowerCase().trim() === RulesConstants.a_yes){
-                lom.value += 0.8;
+                //lom.value += 0.8;
+                lom.value += 1;
             }
 
-            if($.inArray(RulesConstants.f_text, lom.format) > -1 ||
+            /*if($.inArray(RulesConstants.f_text, lom.format) > -1 ||
                 $.inArray(RulesConstants.f_image, lom.format) > -1 ||
                 $.inArray(RulesConstants.f_application, lom.format) > -1){
                 lom.value += 0.2;
-            }
+            }*/
         }else if(userProfile.need_a2.toLocaleLowerCase().trim() === 'si' &&
             userProfile.need_a3.toLocaleLowerCase().trim() === 'si'){
 
             if(lom.signLanguage.toLocaleLowerCase().trim() === RulesConstants.a_yes ||
                 (lom.textual.toLocaleLowerCase().trim() === RulesConstants.a_yes &&
                 lom.textualAlternative.toLocaleLowerCase().trim() === RulesConstants.a_yes)){
-                lom.value += 0.8;
+                //lom.value += 0.8;
+                lom.value += 1;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+            /*if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 0.1;
@@ -176,7 +179,7 @@ function filtroReglasNeedAuditiva(listaOA, userProfile){
                 $.inArray(RulesConstants.f_image, lom.format) > -1 ||
                 $.inArray(RulesConstants.f_application, lom.format) > -1){
                 lom.value += 0.1;
-            }
+            }*/
         }
 
         listaOAFiltroNeedAuditiva.push(lom);
@@ -202,10 +205,11 @@ function filtroReglasNeedVision(listaOA, userProfile){
 
             if(lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
                 lom.hearingAlternative.toLowerCase().trim() === RulesConstants.a_yes){
-                lom.value += 0.8;
+                //lom.value += 0.8;
+                lom.value += 1;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+            /*if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 0.1;
@@ -214,7 +218,7 @@ function filtroReglasNeedVision(listaOA, userProfile){
             if($.inArray(RulesConstants.f_audio, lom.format) > -1 ||
                 $.inArray(RulesConstants.f_video, lom.format) > -1){
                 lom.value += 0.1;
-            }
+            }*/
         }
 
         //Visión baja
@@ -224,10 +228,11 @@ function filtroReglasNeedVision(listaOA, userProfile){
                 lom.hearingAlternative.toLowerCase().trim() === RulesConstants.a_yes) ||
                 (lom.textual.toLocaleLowerCase().trim() === RulesConstants.a_yes &&
                 lom.textualAlternative.toLowerCase().trim() === RulesConstants.a_yes)){
-                lom.value += 0.7;
+                //lom.value += 0.7;
+                lom.value += 1;
             }
 
-            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
+            /*if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_high){
                 lom.value += 0.15;
@@ -237,7 +242,7 @@ function filtroReglasNeedVision(listaOA, userProfile){
                 $.inArray(RulesConstants.f_video, lom.format) > -1 ||
                 $.inArray(RulesConstants.f_text, lom.format) > -1){
                 lom.value += 0.15;
-            }
+            }*/
         }
 
         listaOAFiltroNeedVision.push(lom);
