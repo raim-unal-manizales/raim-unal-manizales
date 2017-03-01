@@ -9,9 +9,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/Public') }}">
-                <img src="{{ asset('images/raim.png') }}" width="86px" height="89px" alt="Logo RAIM" title="Logo RAIM">
-            </a>
         </div>
         <!-- /.navbar-header -->
 
@@ -71,6 +68,11 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
+                    <li class="text-center" id="applicationLogo">
+                        <a href="{{ url('/Public') }}">
+                            <img src="{{ asset('images/raim.png') }}" width="86px" height="89px" alt="Logo RAIM" title="Logo RAIM">
+                        </a>
+                    </li>
                     <li id="accessibilityNav">
                         <a href="#">Accesibilidad<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -186,3 +188,23 @@
         </div>
         <!-- /.navbar-static-side -->
     </nav>
+
+    <footer>
+        <div class="text-center">
+            <a href="http://www.colciencias.gov.co/" target="_blank">
+                <img width="260px" height="60px" src="{{ asset('docs/logo_colciencias.png') }}" alt="Logo Colciencias" title="Logo Colciencias">
+            </a>
+            <a href="http://www.mineducacion.gov.co/1759/w3-channel.html" target="_blank">
+                <img width="245px" height="60px" src="{{ asset('docs/logo_min_educacion.png') }}" alt="Logo Ministerio de Educación" title="Logo Ministerio de Educación">
+            </a>
+            <a href="http://www.manizales.unal.edu.co/" target="_blank">
+                <img width="144px" height="60px" src="{{ asset('docs/escudo_un_sede_manizales.jpg') }}" alt="Escudo Universidad Nacional de Colombia - Sede Manizales" title="Escudo Universidad Nacional de Colombia - Sede Manizales">
+            </a>
+            <a href="http://medellin.unal.edu.co/" target="_blank">
+                <img width="145px" height="60px" src="{{ asset('docs/escudo_un_sede_medellin.png') }}" alt="Escudo Universidad Nacional de Colombia - Sede Medellín" title="Escudo Universidad Nacional de Colombia - Sede Medellín">
+            </a>
+            <a href="http://froac.manizales.unal.edu.co/GAIA/" target="_blank">
+                <img width="110px" height="60px" src="{{ asset('docs/logo_gaia.jpg') }}" alt="Logo Grupo de Ambientes Inteligentes Adaptativos - GAIA" title="Logo Grupo de Ambientes Inteligentes Adaptativos - GAIA">
+            </a>
+        </div>
+    </footer>

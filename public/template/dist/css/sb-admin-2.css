@@ -57,6 +57,54 @@ select#contrast option {
 
 body {
     background-color: #222d32;
+    margin-bottom: 70px;
+}
+
+footer {
+    background-color: #ffffff;
+    text-align: center;
+    height: 70px;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    position:fixed;
+    z-index: 1;
+}
+
+@media (max-width: 776px) {
+    footer {
+        background-color: #ffffff;
+        text-align: center;
+        display: none;
+        left: 250px;
+        right: 0;
+        bottom: 0;
+        position:fixed;
+        z-index: 1;
+    }
+
+    body {
+        background-color: #222d32;
+        margin-bottom: 0px;
+    }
+}
+
+@media (min-width: 776px) and (max-width: 1186px) {
+    footer {
+        background-color: #ffffff;
+        text-align: center;
+        height: 140px;
+        left: 250px;
+        right: 0;
+        bottom: 0;
+        position:fixed;
+        z-index: 1;
+    }
+
+    body {
+        background-color: #222d32;
+        margin-bottom: 140px;
+    }
 }
 
 #wrapper {
@@ -92,7 +140,7 @@ body {
 
 .navbar-top-links li a {
     padding: 15px;
-    min-height: 100px;
+    min-height: 50px;
 }
 
 .navbar-top-links .dropdown-menu li {
@@ -131,9 +179,13 @@ body {
     margin-left: -123px;
 }
 
-.navbar-top-links .dropdown-user {
+/*.navbar-top-links .dropdown-user {
     right: 0;
     left: auto;
+}*/
+
+.navbar-top-links .dropdown-user {
+    margin-left: 5px;
 }
 
 a.dropdown-toggle {
@@ -212,7 +264,8 @@ a.dropdown-toggle:focus {
         z-index: 1;
         position: absolute;
         width: 250px;
-        margin-top: 101px;
+        /*margin-top: 101px;*/
+        margin-top: 0px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -221,6 +274,15 @@ a.dropdown-toggle:focus {
         margin-left: auto;
     }
 }
+
+.sidebar li#applicationLogo,
+.sidebar ul li#applicationLogo.active > a,
+.sidebar ul li#applicationLogo a.active,
+.sidebar ul li#applicationLogo a:hover,
+.sidebar ul li#applicationLogo a:focus{
+    background-color: #222d32;
+    border-left: 0px;
+ }
 
 .btn-outline {
     color: inherit;
