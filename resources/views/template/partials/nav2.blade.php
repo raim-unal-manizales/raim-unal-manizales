@@ -70,7 +70,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="text-center" id="applicationLogo">
                         <a href="{{ url('/Public') }}">
-                            <img src="{{ asset('images/raim.png') }}" width="86px" height="89px" alt="Logo RAIM" title="Logo RAIM">
+                            <img src="{{ asset('images/raim_blanco.png') }}" width="86px" height="89px" alt="Logo RAIM" title="Logo RAIM">
                         </a>
                     </li>
                     <li id="accessibilityNav">

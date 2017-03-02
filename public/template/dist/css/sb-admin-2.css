@@ -57,7 +57,7 @@ select#contrast option {
 
 body {
     background-color: #222d32;
-    margin-bottom: 70px;
+    margin-bottom: 69px;
 }
 
 footer {
@@ -262,7 +262,7 @@ a.dropdown-toggle:focus {
 @media(min-width:768px) {
     .sidebar {
         z-index: 1;
-        position: absolute;
+        position: fixed;
         width: 250px;
         /*margin-top: 101px;*/
         margin-top: 0px;
