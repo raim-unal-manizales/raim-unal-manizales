@@ -201,7 +201,7 @@ function filtroReglasNeedVision(listaOA, userProfile){
         //lom.value = 0;
 
         //Visión nula
-        if(userProfile.need_v1.toLocaleLowerCase().trim() === 'vision_nula'){
+        /*if(userProfile.need_v1.toLocaleLowerCase().trim() === 'vision_nula'){
 
             if(lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
                 lom.hearingAlternative.toLowerCase().trim() === RulesConstants.a_yes){
@@ -209,7 +209,7 @@ function filtroReglasNeedVision(listaOA, userProfile){
                 lom.value += 1;
             }
 
-            /*if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
+            if(lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_very_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_low ||
                 lom.interactivityLevel.toLowerCase().trim() === RulesConstants.il_medium){
                 lom.value += 0.1;
@@ -218,11 +218,12 @@ function filtroReglasNeedVision(listaOA, userProfile){
             if($.inArray(RulesConstants.f_audio, lom.format) > -1 ||
                 $.inArray(RulesConstants.f_video, lom.format) > -1){
                 lom.value += 0.1;
-            }*/
-        }
+            }
+        }*/
 
         //Visión baja
-        if(userProfile.need_v1.toLocaleLowerCase().trim() === 'baja_vision'){
+        if(userProfile.need_v1.toLocaleLowerCase().trim() === 'vision_nula' ||
+            userProfile.need_v1.toLocaleLowerCase().trim() === 'baja_vision'){
 
             if((lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
                 lom.hearingAlternative.toLowerCase().trim() === RulesConstants.a_yes) ||
