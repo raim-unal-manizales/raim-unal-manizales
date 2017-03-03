@@ -225,8 +225,6 @@ function filtroReglasNeedVision(listaOA, userProfile){
         if(userProfile.need_v1.toLocaleLowerCase().trim() === 'vision_nula' ||
             userProfile.need_v1.toLocaleLowerCase().trim() === 'baja_vision'){
 
-            alert(userProfile.need_v1.toLocaleLowerCase().trim());
-
             if((lom.auditory.toLocaleLowerCase().trim() === RulesConstants.a_voice &&
                 lom.hearingAlternative.toLowerCase().trim() === RulesConstants.a_yes) ||
                 (lom.textual.toLocaleLowerCase().trim() === RulesConstants.a_yes &&
