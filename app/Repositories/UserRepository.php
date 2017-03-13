@@ -26,8 +26,9 @@ class UserRepository extends BaseRepository
   public function store($user)
   {
     $user = $this->createObject($user);
-    $user->password = bcrypt($user->password);
-    $user->encript = encrypt($user->password);
+    $temporalPassword = $user->password;
+    $user->password = bcrypt($temporalPassword);
+    $user->encript = encrypt($temporalPassword);
     return $this->getModel()->create($user->toArray());    
   }
 

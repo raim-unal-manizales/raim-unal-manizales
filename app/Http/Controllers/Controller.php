@@ -139,6 +139,7 @@ class Controller extends BaseController
             $aplications = Aplication::where('state','Activo')->get();
             $aplications -> user_id = $id;
 
+
             foreach ($aplications as $key => $value) {
                 $value -> user_id = $id;
             }
@@ -166,6 +167,8 @@ class Controller extends BaseController
                     {
 
                         $id_fiel_tables = $fieldTables->id;
+
+                        exit($id_fiel_tables);
 
                         $fielduser = FieldUser::where('id_user',$fieldTables->user_id)->where('id_field_table',$id_fiel_tables)->get()->first();
 
@@ -227,29 +230,19 @@ class Controller extends BaseController
             }
             $aplications->each(function ($aplications)
             {
-
                 $tables = Table::select('id','name','id_app')->where('id_app',$aplications->id)->get();
-
                 foreach ($tables as $key => $value) {
                  $value -> user_id = $aplications->user_id;
-
                 }
-
                 $tables->each(function ($tables)
                 {
-
-                    $fieldTables = FieldTable::select('id','id_table','id_type_field','name','name_db')->where('id_table',$tables->id)->get();
-
+                    $fieldTables = FieldTable::select('id','id_table','id_type_field','name','name_db','locale_relation')->where('id_table',$tables->id)->get();
                     foreach ($fieldTables as $key => $value) {
                         $value -> user_id = $tables->user_id;
-
                     }
-
                     $fieldTables->each(function ($fieldTables)
                     {
-
                         $id_fiel_tables = $fieldTables->id;
-
                         $fielduser = FieldUser::where('id_user',$fieldTables->user_id)->where('id_field_table',$id_fiel_tables)->get()->first();
 
                         $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
@@ -261,7 +254,6 @@ class Controller extends BaseController
 
 
                         if (is_null($fielduser)) {
-
                             $fieldTables-> value = null;
                             $fieldTables-> id_defect = null;
                             $fieldTables-> id_option_app = null;
@@ -280,7 +272,12 @@ class Controller extends BaseController
 
                             }else{
 
-                                $fieldTables-> value = $fielduser->value;
+                                if ($fieldTables->locale_relation == 'encript'){
+                                    $fieldTables-> value = decrypt($fielduser->value);
+                                }else{
+                                    $fieldTables-> value = $fielduser->value;
+                                }
+
                             }
 
 
