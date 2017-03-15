@@ -38,8 +38,8 @@ class PublicController extends Controller
           //$aplications =  $this->Consult_Aplications($id);
 
           return view('public.searchOa')
-                ->with('aplications', null);
-                //->with('user_id',$id);
+                ->with('aplications', null)
+                ->with('user_id',$id);
         }
         return view('public.searchOa')
             ->with('aplications', null);
