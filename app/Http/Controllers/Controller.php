@@ -168,8 +168,6 @@ class Controller extends BaseController
 
                         $id_fiel_tables = $fieldTables->id;
 
-                        exit($id_fiel_tables);
-
                         $fielduser = FieldUser::where('id_user',$fieldTables->user_id)->where('id_field_table',$id_fiel_tables)->get()->first();
 
                         $types_fields= TypeField::where('id',$fieldTables->id_type_field)->get();
