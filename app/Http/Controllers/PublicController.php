@@ -37,8 +37,8 @@ class PublicController extends Controller
         if($id != null){
           $aplications =  $this->Consult_Aplications($id);
           return view('public.searchOa')
-                ->with('aplications', $aplications)
-                ->with('user_id',$id);
+                ->with('aplications', $aplications);
+                //->with('user_id',$id);
         }
         return view('public.searchOa')
             ->with('aplications', null);
