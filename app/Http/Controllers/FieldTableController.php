@@ -91,7 +91,7 @@ class FieldTableController extends Controller
         $table = $this->tableRepository->lists();
         $typeField = $this->typeFieldRepository->lists();
 
-        return view('admin.FieldTable.edit')
+        return view('admin.fieldTable.edit')
                     ->with('fieldTable', $fieldTable)
                     ->with('table', $table)
                     ->with('typeField', $typeField);
