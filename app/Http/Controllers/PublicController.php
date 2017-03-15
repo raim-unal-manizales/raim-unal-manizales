@@ -35,8 +35,8 @@ class PublicController extends Controller
     public function searchOa($id = null)
     {
         if($id != null){
-          $aplications =  $this->Consult_Aplications($id);
-          dd($aplications);
+          //$aplications =  $this->Consult_Aplications($id);
+
           return view('public.searchOa')
                 ->with('aplications', null);
                 //->with('user_id',$id);
