@@ -30,7 +30,7 @@ class RedirectController extends Controller
    	$user_id = (integer)$var['user_id'];
 
 		$user = $this->userRepository->find($user_id);
-		$Usuario  = $user->email;
+		$Usuario  = $user->user_name;
 		$contrasenia = decrypt($user->encript);
 
 		$aplication = $this->aplicationRepository->find($app_id);
