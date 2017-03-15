@@ -23,7 +23,7 @@
                             @include('public.partialsRegistrer.user')
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <h3>Iformación De Aplicaciones</h3>
+                            <h3>Información De Aplicaciones</h3>
                             @include('public.partialsRegistrer.aplication_all')
                         </div>
                         <div class="tab-pane" id="tab3">
