@@ -80,14 +80,14 @@
                                 <a>
                                     <label id="fontSizeLabel" for="fontSizeNav">Cambiar Fuente</label>
                                     <br>
-                                    <input style="color: #555;" type="number" name="fontSizeNav" id="fontSizeNav" class="fontSize" min="1" max="99">
+                                    <input style="color: #555;" type="number" name="fontSizeNav" id="fontSizeNav" class="fontSize" min="8" max="40">
                                 </a>
                             </li>
                             <li>
                                 <a>
                                     <label id="interlineLabel" for="interlineNav">Cambiar Interlineado</label>
                                     <br>
-                                    <input style="color: #555;" type="number" name="interlineNav" id="interlineNav" class="interline" min="1" max="99">
+                                    <input style="color: #555;" type="number" name="interlineNav" id="interlineNav" class="interline" min="10" max="40">
                                 </a>
                             </li>
                             <!--li>

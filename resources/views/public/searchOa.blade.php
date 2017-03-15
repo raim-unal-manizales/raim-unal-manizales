@@ -63,10 +63,20 @@
             var existUserProfile;
 
             @if ($data !== null and  $usuario !== null)
-                existUserProfile = true;
-                userProfile = getUserProfile();
 
-                console.log(userProfile);
+                @if (
+                    !empty($data["learningStyle"]) and
+                    !empty($data["need"]) //and
+                    //!empty($data["personalization"])
+                    )
+
+                    existUserProfile = true;
+                    userProfile = getUserProfile();
+
+                    console.log(userProfile);
+                @else
+                    existUserProfile = false;
+                @endif
             @else
                 existUserProfile = false;
             @endif
@@ -272,7 +282,7 @@
                     lom.location + '" target="_blank">' + lom.description + '</a><br>' +
                     '<strong>Palabras clave: </strong>' + lom.keyword + '<br>' +
                     '<strong>Formato: </strong>' + lom.format + '<br>' +
-                    '<strong>Puntuación de adpatación: </strong>' + lom.value + '<br>' +
+                    '<strong>Puntuación de adaptación: </strong>' + lom.value + '<br>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
@@ -283,13 +293,18 @@
         function getUserProfile(){
 
             var userProfile = new UserProfile();
-
             @if ($usuario !== null)
                     userProfile.idioma = '{!! $usuario[0]->language !!}';
                     userProfile.nivel_escolaridad = '{!! $usuario[0]->educativeLevel !!}';
             @endif
 
             @if ($data !== null)
+
+                @if (
+                    !empty($data["learningStyle"]) and
+                    !empty($data["need"]) //and
+                    //!empty($data["personalization"])
+                    )
 
                     //Estilo de aprendizaje
                     userProfile.id_estilo_aprendizaje = '{!! $data["learningStyle"][0]["reference_learning_styles"] !!}';
@@ -326,6 +341,7 @@
 
                     userProfile.need_etnica = '{!! $data["need"][0]["E"] !!}';
                     userProfile.need_e1 = '{!! $data["need"][0]["E1"] !!}';
+                @endif
             @endif
 
             userProfile = varificarLs(userProfile);
