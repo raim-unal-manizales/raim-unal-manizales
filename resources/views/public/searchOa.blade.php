@@ -282,7 +282,7 @@
                     lom.location + '" target="_blank">' + lom.description + '</a><br>' +
                     '<strong>Palabras clave: </strong>' + lom.keyword + '<br>' +
                     '<strong>Formato: </strong>' + lom.format + '<br>' +
-                    '<strong>Puntuación de adpatación: </strong>' + lom.value + '<br>' +
+                    '<strong>Puntuación de adaptación: </strong>' + lom.value + '<br>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
