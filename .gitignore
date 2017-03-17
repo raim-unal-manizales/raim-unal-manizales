@@ -9,3 +9,5 @@ workspace.xml
 .idea/dataSources/
 .idea/inspectionProfiles/
 resources/views/public/searchOa.blade2.php
+!/.env
+/.env
