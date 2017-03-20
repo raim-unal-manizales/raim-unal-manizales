@@ -1,6 +1,6 @@
         <div class="fieldForm">
             {!! Form::label('user_name','Nombre de Usuario') !!}
-            {!! Form::text('user_name', null ,['class' => '', 'placeholder' => 'Nombre de Usuario','required']) !!}         
+            {!! Form::text('user_name', null ,['class' => '','autofocus'=> 'autofocus' ,'placeholder' => 'Nombre de Usuario','required']) !!}
         </div>
 
         <div class="fieldForm">

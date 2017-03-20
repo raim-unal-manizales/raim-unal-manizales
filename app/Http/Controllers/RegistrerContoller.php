@@ -74,8 +74,6 @@ class RegistrerContoller extends Controller
      */
     public function createUser(RegisterRequest $request){
 
-        dd($request);
-
     	$data = $request->all();
       $dataLearnindDeff = $data['inicial-Learning'];
 
