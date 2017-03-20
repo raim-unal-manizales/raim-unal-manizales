@@ -309,7 +309,7 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 				'as'	=> 'Public.store_need'
 			]);
 
-		// formulario para el reguistro de usuario.
+		// formulario para el registro de usuario.
 
 		Route::get('/register_user',[
 			'uses' 	=> 'RegistrerContoller@create',

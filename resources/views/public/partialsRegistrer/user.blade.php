@@ -57,7 +57,13 @@
 
         <div class="fieldForm">
             {!! Form::label('password','Contraseña') !!}  
-            {!! Form::password('password', ['class' => '', 'placeholder' => '**********','required']) !!}           
+            {!! Form::password('password', ['class' => '', 'placeholder' => '**********','required']) !!}
+
+        </div>
+
+        <div class="fieldForm">
+                {!! Form::label('password_confirmation','Confirmación de Contraseña') !!}
+                {!! Form::password('password_confirmation', ['class' => '', 'required']) !!}
         </div>
 
         <div class="fieldForm">

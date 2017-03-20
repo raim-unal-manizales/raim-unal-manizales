@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+//use App\Http\Controllers\Auth;
+
+
 use App\Repositories\RolRepository;
 use App\Repositories\NeedRepository;
 use App\Repositories\UserRepository;
@@ -15,8 +15,10 @@ use App\Repositories\PersonalizationRepository;
 use App\Repositories\AplicationRepository;
 use App\Repositories\RLSRepository;
 use App\Repositories\FieldUserRepository;
-
 use App\Http\Controllers\Base\FieldUserBaseController;
+
+
+use App\Http\Requests\RegisterRequest;
 
 class RegistrerContoller extends Controller
 {
@@ -66,7 +68,13 @@ class RegistrerContoller extends Controller
                   ->with('needEtnica',$needEtnica);
     }
 
-    public function createUser(Request $request){
+    /**
+     * @param RegisterRequest|Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createUser(RegisterRequest $request){
+
+        dd($request);
 
     	$data = $request->all();
       $dataLearnindDeff = $data['inicial-Learning'];
@@ -86,7 +94,7 @@ class RegistrerContoller extends Controller
     		switch ($bandera) {
     			case '0':
     				if ($this->termination($value)) {
-              $id_user = $this->userRepository->store($user->toArray())->id;
+                        $id_user = $this->storeUser($user->toArray());
     					$bandera++;
     				}else{
     					$user->$key= $value;
@@ -299,7 +307,16 @@ class RegistrerContoller extends Controller
 
     }
 
-/* Fin de estilos de aprendizaje */
+    /**
+     * @param RequestUser|UserRequest $user
+     * @return mixed
+     */
+    private function storeUser($user)
+    {
+        return $this->userRepository->store($user)->id;
+    }
+
+    /* Fin de estilos de aprendizaje */
 
 
 }

@@ -5,6 +5,7 @@
 @section('content')
 
 <div class="row row-centered">
+
     <br>
     <div class="col-md-12">
         {!! Form::open(['route'=> 'Public.store_create_user','method'=> 'POST','id'=>'commentForm', 'class'=>'form-horizontal']) !!}
@@ -17,6 +18,8 @@
                     <li><a href="#tab5" class="tab5" data-toggle="tab">Paso 5 : Personalización <br> de Interfaz</a></li>
                     
                 </ul>
+                <br>
+                @include('partials.displayErrors')
                     <div class="tab-content">
                         <div class="tab-pane" id="tab1">
                             <h3>Información Básica</h3>
