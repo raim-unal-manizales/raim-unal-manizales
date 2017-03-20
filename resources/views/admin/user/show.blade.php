@@ -41,8 +41,9 @@
           </ul>
         </div>
         <div class="panel-footer">
-          <a href="{{ route('Admin.User.index') }}" class="btn btn-danger">Volver</a>
-          <a href="{{ route('Admin.User.edit', $user->id) }}" class="btn btn-primary pull-right">Editar</a>
+            <a href="{{ route('Admin.User.index') }}" class="btn btn-danger">Volver</a>
+            <a href="{{ route('Admin.User.editPass', $user->id) }}" class="btn btn-success">Cambiar Contraseña</a>
+            <a href="{{ route('Admin.User.edit', $user->id) }}" class="btn btn-primary pull-right">Editar</a>
         </div>
       </div>
     </div>

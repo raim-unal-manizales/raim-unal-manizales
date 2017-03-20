@@ -28,8 +28,8 @@ class UserRequest extends Request
             'educativeLevel'        => 'required',
             'institution'           => 'required',
             'email'                 => 'sometimes|unique:users|required|email',
-            'password'              => 'sometimes|min:6|max:15|required',
-            'password_confirmation' => 'sometimes|min:6|max:15|same:password',
+            'password'              => 'sometimes|min:6|max:15|required|confirmed',
+            'password_confirmation' => 'same:password',
             'birth_date'            => 'required|date',
             'language'              => 'required',
         ];

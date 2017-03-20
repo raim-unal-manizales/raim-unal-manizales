@@ -43,6 +43,16 @@ Route::get('/', function () {
 				'uses' 	=> 'UserController@delete',
 				'as'	=> 'Admin.User.delete'
 			]);
+
+        Route::get('User/{id}/editPass',[
+            'uses' 	=> 'UserController@editPass',
+            'as'	=> 'Admin.User.editPass'
+        ]);
+        Route::post('User/storePass',[
+            'uses' 	=> 'UserController@storePass',
+            'as'	=> 'Admin.User.storePass'
+        ]);
+
       Route::get('User/{id}/editAll',[
         'uses' 	=> 'UserController@editAll',
         'as'	=> 'Admin.User.editAll'
@@ -383,12 +393,6 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 				'uses' 	=> 'PublicController@storeAll',
 				'as'	=> 'Public.storeAll'
 			]);
-
-
-
-
-
-
 
 	});
 

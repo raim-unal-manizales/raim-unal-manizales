@@ -50,4 +50,16 @@ class UserRepository extends BaseRepository
     return $user;
   }
 
+  public function storePass($userPass)
+  {
+      $user = $this->find($userPass['id_user'])->fill($userPass);
+      $temporalPassword = $user->password;
+      $user->password = bcrypt($temporalPassword);
+      $user->encript = encrypt($temporalPassword);
+      $user->update();
+
+      return $user;
+
+  }
+
 }

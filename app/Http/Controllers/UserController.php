@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+use App\Http\Requests\PasswordResetRequest;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
@@ -51,7 +52,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -62,7 +63,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserRequest|Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
@@ -176,5 +177,25 @@ class UserController extends Controller
     public function storeNeedEdit(Request $request, $id)
     {
       # code...
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editPass($id)
+    {
+        return view('admin.user.editPass')->with('id_user', $id);
+    }
+
+    /**
+     * @param PasswordResetRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storePass(PasswordResetRequest $request)
+    {
+        $user = $this->userRepository->storePass($request->all());
+        flash( "Se ha editado la contraseña del usuario correctamente" , "success");
+        return redirect()->route('Admin.User.show',$user->id);
     }
 }
