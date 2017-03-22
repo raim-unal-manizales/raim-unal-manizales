@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\RLSRepository;
-use App\Repositories\LearningStyleReposiroty;
+use App\Repositories\LearningStyleRepository;
 use App\Repositories\UserRepository;
 
 
@@ -20,7 +20,7 @@ class LearningStyleBaseController extends Controller
   public function __construct(
     UserRepository $userRepository,
     RLSRepository $rLSRepository,
-    LearningStyleReposiroty $learningStyleRepository
+    LearningStyleRepository $learningStyleRepository
   )
   {
     $this->rLSRepository = $rLSRepository;

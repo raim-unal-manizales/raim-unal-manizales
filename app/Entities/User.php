@@ -2,11 +2,16 @@
 
 namespace App\Entities;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
+    use Authenticatable, CanResetPassword;
 
     protected $table = "users";
     /**

@@ -13,7 +13,7 @@ use App\Repositories\UserRepository;
 use App\Repositories\FieldUserRepository;
 use App\Repositories\RolRepository;
 use App\Repositories\RLSRepository;
-use App\Repositories\LearningStyleReposiroty;
+use App\Repositories\LearningStyleRepository;
 
 use App\Http\Controllers\Base\LearningStyleBaseController;
 use App\Http\Controllers\Base\FieldUserBaseController;

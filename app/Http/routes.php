@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return redirect()->route('Public.searchOa');
-});
+})->middleware('web');
 
 /*
 |--------------------------------------------------------------------------

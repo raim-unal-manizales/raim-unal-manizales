@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Repositories\RolRepository;
 use App\Repositories\NeedRepository;
 use App\Repositories\UserRepository;
-use App\Repositories\LearningStyleReposiroty;
+use App\Repositories\LearningStyleRepository;
 use App\Repositories\PersonalizationRepository;
 use App\Repositories\AplicationRepository;
 use App\Repositories\RLSRepository;
@@ -19,6 +19,7 @@ use App\Http\Controllers\Base\FieldUserBaseController;
 
 
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrerContoller extends Controller
 {
@@ -37,7 +38,7 @@ class RegistrerContoller extends Controller
     RolRepository $rolRepository,
     NeedRepository $needRepository,
     UserRepository $userRepository,
-    LearningStyleReposiroty $learningStyleRepository,
+    LearningStyleRepository $learningStyleRepository,
     PersonalizationRepository $personalizationRepository,
     AplicationRepository $aplicationRepository,
     RLSRepository $rLSRepository,
@@ -146,9 +147,9 @@ class RegistrerContoller extends Controller
     				break;
     		}
     	}
-        $resultado = $this->session_all($id_user,'Create');
-        //$user = Auth::user();
+        //$resultado = $this->session_all($id_user,'Create');
 
+        Auth::login($this->userRepository->find($id_user));
 
         if ($dataLearnindDeff == "Si") {
           $learningStyleName = $this->userRepository

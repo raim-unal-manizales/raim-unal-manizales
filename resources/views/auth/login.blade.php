@@ -72,8 +72,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">Ingresar</button>
 
-                                <!-- <a class="btn btn-link" href="{{ url('/password/reset') }}">¿Olvidaste Tu Contraseña?</a> -->
-                            </div>
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">¿Olvidaste Tu Contraseña?</a>                             </div>
                         </div>
                     </div>
 

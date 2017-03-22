@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('template.main')
 
-<!-- Main Content -->
+@section('title', 'Login')
+
 @section('content')
 <div class="container">
     <div class="row">
