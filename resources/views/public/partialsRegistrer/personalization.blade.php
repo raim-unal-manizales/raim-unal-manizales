@@ -1,17 +1,17 @@
 
         <div class="fieldForm">
             {!! Form::label('fontSize','Tamaño de fuente') !!}
-            {!! Form::number('fontSize', 'value',['class' => 'fontSize','id'=>'fontSize', 'placeholder' => '¿Desea Aumentar o Disrminuir el Tamaño de Fuente?', 'min'=>'8', 'max'=>'40' ])!!}
+            {!! Form::number('fontSize', 'value',['class' => 'fontSize form-control','id'=>'fontSize', 'placeholder' => '¿Desea Aumentar o Disrminuir el Tamaño de Fuente?', 'min'=>'1', 'max'=>'99' ])!!}
         </div>
 
        	<div class="fieldForm">
             {!! Form::label('interline','Tamaño de interlineado') !!}
-            {!! Form::number('interline', 'value',['class' => 'interline','id'=>'interline', 'placeholder' => '¿Desea Aumentar o Disrminuir el Tamaño del Interlineado?' , 'min'=>'10', 'max'=>'40' ])!!}
+            {!! Form::number('interline', 'value',['class' => 'interline form-control','id'=>'interline', 'placeholder' => '¿Desea Aumentar o Disrminuir el Tamaño del Interlineado?' , 'min'=>'1', 'max'=>'99' ])!!}
         </div>
 
         <div class="fieldForm">
             {!! Form::label('contrast','Contraste') !!}
-            {!! Form::select('contrast', [''=>'Normal','highContrast1'=>'Negro - Blanco','highContrast2'=>'Amarillo - Negro','highContrast3'=>'Azul - Naranja'] ,null, ['class' => '','id'=>'contrast']) !!}
+            {!! Form::select('contrast', [''=>'Normal','highContrast1'=>'Negro - Blanco','highContrast2'=>'Amarillo - Negro','highContrast3'=>'Azul - Naranja'] ,null, ['class' => 'form-control','id'=>'contrast']) !!}
         </div>
 
         <div class="fieldForm">
@@ -25,7 +25,7 @@
             			'monospace'=>'monospace',
             			'Serif'=>'Serif',
             			'Comic Sans MS'=>'Comic Sans MS'
-            		],null, ['class' => '','id'=>'font']) !!}
+            		],null, ['class' => 'form-control','id'=>'font']) !!}
         </div>
 
         <div>

@@ -12,3 +12,4 @@ workspace.xml
 resources/views/public/searchOa.blade2.php
 !/.env
 /.env
+/resources/views/public/searchOa.blade2.php

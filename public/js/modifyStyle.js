@@ -5,18 +5,18 @@
 $().ready(function(){
 
     //Modifica el estilo de las tablas agregadas
-    modifyTables();
+    //modifyTables();
 
     //Modifica el estilo de los encabezados de los formularios
-    modifyContentHeader();
+    //modifyContentHeader();
 
     //Modifica el estilo de los contenedores de los campos de los formularios
-    modifyFieldForm();
+    //modifyFieldForm();
 
     //Modifica el estilo de los campos de los formularios
-    modifyFields();
+    //modifyFields();
 
-    modifyButtonForm();
+    //modifyButtonForm();
 
     changeFontSize();
 
@@ -115,26 +115,34 @@ function modifyButtonForm(){
 
 function loadInterfacePersonalization(){
 
-    $('.tab5').click(function(){
-        $('li#accessibilityNav').css('display', 'none');
+    var target = document.querySelector('#tab5');
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            console.log(mutation.type);
+            if($('#tab5').hasClass('active')){
+                $('li#accessibilityNav').css('display', 'none');
 
-        changeFontSize('input#fontSize');
-        changeInterlineSpace('input#interline');
+                changeFontSize('input#fontSize');
+                changeInterlineSpace('input#interline');
 
-        var contrastOptionSelected = $('select#contrastNav').find("option:selected");
-        var contrastValueSelected = contrastOptionSelected.val();
-        $('select#contrast').val(contrastValueSelected);
-        highContrast('select#contrast');
+                var contrastOptionSelected = $('select#contrastNav').find("option:selected");
+                var contrastValueSelected = contrastOptionSelected.val();
+                $('select#contrast').val(contrastValueSelected);
+                highContrast('select#contrast');
 
-        var fontOptionSelected = $('select#fontNav').find("option:selected");
-        var fontValueSelected = fontOptionSelected.val();
-        $('select#font').val(fontValueSelected);
-        changeFontFamily('select#font');
+                var fontOptionSelected = $('select#fontNav').find("option:selected");
+                var fontValueSelected = fontOptionSelected.val();
+                $('select#font').val(fontValueSelected);
+                changeFontFamily('select#font');
+            }else{
+                $('li#accessibilityNav').css('display', '');
+                observer.disconnect();
+            }
+        });
     });
-
-    $('input#sendRegistry').click(function(){
-        $('li#accessibilityNav').css('display', '');
-    });
+    if(target){
+        observer.observe(target, { attributes: true, childList: true, characterData: true, subtree: true });
+    }
 
 }
 

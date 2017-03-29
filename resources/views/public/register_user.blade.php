@@ -5,17 +5,16 @@
 @section('content')
 
 <div class="row row-centered">
-
     <br>
     <div class="col-md-12">
         {!! Form::open(['route'=> 'Public.store_create_user','method'=> 'POST','id'=>'commentForm', 'class'=>'form-horizontal']) !!}
             <div id="rootwizard" class="col-md-11 col-centered">
                 <ul class="">
-                    <li><a href="#tab1" class="tab1" data-toggle="tab">Paso 1 : Información <br> Básica</a></li>
-                    <li><a href="#tab2" class="tab2" data-toggle="tab">Paso 2 : Información De <br> Aplicaciones</a></li>
-                    <li><a href="#tab4"  class="tab4" data-toggle="tab">Paso 3 : Necesidades <br> Especiales</a></li>
-                    <li><a href="#tab3" class="tab3" data-toggle="tab">Paso 4 : Estilos de <br> Aprendizaje</a></li> 
-                    <li><a href="#tab5" class="tab5" data-toggle="tab">Paso 5 : Personalización <br> de Interfaz</a></li>
+                    <li><a style="pointer-events: none; cursor: default;" href="#tab1" class="tab1" data-toggle="tab">Paso 1 : Información <br> Básica</a></li>
+                    <li><a style="pointer-events: none; cursor: default;" href="#tab2" class="tab2" data-toggle="tab">Paso 2 : Información De <br> Aplicaciones</a></li>
+                    <li><a style="pointer-events: none; cursor: default;" href="#tab4" class="tab4" data-toggle="tab">Paso 3 : Necesidades <br> Especiales</a></li>
+                    <li><a style="pointer-events: none; cursor: default;" href="#tab3" class="tab3" data-toggle="tab">Paso 4 : Estilos de <br> Aprendizaje</a></li>
+                    <li><a style="pointer-events: none; cursor: default;" href="#tab5" class="tab5" data-toggle="tab">Paso 5 : Personalización <br> de Interfaz</a></li>
                     
                 </ul>
                 <br>
@@ -46,12 +45,12 @@
                             <li class="previous first" style="display:none;"><a href="#">Inicio</a></li>
                             <li class="previous"><a href="#">Anterior</a></li>
                             <li class="next last" style="display:none;"><a href="#">Final</a></li>
-                            <li class="next"><a href="#">Siguiente</a></li>
-                            <li class="finish"><input id="sendRegistry" type="submit" class="btn" value="enviar" href="javascript:;"></input></li>
+                            <li class="next btn"><a href="#">Siguiente</a></li>
+                            <li class="finish"><input id="sendRegistry" type="submit" class="btn btn-primary" value="Enviar" href="javascript:;"></input></li>
                         </ul>
                     </div>
             </div>
-        {!! Form::close() !!} keyword
+        {!! Form::close() !!}
     </div>
 </div>
 

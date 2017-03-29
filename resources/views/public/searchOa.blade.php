@@ -8,16 +8,15 @@
         <h1 class="pull-left">Buscador de Objetos de Aprendizaje</h1>
     </div>
 
-    <div class="row">
-
-        {!! Form::open(['id'=>'formulario', 'method'=>'post', 'enctype'=>'multipart/form-data']) !!}
+    <!--<div class="row">-->
+        {!! Form::open(['id'=>'formulario', 'method'=>'post', 'enctype'=>'multipart/form-data','class' => 'form-group']) !!}
             <div class="form-group">
-                <label for="text" class="">Buscar objetos:</label>
-                <input type="text" id="text" name="buscar" class="" placeholder="Buscar">
+                <label for="text" >Buscar objetos:</label>
+                <input type="text" id="text" name="buscar" class="form-control" placeholder="Buscar">
             </div>
-            <input type="submit" value="Buscar objetos" name="submit">
+            <input type="submit" value="Buscar objetos" name="submit" class="btn btn-primary">
         {!! Form::close() !!}
-    </div>
+   <!-- </div>-->
 
     {{-- dd($data) --}}
     {{-- dd($usuario[0]) --}}
@@ -293,6 +292,7 @@
         function getUserProfile(){
 
             var userProfile = new UserProfile();
+
             @if ($usuario !== null)
                     userProfile.idioma = '{!! $usuario[0]->language !!}';
                     userProfile.nivel_escolaridad = '{!! $usuario[0]->educativeLevel !!}';

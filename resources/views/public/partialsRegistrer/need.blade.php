@@ -90,7 +90,9 @@
             <!-- expancion de necesidades Auditiva-->
                 <tr style="display: none;" class="Auditivo" id="Auditivo">
                     <td>
+                        <br>
                         <table style="display: none;" class="Auditivo1" id="Auditivo1">
+
                             <tr>
                                 <td>
                                     <strong><label>¿En qué grado se presenta dicha condición?</label></strong>
@@ -148,6 +150,7 @@
             <!-- expancion de necesidades Motriz-->
                 <tr style="display: none;" class="Motriz" id="Motriz">
                     <td>
+                        <br>
                         <table style="display: none;" class="Motriz1" id="Motriz1">
                             <tr>
                                 <td>
@@ -207,6 +210,7 @@
             <!-- expancion de necesidades Cognitiva-->
                 <tr style="display: none;" class="Cognitiva" id="Cognitiva">
                     <td>
+                        <br>
                         <table style="display: none;"  class="Cognitiva1" id="Cognitiva1">
                             <tr>
                                 <td>
@@ -270,7 +274,8 @@
             <!-- expancion de necesidades Cognitiva-->
                 <tr style="display: none;" class="Etnica" id="Etnica">
                     <td>
-                        <table style="display: none;"  class="Etnica1" id="Etnica1">
+                        <br>
+                        <table style="display: none;"  class="Etnica1 " id="Etnica1">
                             <tr>
                                 <td>
                                     <strong><label>Indique a cuál comunidad étnico pertenece:</label></strong>
@@ -278,10 +283,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select class="E1" id="E1" name="E1">
+                                    <select class="E1" id="E1" name="E1" >
 
                                         <?php foreach ($needEtnica as $key => $value): ?>
-                                            <option value="{{$value}}">{{ $value}}</option>
+                                        <option value="{{$value}}" >{{ $value}}</option>
                                         <?php endforeach ?>
                                     </select>
                                     <div id="OtraNeedEtnica">

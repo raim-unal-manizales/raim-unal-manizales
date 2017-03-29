@@ -36,7 +36,6 @@ class PublicController extends Controller
     {
         if($id != null){
           $aplications =  $this->Consult_Aplications($id);
-
           return view('public.searchOa')
                 ->with('aplications', $aplications)
                 ->with('user_id',$id);
@@ -64,6 +63,11 @@ class PublicController extends Controller
     public function publications()
     {
         return view('public.publications');
+    }
+    //CONTROALDOR PARA DOCUMENTOS DE APOYO
+    public function supportdocs()
+    {
+        return view('public.supportdocs');
     }
 
     public function others()

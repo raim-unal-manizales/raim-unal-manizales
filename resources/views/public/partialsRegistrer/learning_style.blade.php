@@ -21,6 +21,7 @@
             </td>
         </tr>
     </table>
+    <br>
     <table class="table2" width="100%" border="0" cellspacing="5" cellpadding="0" align="center" style="display: none;" id="test-learning-style">
         <tr> 
             <td class="boxtitle" align="left"><strong>¿CÓMO APRENDO MEJOR?</strong></td>

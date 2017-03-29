@@ -35,7 +35,7 @@
 																	$fields_table->options->lists('name','id'),
 																	$fields_table-> value,
 																	[
-																		'class' => '',
+																		'class' => 'form-control',
 																		'required'
 																	]
 														)
@@ -55,7 +55,7 @@
 
 											@else
 												{!! Form::label($fields_table->id,$fields_table->name) !!}
-												{!! Form::text($bandera, $fields_table-> value ,['class' => '','required']) !!}
+												{!! Form::text($bandera, $fields_table-> value ,['class' => 'form-control','required']) !!}
 											@endif
 
 

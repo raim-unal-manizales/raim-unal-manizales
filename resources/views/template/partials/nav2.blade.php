@@ -144,6 +144,9 @@
                             <li>
                                 <a href="{{ route('Public.reporting') }}">Difusión</a>
                             </li>
+                            <li>
+                                <a href="{{ route('Public.supportdocs') }}">Documentos de soporte</a>
+                            </li>
                         </ul>
                     </li>
                         @if (!Auth::guest())
