@@ -362,8 +362,8 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			'as'	=> 'Public.publications'
 		]);
 
-    //RUTA PARA DOCUMENTOS DE APOYO
-    Route::get('/supportdocs',[
+        //RUTA PARA DOCUMENTOS DE APOYO
+        Route::get('/supportdocs',[
 			'uses' 	=> 'PublicController@supportdocs',
 			'as'	=> 'Public.supportdocs'
 		]);
