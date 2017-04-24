@@ -16,7 +16,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><strong>Notas 2013</strong></a>
                     </h4>
                 </div>
-                <div id="collapse1" class="panel-collapse collapse in">
+                <div id="collapse1" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="col-sm-4">
                             <div class="panel panel-info">
@@ -191,7 +191,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><strong>Notas 2017</strong></a>
                     </h4>
                 </div>
-                <div id="collapse4" class="panel-collapse collapse in">
+                <div id="collapse4" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="col-sm-4">
                             <div class="panel panel-info">
@@ -211,7 +211,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 @endsection

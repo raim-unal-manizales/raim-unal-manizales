@@ -17,7 +17,7 @@
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><strong>Fichas de creación OA</strong></a>
         </h4>
       </div>
-      <div id="collapse1" class="panel-collapse collapse in">
+      <div id="collapse1" class="panel-collapse collapse ">
         <div class="panel-body">
           <!--*********************************-->
                     <div class="container">
@@ -119,7 +119,7 @@
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse76"><strong>Divisíon celular meiosis</strong></a>
+                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse76"><strong>División celular meiosis</strong></a>
                             </h4>
                           </div>
                           <div id="collapse76" class="panel-collapse collapse">
@@ -137,7 +137,7 @@
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse77"><strong>Divisíon celular mitosis</strong></a>
+                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse77"><strong>División celular mitosis</strong></a>
                             </h4>
                           </div>
                           <div id="collapse77" class="panel-collapse collapse">
@@ -231,7 +231,7 @@
                               <ul id="markdown-toc">
                                 <li><a href="{{ asset('fichas_de_creacion/edad_media/actividad.pdf') }}" id="markdown-toc-contents" target="_blank">Actividad</a></li>
                                 <li><a href="{{ asset('fichas_de_creacion/edad_media/contenido.pdf') }}" id="markdown-toc-contents" target="_blank">Contenido</a></li>
-                                <li><a href="{{ asset('fichas_de_creacion/edad_media/video.pdf') }}" id="markdown-toc-contents" target="_blank">Video</a></li>
+                                <li><a href="{{ asset('fichas_de_creacion/edad_media/ra.pdf') }}" id="markdown-toc-contents" target="_blank">RA</a></li>
                               </ul>
                             </div>
                           </div>
@@ -352,7 +352,7 @@
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse89"><strong>La nueva granada a finales del siglo XVIII</strong></a>
+                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse89"><strong>La Nueva Granada a finales del siglo XVIII</strong></a>
                             </h4>
                           </div>
                           <div id="collapse89" class="panel-collapse collapse">
@@ -439,7 +439,7 @@
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse94"><strong>Normas de transito</strong></a>
+                              <a data-toggle="collapse" data-parent="#accordion71" href="#collapse94"><strong>Normas de tránsito</strong></a>
                             </h4>
                           </div>
                           <div id="collapse94" class="panel-collapse collapse">
@@ -518,7 +518,7 @@
                           <div id="collapse98" class="panel-collapse collapse">
                             <div class="panel-body">
                               <ul id="markdown-toc">
-                                <li><a href="{{ asset('fichas_de_creacion/reconquista/actividad.pdf') }}" id="markdown-toc-contents" target="_blank">Actividad</a></li>
+                                <li><a href="{{ asset('fichas_de_creacion/reconquista/contenido.pdf') }}" id="markdown-toc-contents" target="_blank">Contenido</a></li>
                                 <li><a href="{{ asset('fichas_de_creacion/reconquista/video.pdf') }}" id="markdown-toc-contents" target="_blank">Video</a></li>
 
                                 </ul>
@@ -1263,7 +1263,6 @@
                             <div class="panel-body">
                               <div class="panel-body">
                                 <ul id="markdown-toc">
-                                  <li><a href="{{ asset('manuales/manual_tecnico_edutools.pdf') }}" id="markdown-toc-contents" target="_blank">Manual técnico</a></li>
                                   <li><a href="{{ asset('manuales/manual_usuario_edutools.pdf') }}" id="markdown-toc-example" target="_blank">Manual de usuario</a></li>
                                 </ul>
                               </div>
@@ -1317,6 +1316,7 @@
                           <div id="collapse58" class="panel-collapse collapse">
                             <div class="panel-body">
                               <ul id="markdown-toc">
+                                <li><a href="{{ asset('manuales/manual_tecnico_aet.pdf') }}" id="markdown-toc-contents" target="_blank">Manual técnico</a></li>
                                 <li><a href="{{ asset('manuales/manual_usuario_aet.pdf') }}" id="markdown-toc-contents" target="_blank">Manual de usuario</a></li>
 
                               </ul>
