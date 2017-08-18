@@ -23,4 +23,8 @@ class CalificationLoRepository extends BaseRepository
     return $this->createObject($calification_lo)->save();
   }
 
+  public function getRatesByUser($userId){
+      return Calification_lo::where('user_id', $userId)->get();
+  }
+
 }

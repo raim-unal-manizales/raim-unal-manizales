@@ -53,6 +53,15 @@
     <script src="{{ asset('js/lsAdaptionRules.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/RulesConstants.js') }}" type="text/javascript"></script>
 
+    <script src="{{ asset('auxiliary-rater/rater.js') }}" type="text/javascript"></script>
+
+    {{--<link href="{{ asset('star-rating/css/star-rating.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('star-rating/themes/krajee-fa/theme.css') }}" media="all" rel="stylesheet" type="text/css" />
+
+    <script src="{{ asset('star-rating/js/star-rating.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('star-rating/themes/krajee-fa/theme.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('star-rating/js/locales/es.js') }}" type="text/javascript"></script>--}}
+
     <script>
         $(document).ready(function (){
 
@@ -90,128 +99,196 @@
                 var searchString = $('#text').val().trim();
 
                 //store_search_lo();
-                  if (searchString.length !== 0) {
+                if (searchString.length !== 0) {
 
                     $.ajax({
-                    type: "GET",
-                    data: "raim=" + searchString,
-                    url: "http://froac.manizales.unal.edu.co/froacn",
-                    dataType: "jsonp",
+                        type: "GET",
+                        data: "raim=" + searchString,
+                        url: "http://froac.manizales.unal.edu.co/froacn",
+                        dataType: "jsonp",
+                        async: true,
+                        success: function(datos){
+                            var dataJson = eval(datos);
+
+                            var items = [];
+                            $.each(dataJson, function(key, val) {
+                                //console.log(key);
+                                items.push({'rep_id': val.rep_id, 'lo_id': val.lo_id, 'xml': val.xml});
+                            });
+
+                            var listaOA = [];
+
+                            $.each(items, function(index, xml){
+
+                                //console.log(xml);
+
+                                var lom = processXml(xml.xml, xml.rep_id, xml.lo_id);
+                                console.log(lom);
+                                listaOA.push(lom);
+
+                                lom.typicalLearningTimeHours = 0;
+                                lom.typicalLearningTimeMinutes = 0;
+
+                                if(regex.test(lom.typicalLearningTime)){
+
+                                    var dato = '0';
+
+                                    for(var i = 2; i < lom.typicalLearningTime.length; i ++){
+
+                                        if(lom.typicalLearningTime.charAt(i) === 'H'){
+                                            lom.typicalLearningTimeHours = parseInt(dato);
+                                            dato = '0';
+                                        }else if(lom.typicalLearningTime.charAt(i) === 'M'){
+                                            lom.typicalLearningTimeMinutes = parseInt(dato);
+                                            dato = '0';
+                                        }else{
+                                            dato = dato + lom.typicalLearningTime.charAt(i);
+                                        }
+                                    }
+                                }
+
+                            });
+
+                            if(existUserProfile && listaOA.length > 0){
+
+                                var listaOAInicial = filtroReglasIniciales(listaOA, userProfile);
+
+                                var listaOAMostrar = [];
+
+                                //Filtros need
+                                if(userProfile.need.toLocaleLowerCase().trim() === 'si' &&
+                                    listaOAInicial.length > 0){
+
+                                    //Filtros need visión
+                                    if(userProfile.need_visual.toLocaleLowerCase().trim() === 'si'){
+                                        listaOAMostrar = filtroReglasNeedVision(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros need auditiva
+                                    if(userProfile.need_auditiva.toLocaleLowerCase().trim() === 'si'){
+                                        listaOAMostrar = filtroReglasNeedAuditiva(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros need motriz
+                                    if(userProfile.need_motriz.toLocaleLowerCase().trim() === 'si'){
+                                        listaOAMostrar = filtroReglasNeedMotriz(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros need cognitiva
+                                    if(userProfile.need_cognitiva.toLocaleLowerCase().trim() === 'si'){
+                                        listaOAMostrar = filtroReglasNeedCognitiva(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros need étnica
+                                    if(userProfile.need_etnica.toLocaleLowerCase().trim() === 'si'){
+                                        listaOAMostrar = filtroReglasNeedEtnica(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros ls
+                                }else if(userProfile.estilo_aprendizaje.toLocaleLowerCase().trim() !== 'no definido' &&
+                                    listaOAInicial.length > 0){
+
+                                    //Filtros ls visual-global visual-secuencial
+                                    if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'v'){
+                                        listaOAMostrar = filtroReglasLsVisual(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros ls auditivo-global auditivo-secuencial
+                                    if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'a'){
+                                        listaOAMostrar = filtroReglasLsAuditivo(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros ls lector-global lector-secuencial
+                                    if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'l'){
+                                        listaOAMostrar = filtroReglasLsLector(listaOAInicial, userProfile);
+                                    }
+
+                                    //Filtros ls kinestesico-global kinestesico-secuencial
+                                    if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'k'){
+                                        listaOAMostrar = filtroReglasLsKinestesico(listaOAInicial, userProfile);
+                                    }
+                                }
+
+                                //Muestra los objetos filtrados
+                                mostrarLOSecciones(listaOAMostrar, existUserProfile);
+
+                            }else if(listaOA.length <= 0){
+
+                                $('#notResults')
+                                    .append('No existen objetos de aprendizaje que cumplan con los criterios de búsqueda');
+                            }else{
+
+                                mostrarLOSecciones(listaOA, existUserProfile);
+                            }
+
+
+
+                        },
+                        error: function (obj, error, objError){
+                            //avisar que ocurrió un error
+                            console.log(obj);
+                            console.log(error);
+                            console.log(objError);
+                        }
+                    });
+
+                    if(existUserProfile){
+                        // funcionalidad de guardar historial de busqueda
+                        store_search_lo();
+
+                        $.ajax({
+                            type: "POST",
+                            data: { _token: $('[name=\'_token\']').val() },
+                            url: "{{ route('Lo.get_user_rates') }}",
+                            async: true,
+                            success: function(datos){
+                                var dataJson = eval(datos);
+                                console.log(dataJson);
+                                $.each(dataJson, function(index, rate){
+                                    $('#' + rate.repository_id + '-' + rate.object_id).rate('setValue', rate.calification);
+                                });
+                            },
+                            error: function (obj, error, objError){
+                                //avisar que ocurrió un error
+                                console.log(obj);
+                                console.log(error);
+                                console.log(objError);
+                            }
+                        });
+
+
+                    }
+
+
+
+                }
+
+                //Previene que se realice la redirección con el submit del formulario
+                return false;
+            });
+
+
+        });
+
+        function store_visited_lo(rep_id, lo_id, existUserProfile) {
+
+            if(existUserProfile){
+
+                $("#formulario").append('<input type="hidden" name="rep_id" id="rep_id" value="' +
+                    rep_id + '">');
+                $("#formulario").append('<input type="hidden" name="lo_id" id="lo_id" value="' +
+                    lo_id + '">');
+
+                $.ajax({
+                    type: "POST",
+                    data: $("#formulario").serialize(),
+                    url: "{{ route('Lo.save_visited') }}",
                     async: true,
                     success: function(datos){
                         var dataJson = eval(datos);
-
-                        var items = [];
-                        $.each(dataJson, function(key, val) {
-                            //console.log(key);
-                            items.push({'rep_id': val.rep_id, 'lo_id': val.lo_id, 'xml': val.xml});
-                        });
-
-                        var listaOA = [];
-
-                        $.each(items, function(index, xml){
-
-                            //console.log(xml);
-
-                            var lom = processXml(xml.xml, xml.rep_id, xml.lo_id);
-                            console.log(lom);
-                            listaOA.push(lom);
-
-                            lom.typicalLearningTimeHours = 0;
-                            lom.typicalLearningTimeMinutes = 0;
-
-                            if(regex.test(lom.typicalLearningTime)){
-
-                                var dato = '0';
-
-                                for(var i = 2; i < lom.typicalLearningTime.length; i ++){
-
-                                    if(lom.typicalLearningTime.charAt(i) === 'H'){
-                                        lom.typicalLearningTimeHours = parseInt(dato);
-                                        dato = '0';
-                                    }else if(lom.typicalLearningTime.charAt(i) === 'M'){
-                                        lom.typicalLearningTimeMinutes = parseInt(dato);
-                                        dato = '0';
-                                    }else{
-                                        dato = dato + lom.typicalLearningTime.charAt(i);
-                                    }
-                                }
-                            }
-
-                        });
-
-                        if(existUserProfile && listaOA.length > 0){
-
-                            var listaOAInicial = filtroReglasIniciales(listaOA, userProfile);
-
-                            var listaOAMostrar = [];
-
-                            //Filtros need
-                            if(userProfile.need.toLocaleLowerCase().trim() === 'si' &&
-                                    listaOAInicial.length > 0){
-
-                                //Filtros need visión
-                                if(userProfile.need_visual.toLocaleLowerCase().trim() === 'si'){
-                                    listaOAMostrar = filtroReglasNeedVision(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros need auditiva
-                                if(userProfile.need_auditiva.toLocaleLowerCase().trim() === 'si'){
-                                    listaOAMostrar = filtroReglasNeedAuditiva(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros need motriz
-                                if(userProfile.need_motriz.toLocaleLowerCase().trim() === 'si'){
-                                    listaOAMostrar = filtroReglasNeedMotriz(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros need cognitiva
-                                if(userProfile.need_cognitiva.toLocaleLowerCase().trim() === 'si'){
-                                    listaOAMostrar = filtroReglasNeedCognitiva(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros need étnica
-                                if(userProfile.need_etnica.toLocaleLowerCase().trim() === 'si'){
-                                    listaOAMostrar = filtroReglasNeedEtnica(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros ls
-                            }else if(userProfile.estilo_aprendizaje.toLocaleLowerCase().trim() !== 'no definido' &&
-                                listaOAInicial.length > 0){
-
-                                //Filtros ls visual-global visual-secuencial
-                                if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'v'){
-                                    listaOAMostrar = filtroReglasLsVisual(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros ls auditivo-global auditivo-secuencial
-                                if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'a'){
-                                    listaOAMostrar = filtroReglasLsAuditivo(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros ls lector-global lector-secuencial
-                                if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'l'){
-                                    listaOAMostrar = filtroReglasLsLector(listaOAInicial, userProfile);
-                                }
-
-                                //Filtros ls kinestesico-global kinestesico-secuencial
-                                if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'k'){
-                                    listaOAMostrar = filtroReglasLsKinestesico(listaOAInicial, userProfile);
-                                }
-                            }
-
-                            //Muestra los objetos filtrados
-                            mostrarLOSecciones(listaOAMostrar);
-
-                        }else if(listaOA.length <= 0){
-
-                            $('#notResults')
-                                .append('No existen objetos de aprendizaje que cumplan con los criterios de búsqueda');
-                        }else{
-
-                            mostrarLOSecciones(listaOA);
-                        }
-
+                        console.log(dataJson);
+                        $("#rep_id").remove();
+                        $("#lo_id").remove();
                     },
                     error: function (obj, error, objError){
                         //avisar que ocurrió un error
@@ -220,20 +297,44 @@
                         console.log(objError);
                     }
                 });
+            }
+        }
 
-                    if(existUserProfile){
-                        // funcionalidad de guardar historial de busqueda
-                        store_search_lo();
+        function store_lo_rate(rep_id, lo_id, rate, existUserProfile) {
+
+            if(existUserProfile){
+
+                $('#formulario').append('<input type="hidden" name="repository_id" id="repository_id" value="' +
+                    rep_id + '">');
+                $('#formulario').append('<input type="hidden" name="object_id" id="object_id" value="' +
+                    lo_id + '">');
+                $('#formulario').append('<input type="hidden" name="calification" id="calification" value="' +
+                    rate + '">');
+
+                $.ajax({
+                    type: "POST",
+                    data: $("#formulario").serialize(),
+                    url: "{{ route('Lo.save_calification') }}",
+                    async: true,
+                    success: function(datos){
+                        var dataJson = eval(datos);
+                        console.log('Calificación guardada ' + dataJson);
+
+                        $("#repository_id").remove();
+                        $("#object_id").remove();
+                        $("#calification").remove();
+                    },
+                    error: function (obj, error, objError){
+                        //avisar que ocurrió un error
+                        console.log(obj);
+                        console.log(error);
+                        console.log(objError);
                     }
+                });
+            }
+        }
 
-                }
-
-                //Previene que se realice la redirección con el submit del formulario
-                return false;
-            });
-        });
-
-        function mostrarLOSecciones(listaOA){
+        function mostrarLOSecciones(listaOA, existUserProfile){
 
             $('#recomendedLo .resultado').html('');
             $('#othersLo .resultado').html('');
@@ -244,10 +345,10 @@
             $.each(listaOA, function(index, lom){
 
                 if(lom.value > 0){
-                    showLO(lom, '#recomendedLo');
+                    showLO(lom, '#recomendedLo', existUserProfile);
                     contadorLORecomendados ++;
                 }else{
-                    showLO(lom, '#othersLo');
+                    showLO(lom, '#othersLo', existUserProfile);
                     contadorOtrosLO ++;
                 }
             });
@@ -264,16 +365,18 @@
             }
         }
 
-        function showLO(lom, idDiv){
+        function showLO(lom, idDiv, existUserProfile){
 
-            $(idDiv + ' > .resultado').append('' +
+            if(existUserProfile){
+                $(idDiv + ' > .resultado').append('' +
                     '<div class="row">' +
                     '<div class="col-lg-12 col-md-12">' +
                     '<div class="col.md-2">' +
                     '<div class="panel panel-default">' +
                     '<div class="panel-heading">' +
                     '<a href="' + lom.location + '" onclick="store_visited_lo(' +
-                    lom.rep_id + ',' + lom.lo_id + ')" target="_blank" class="">' + lom.title + '</a>' +
+                    lom.rep_id + ',' + lom.lo_id + ',' + existUserProfile + ')" target="_blank" class="">' + lom.title + '</a>' +
+                    '<div id="' + lom.rep_id + '-' + lom.lo_id + '" class="rate pull-right"></div>' +
                     '</div>' +
                     '<div class="panel-body" style="text-align: justify;">' +
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
@@ -287,6 +390,41 @@
                     '</div>' +
                     '</div>' +
                     '</div>');
+
+                var options = {
+                    max_value: 5,
+                    step_size: 1,
+                }
+
+                $('.rate').rate(options);
+
+                $('#' + lom.rep_id + '-' + lom.lo_id + '.rate').on('click', function(ev, data){
+                    var rate = $('#' + lom.rep_id + '-' + lom.lo_id).rate("getValue");
+                    store_lo_rate(lom.rep_id, lom.lo_id, rate, existUserProfile);
+                });
+            }else{
+                $(idDiv + ' > .resultado').append('' +
+                    '<div class="row">' +
+                    '<div class="col-lg-12 col-md-12">' +
+                    '<div class="col.md-2">' +
+                    '<div class="panel panel-default">' +
+                    '<div class="panel-heading">' +
+                    '<a href="' + lom.location + '" onclick="store_visited_lo(' +
+                    lom.rep_id + ',' + lom.lo_id + ',' + existUserProfile + ')" target="_blank" class="">' + lom.title + '</a>' +
+                    '</div>' +
+                    '<div class="panel-body" style="text-align: justify;">' +
+                    '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
+                    '<strong>Descripción: </strong><a class="descripcion-lo" href="' +
+                    lom.location + '" target="_blank">' + lom.description + '</a><br>' +
+                    '<strong>Palabras clave: </strong>' + lom.keyword + '<br>' +
+                    '<strong>Formato: </strong>' + lom.format + '<br>' +
+                    '<strong>Puntuación de adaptación: </strong>' + lom.value + '<br>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>');
+            }
         }
 
         function getUserProfile(){
@@ -455,35 +593,6 @@
                 }
             });
 
-        }
-
-        function store_visited_lo(rep_id, lo_id) {
-          if(existUserProfile){
-
-            $("#formulario").append('<input type="hidden" name="rep_id" id="rep_id" value="' +
-                rep_id + '">');
-            $("#formulario").append('<input type="hidden" name="lo_id" id="lo_id" value="' +
-                lo_id + '">');
-
-            $.ajax({
-                type: "POST",
-                data: $("#formulario").serialize(),
-                url: "{{ route('Lo.save_visited') }}",
-                async: true,
-                success: function(datos){
-                  var dataJson = eval(datos);
-                  console.log(dataJson);
-                  $("#rep_id").remove();
-                  $("#lo_id").remove();
-                },
-                error: function (obj, error, objError){
-                  //avisar que ocurrió un error
-                  console.log(obj);
-                  console.log(error);
-                  console.log(objError);
-                }
-            });
-          }
         }
 
     </script>

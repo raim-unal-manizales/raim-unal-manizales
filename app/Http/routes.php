@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return redirect()->route('Public.searchOa');
 })->middleware('web');
@@ -432,6 +434,11 @@ Route::group(['middleware' => ['web','auth','estudiante'],'prefix' => 'Estudiant
 			'uses' 	=> 'LoController@save_search',
 			'as'	=> 'Lo.save_search'
 		]);
+
+		Route::post('/get_user_rates', [
+		    'uses'  => 'LoController@get_user_rates',
+            'as'    => 'Lo.get_user_rates'
+        ]);
 
 	});
 
