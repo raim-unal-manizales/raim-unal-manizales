@@ -245,7 +245,16 @@
                                 var dataJson = eval(datos);
                                 console.log(dataJson);
                                 $.each(dataJson, function(index, rate){
-                                    $('#' + rate.repository_id + '-' + rate.object_id).rate('setValue', rate.calification);
+                                    $('#' + rate.repository_id + '-' + rate.object_id + '-general').rate('setValue', rate.calification);
+                                    $('#' + rate.repository_id + '-' + rate.object_id + '-contribution').rate('setValue', rate.contribution);
+                                    $('#' + rate.repository_id + '-' + rate.object_id + '-design').rate('setValue', rate.design);
+                                    $('#' + rate.repository_id + '-' + rate.object_id + '-quality').rate('setValue', rate.quality);
+                                    $('#' + rate.repository_id + '-' + rate.object_id + '-recommended').rate('setValue', rate.recommended);
+                                });
+
+                                $('div.rate').on('change', function(ev){
+                                    var idSeparated = ev.target.id.split('-');
+                                    $('button#' + idSeparated[0] + '-' + idSeparated[1] + '-saveAssessment').attr('disabled', false);
                                 });
                             },
                             error: function (obj, error, objError){
@@ -255,12 +264,7 @@
                                 console.log(objError);
                             }
                         });
-
-
                     }
-
-
-
                 }
 
                 //Previene que se realice la redirección con el submit del formulario
@@ -274,14 +278,16 @@
 
             if(existUserProfile){
 
-                $("#formulario").append('<input type="hidden" name="rep_id" id="rep_id" value="' +
+                var formulario =  $('#formulario');
+
+                formulario.append('<input type="hidden" name="rep_id" id="rep_id" value="' +
                     rep_id + '">');
-                $("#formulario").append('<input type="hidden" name="lo_id" id="lo_id" value="' +
+                formulario.append('<input type="hidden" name="lo_id" id="lo_id" value="' +
                     lo_id + '">');
 
                 $.ajax({
                     type: "POST",
-                    data: $("#formulario").serialize(),
+                    data: formulario.serialize(),
                     url: "{{ route('Lo.save_visited') }}",
                     async: true,
                     success: function(datos){
@@ -300,20 +306,36 @@
             }
         }
 
-        function store_lo_rate(rep_id, lo_id, rate, existUserProfile) {
+        function store_lo_rate(rep_id, lo_id, generalRate, contributionRate, designRate, qualityRate, recommendedRate, existUserProfile) {
+
+            generalRate = generalRate || 0;
+            contributionRate = contributionRate || 0;
+            designRate = designRate || 0;
+            qualityRate = qualityRate || 0;
+            recommendedRate = recommendedRate || 0;
 
             if(existUserProfile){
 
-                $('#formulario').append('<input type="hidden" name="repository_id" id="repository_id" value="' +
+                var formulario =  $('#formulario');
+
+                formulario.append('<input type="hidden" name="repository_id" id="repository_id" value="' +
                     rep_id + '">');
-                $('#formulario').append('<input type="hidden" name="object_id" id="object_id" value="' +
+                formulario.append('<input type="hidden" name="object_id" id="object_id" value="' +
                     lo_id + '">');
-                $('#formulario').append('<input type="hidden" name="calification" id="calification" value="' +
-                    rate + '">');
+                formulario.append('<input type="hidden" name="calification" id="calification" value="' +
+                    generalRate + '">');
+                formulario.append('<input type="hidden" name="contribution" id="contribution" value="' +
+                    contributionRate + '">');
+                formulario.append('<input type="hidden" name="design" id="design" value="' +
+                    designRate + '">');
+                formulario.append('<input type="hidden" name="quality" id="quality" value="' +
+                    qualityRate + '">');
+                formulario.append('<input type="hidden" name="recommended" id="recommended" value="' +
+                    recommendedRate + '">');
 
                 $.ajax({
                     type: "POST",
-                    data: $("#formulario").serialize(),
+                    data: formulario.serialize(),
                     url: "{{ route('Lo.save_calification') }}",
                     async: true,
                     success: function(datos){
@@ -323,6 +345,10 @@
                         $("#repository_id").remove();
                         $("#object_id").remove();
                         $("#calification").remove();
+                        $("#contribution").remove();
+                        $("#design").remove();
+                        $("#quality").remove();
+                        $("#recommended").remove();
                     },
                     error: function (obj, error, objError){
                         //avisar que ocurrió un error
@@ -376,7 +402,6 @@
                     '<div class="panel-heading">' +
                     '<a href="' + lom.location + '" onclick="store_visited_lo(' +
                     lom.rep_id + ',' + lom.lo_id + ',' + existUserProfile + ')" target="_blank" class="">' + lom.title + '</a>' +
-                    '<div id="' + lom.rep_id + '-' + lom.lo_id + '" class="rate pull-right"></div>' +
                     '</div>' +
                     '<div class="panel-body" style="text-align: justify;">' +
                     '<strong>Ubicación: </strong>' + lom.coverage + '<br>' +
@@ -385,6 +410,12 @@
                     '<strong>Palabras clave: </strong>' + lom.keyword + '<br>' +
                     '<strong>Formato: </strong>' + lom.format + '<br>' +
                     '<strong>Puntuación de adaptación: </strong>' + lom.value + '<br>' +
+                    '<strong>Valoración general del objeto: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-general" class="rate"></div><br>' +
+                    '<strong>Valoración según lo que aportó a tu aprendizaje: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-contribution" class="rate"></div><br>' +
+                    '<strong>Valoración del diseño: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-design" class="rate"></div><br>' +
+                    '<strong>Valoración de la calidad del contenido: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-quality" class="rate"></div><br>' +
+                    '<strong>¿Recomendarías este objeto?: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-recommended" class="rate"></div><br>' +
+                    '<button disabled="disabled" class="btn btn-primary" id="' + lom.rep_id + '-' + lom.lo_id + '-saveAssessment">Guardar Calificación</button>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
@@ -394,13 +425,21 @@
                 var options = {
                     max_value: 5,
                     step_size: 1,
-                }
+                    initial_value: 0
+                };
 
-                $('.rate').rate(options);
+                var rate = $('.rate');
 
-                $('#' + lom.rep_id + '-' + lom.lo_id + '.rate').on('click', function(ev, data){
-                    var rate = $('#' + lom.rep_id + '-' + lom.lo_id).rate("getValue");
-                    store_lo_rate(lom.rep_id, lom.lo_id, rate, existUserProfile);
+                rate.rate(options);
+
+                $('button#' + lom.rep_id + '-' + lom.lo_id + '-saveAssessment').on('click', function(ev, data){
+                    var generalRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-general').rate("getValue");
+                    var contributionRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-contribution').rate("getValue");
+                    var designRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-design').rate("getValue");
+                    var qualityRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-quality').rate("getValue");
+                    var recommendedRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-recommended').rate("getValue");
+                    $(this).attr('disabled', true);
+                    store_lo_rate(lom.rep_id, lom.lo_id, generalRate, contributionRate, designRate, qualityRate, recommendedRate, existUserProfile);
                 });
             }else{
                 $(idDiv + ' > .resultado').append('' +

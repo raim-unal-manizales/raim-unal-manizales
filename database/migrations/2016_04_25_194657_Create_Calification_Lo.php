@@ -18,7 +18,11 @@ class CreateCalificationLo extends Migration
             $table->integer('user_id');
             $table->integer('repository_id')->nullable();
             $table->integer('object_id')->nullable();
-            $table->integer('calification')->nullable();    
+            $table->integer('calification')->nullable();
+            $table->integer('contribution')->nullable();
+            $table->integer('design')->nullable();
+            $table->integer('quality')->nullable();
+            $table->integer('recommended')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');   
 
