@@ -254,6 +254,7 @@
 
                                 $('div.rate').on('change', function(ev){
                                     var idSeparated = ev.target.id.split('-');
+                                    console.dir(idSeparated);
                                     $('button#' + idSeparated[0] + '-' + idSeparated[1] + '-saveAssessment').attr('disabled', false);
                                 });
                             },
@@ -415,7 +416,8 @@
                     '<strong>Valoración del diseño: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-design" class="rate"></div><br>' +
                     '<strong>Valoración de la calidad del contenido: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-quality" class="rate"></div><br>' +
                     '<strong>¿Recomendarías este objeto?: </strong><div style="display: inline-block;" id="' + lom.rep_id + '-' + lom.lo_id + '-recommended" class="rate"></div><br>' +
-                    '<button disabled="disabled" class="btn btn-primary" id="' + lom.rep_id + '-' + lom.lo_id + '-saveAssessment">Guardar Calificación</button>' +
+                    //'<button disabled="disabled" class="btn btn-primary" id="' + lom.rep_id + '-' + lom.lo_id + '-saveAssessment">Guardar Calificación</button>' +
+                    '<button class="btn btn-primary" id="' + lom.rep_id + '-' + lom.lo_id + '-saveAssessment">Guardar Calificación</button>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
