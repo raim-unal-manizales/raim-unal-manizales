@@ -255,7 +255,7 @@
                                 $('div.rate').on('change', function(ev){
                                     var idSeparated = ev.target.id.split('-');
                                     console.dir(idSeparated);
-                                    $('button#' + idSeparated[0] + '-' + idSeparated[1] + '-saveAssessment').attr('disabled', false);
+                                    //$('button#' + idSeparated[0] + '-' + idSeparated[1] + '-saveAssessment').attr('disabled', false);
                                 });
                             },
                             error: function (obj, error, objError){
@@ -440,7 +440,7 @@
                     var designRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-design').rate("getValue");
                     var qualityRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-quality').rate("getValue");
                     var recommendedRate = $('#' + lom.rep_id + '-' + lom.lo_id + '-recommended').rate("getValue");
-                    $(this).attr('disabled', true);
+                    //$(this).attr('disabled', true);
                     store_lo_rate(lom.rep_id, lom.lo_id, generalRate, contributionRate, designRate, qualityRate, recommendedRate, existUserProfile);
                 });
             }else{
