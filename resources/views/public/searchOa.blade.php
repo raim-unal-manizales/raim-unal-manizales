@@ -116,7 +116,7 @@
                                 items.push({'rep_id': val.rep_id, 'lo_id': val.lo_id, 'xml': val.xml});
                             });
 
-                            console.dir('Lista inicial: ', items.length);
+                            console.dir('Lista inicial: ' + items.length);
 
                             var listaOA = [];
 
@@ -151,13 +151,13 @@
 
                             });
 
-                            console.dir('Primer filtro: ', listaOA.length);
+                            console.dir('Primer filtro: ' + listaOA.length);
 
                             if(existUserProfile && listaOA.length > 0){
 
                                 var listaOAInicial = filtroReglasIniciales(listaOA, userProfile);
 
-                                console.dir('Filtro reglas iniciales: ', listaOAInicial.length);
+                                console.dir('Filtro reglas iniciales: ' + listaOAInicial.length);
 
                                 var listaOAMostrar = [];
 
@@ -190,7 +190,7 @@
                                         listaOAMostrar = filtroReglasNeedEtnica(listaOAInicial, userProfile);
                                     }
 
-                                    console.dir('Filtro reglas need: ', listaOAMostrar.length);
+                                    console.dir('Filtro reglas need: ' + listaOAMostrar.length);
 
                                     //Filtros ls
                                 }else if(userProfile.estilo_aprendizaje.toLocaleLowerCase().trim() !== 'no definido' &&
@@ -216,7 +216,7 @@
                                         listaOAMostrar = filtroReglasLsKinestesico(listaOAInicial, userProfile);
                                     }
 
-                                    console.dir('Filtro reglas ls: ', listaOAMostrar.length);
+                                    console.dir('Filtro reglas ls: ' + listaOAMostrar.length);
                                 }
 
                                 //Muestra los objetos filtrados
