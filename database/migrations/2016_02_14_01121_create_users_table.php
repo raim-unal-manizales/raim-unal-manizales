@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('institution')->nullable();
             $table->date('birth_date');
-            $table->enum('language',['Español','Ingles']);
+            $table->enum('language',['Español','Inglés', 'Portugués']);
             $table->enum('educativeLevel',['Preescolar','Basica Primaria','Basica Secundaria','Media','Superior','Otro']);
             $table->string('email')->unique();
            

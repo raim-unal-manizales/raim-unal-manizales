@@ -42,7 +42,7 @@
         </div>
         <div class="fieldForm">
             {!! Form::label('language','Idioma') !!}
-            {!! Form::select('language', ['Español'=>'Español','Ingles'=>'Inglés'] , null, ['class' => 'form-control','required']) !!}
+            {!! Form::select('language', ['Español'=>'Español','Ingles'=>'Inglés', 'Portugués'=>'Portugués'] , null, ['class' => 'form-control','required']) !!}
 
         </div>
 
