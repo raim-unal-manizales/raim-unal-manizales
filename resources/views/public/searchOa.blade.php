@@ -159,7 +159,7 @@
 
                                 console.dir('Filtro reglas iniciales: ' + listaOAInicial.length);
 
-                                var listaOAMostrar = [];
+                                var listaOAMostrar = listaOAInicial;
 
                                 //Filtros need
                                 if(userProfile.need.toLocaleLowerCase().trim() === 'si' &&
