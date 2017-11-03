@@ -116,6 +116,8 @@
                                 items.push({'rep_id': val.rep_id, 'lo_id': val.lo_id, 'xml': val.xml});
                             });
 
+                            console.dir('Lista inicial: ', items.length);
+
                             var listaOA = [];
 
                             $.each(items, function(index, xml){
@@ -149,9 +151,13 @@
 
                             });
 
+                            console.dir('Primer filtro: ', listaOA.length);
+
                             if(existUserProfile && listaOA.length > 0){
 
                                 var listaOAInicial = filtroReglasIniciales(listaOA, userProfile);
+
+                                console.dir('Filtro reglas iniciales: ', listaOAInicial.length);
 
                                 var listaOAMostrar = [];
 
@@ -184,6 +190,8 @@
                                         listaOAMostrar = filtroReglasNeedEtnica(listaOAInicial, userProfile);
                                     }
 
+                                    console.dir('Filtro reglas need: ', listaOAMostrar.length);
+
                                     //Filtros ls
                                 }else if(userProfile.estilo_aprendizaje.toLocaleLowerCase().trim() !== 'no definido' &&
                                     listaOAInicial.length > 0){
@@ -207,6 +215,8 @@
                                     if(userProfile.ls_vark.toLocaleLowerCase().trim() === 'k'){
                                         listaOAMostrar = filtroReglasLsKinestesico(listaOAInicial, userProfile);
                                     }
+
+                                    console.dir('Filtro reglas ls: ', listaOAMostrar.length);
                                 }
 
                                 //Muestra los objetos filtrados
@@ -220,8 +230,6 @@
 
                                 mostrarLOSecciones(listaOA, existUserProfile);
                             }
-
-
 
                         },
                         error: function (obj, error, objError){
