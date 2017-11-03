@@ -128,7 +128,7 @@
                                 console.log(lom);
                                 listaOA.push(lom);
 
-                                lom.typicalLearningTimeHours = 0;
+                                /*lom.typicalLearningTimeHours = 0;
                                 lom.typicalLearningTimeMinutes = 0;
 
                                 if(regex.test(lom.typicalLearningTime)){
@@ -147,7 +147,7 @@
                                             dato = dato + lom.typicalLearningTime.charAt(i);
                                         }
                                     }
-                                }
+                                }*/
 
                             });
 
