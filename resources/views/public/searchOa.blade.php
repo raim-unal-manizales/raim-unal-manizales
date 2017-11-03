@@ -102,8 +102,8 @@
                 if (searchString.length !== 0) {
                     $.ajax({
                         type: "GET",
-                        data: "raim=" + searchString,
-                        //data: "raim_brazil=" + searchString,
+                        //data: "raim=" + searchString,
+                        data: "raim_brazil=" + searchString,
                         url: "http://froac.manizales.unal.edu.co/froacn",
                         dataType: "jsonp",
                         async: true,
